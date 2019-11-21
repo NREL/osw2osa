@@ -1,0 +1,84 @@
+{
+  "analysis": {
+    "display_name": "OSW 2 OSA - Singe Run Algorithm",
+    "name": "osw_2_osa_single_run",
+    "output_variables": [
+      {
+        "objective_function": false,
+        "objective_function_index": null,
+        "objective_function_target": null,
+        "objective_function_group": null,
+        "scaling_factor": null,
+        "display_name": "eui",
+        "display_name_short": "eui",
+        "metadata_id": null,
+        "name": "openstudio_results.eui",
+        "visualize": true,
+        "export": true,
+        "variable_type": "double"
+      },
+      {
+        "display_name": "total_site_eui",
+        "display_name_short": "total_site_eui",
+        "name": "openstudio_results.total_site_eui",
+        "visualize": true,
+        "export": true,
+        "variable_type": "double"
+      },
+      {
+        "display_name": "annual_peak_electric_demand",
+        "display_name_short": "annual_peak_electric_demand",
+        "name": "openstudio_results.annual_peak_electric_demand",
+        "visualize": true,
+        "export": true,
+        "variable_type": "double"
+      },
+      {
+        "display_name": "unmet_hours_during_occupied_cooling",
+        "display_name_short": "unmet_hours_during_occupied_cooling",
+        "name": "openstudio_results.unmet_hours_during_occupied_cooling",
+        "visualize": true,
+        "export": true,
+        "variable_type": "double"
+      },
+      {
+        "display_name": "unmet_hours_during_occupied_heating",
+        "display_name_short": "unmet_hours_during_occupied_heating",
+        "name": "openstudio_results.unmet_hours_during_occupied_heating",
+        "visualize": true,
+        "export": true,
+        "variable_type": "double"
+      },
+      {
+        "display_name": "reported_climate_zone",
+        "display_name_short": "reported_climate_zone",
+        "name": "changebuildinglocation.reported_climate_zone",
+        "visualize": true,
+        "export": true,
+        "variable_type": "string"
+      }
+    ],
+    "problem": {
+      "workflow": [],
+      "algorithm": {
+        "seed": null,
+        "failed_f_value": 1000000000000000000,
+        "debug_messages": 0,
+        "objective_functions": []
+      },
+      "analysis_type": "single_run"
+    },
+    "seed": {
+      "file_type": "OSM",
+      "path": "./seeds/retail_seed.osm"
+    },
+    "weather_file": {
+      "file_type": "EPW",
+      "path": "./weather/USA_AK_Fairbanks.Intl.AP.702610_TMY3.epw"
+    },
+    "file_format_version": 1,
+    "server_scripts": {
+      "worker_initialization": "./scripts/worker_initialization/initialize.sh"
+    }
+  }
+}
