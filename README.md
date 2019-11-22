@@ -6,6 +6,7 @@ Documentation tasks
 - document other repos that need to be checked out (may use gem install at some point to get sample measures)
     - https://github.com/NREL/openstudio-model-articulation-gem/tree/develop
     - https://github.com/NREL/openstudio-common-measures-gem/tree/develop
+    - https://github.com/urbanopt/urbanopt-geojson-gem/tree/develop
     - https://github.com/macumber/openstudio-vA3C/tree/master
 - document workflow
 - document script arguments
