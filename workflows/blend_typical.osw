@@ -49,7 +49,7 @@
         "__SKIP__": false,
         "geojson_file": "/Users/dgoldwas/Documents/GitHub/Personal/osw2osa/resources/uo_example.geojson",
         "feature_id": "1",
-        "surrounding_buildings": "ShadingOnly"
+        "surrounding_buildings": "None"
       },
       "measure_dir_name": "urban_geometry_creation"
     },
@@ -63,7 +63,7 @@
         "add_elevators": false,
         "add_exterior_lights": false,
         "add_exhaust": false,
-        "add_thermostat": false
+        "add_thermostat": true
       },
       "measure_dir_name": "create_typical_building_from_model"
     },
