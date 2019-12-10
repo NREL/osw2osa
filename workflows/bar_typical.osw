@@ -22,8 +22,8 @@
       "arguments": {
         "__SKIP__": false,
         "template": "90.1-2013",
-        "bldg_type_a": "PrimarySchool",
-        "total_bldg_floor_area": "75000",
+        "bldg_type_a": "SecondarySchool",
+        "total_bldg_floor_area": "210887",
         "ns_to_ew_ratio": "0.0",
         "num_stories_above_grade": "2.0"
       },
