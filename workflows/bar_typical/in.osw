@@ -1,16 +1,13 @@
 {
-  "seed_file": "SDDC Office template.osm",
+  "seed_file": "seed_empty.osm",
   "file_paths": [
-    "../seeds",
-    "../weather",
-    "../resources"
+    "../../seeds",
+    "../../weather"
   ],
   "measure_paths": [
-    "../../openstudio-common-measures-gem/lib/measures",
-    "../../openstudio-model-articulation-gem/lib/measures",
-    "../../openstudio-vA3C",
-    "../measures"
-
+    "../../../openstudio-common-measures-gem/lib/measures",
+    "../../../openstudio-model-articulation-gem/lib/measures",
+    "../../../openstudio-vA3C"
   ],
   "steps": [
     {
@@ -21,9 +18,13 @@
     },
     {
       "arguments": {
-        "floorplan_path": "office_floorplan.json"
+        "template": "90.1-2013",
+        "bldg_type_a": "SecondarySchool",
+        "total_bldg_floor_area": "210887",
+        "ns_to_ew_ratio": "0.0",
+        "num_stories_above_grade": "2.0"
       },
-      "measure_dir_name": "merge_floorspace_js_with_model"
+      "measure_dir_name": "create_bar_from_building_type_ratios"
     },
     {
       "arguments": {

@@ -1,15 +1,13 @@
 {
   "seed_file": "seed_empty.osm",
   "file_paths": [
-    "../seeds",
-    "../weather",
-    "../resources"
+    "../../seeds",
+    "../../weather"
   ],
   "measure_paths": [
-    "../../openstudio-common-measures-gem/lib/measures",
-    "../../openstudio-model-articulation-gem/lib/measures",
-    "../../urbanopt-geojson-gem/lib/measures",
-    "../../openstudio-vA3C"
+    "../../../openstudio-common-measures-gem/lib/measures",
+    "../../../openstudio-model-articulation-gem/lib/measures",
+    "../../../openstudio-vA3C"
   ],
   "steps": [
     {
