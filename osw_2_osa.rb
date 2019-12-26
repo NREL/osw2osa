@@ -4,8 +4,8 @@
 # ARGV[0] json file is generated unless false
 # ARGV[1] zip file is generated unless false
 # ARGV[2] analysis name
-# ARGV[3] path relative path to source osw (can also be picked based on analysis name in ARGV[3])
-# ARG[4] relative path to template osa
+# ARGV[3] parent directory name for source osw (can also be picked based on analysis name in ARGV[3])
+# ARG[4] file name for template osa
 
 # todo - setup data file for variable sets instead of storing in the ruby script, so this script doesn't have to be customized as much
 
@@ -41,7 +41,7 @@ end
 
 if ARGV[3].nil?
   # add logic to use different default based on analysis chosen
-  if ['bar_study_1','bar_study_2'].include?(var_set)
+  if ['bar_study_1','bar_study_2','generic'].include?(var_set)
     osw_path = OpenStudio::Path.new("workflows/bar_typical/in.osw")
   else
     osw_path = OpenStudio::Path.new("workflows/floorspace_typical/in.osw")
@@ -125,6 +125,7 @@ if workflow.weatherFile.is_initialized
   # code below isn't necessary unless OSW weather file is not in the repo 'weather' directory
   if zip_file
     source_path = workflow.findFile(weather_file).get
+    puts "confirming weather file is in analysis zip"
     zip_file.addFile(source_path,OpenStudio::Path.new("weather/#{weather_file}"))
   end
 end
@@ -229,6 +230,7 @@ end
 
 # populate workflow of OSA with steps from OSW
 puts "processing source OSW"
+desc_vars_validated = {}
 workflow.workflowSteps.each do |step|
   if step.to_MeasureStep.is_initialized
 
@@ -266,6 +268,11 @@ workflow.workflowSteps.each do |step|
         arg_hash = {"name" => k,"value" => v}
       end
       if desc_vars.has_key?(inst_name) && desc_vars[inst_name].has_key?(k)
+
+        # update validated hash for reporting of script
+        if !desc_vars_validated.has_key?(inst_name) then desc_vars_validated[inst_name] = {} end
+        if !desc_vars_validated[inst_name].has_key?(k) then desc_vars_validated[inst_name][k] = [] end
+
         # setup variable
         if !new_workflow_measure.has_key?("variables")
           new_workflow_measure["variables"] = []
@@ -292,6 +299,7 @@ workflow.workflowSteps.each do |step|
         desc_vars[inst_name][k].each do |val|
           # weight not important for DOE but may want to store with values for other use cases
           values_and_weights << {'value' => val, 'weight' => 1.0/desc_vars[inst_name][k].size}
+          desc_vars_validated[inst_name][k] << val
         end
         attribute_hash['values_and_weights'] = values_and_weights
         new_var['uncertainty_description']['attributes'] << attribute_hash
@@ -328,15 +336,29 @@ end
 
 # report number of variables
 measures_with_vars = []
+missing_measures_with_vars = []
 vars = []
 var_vals = []
 puts "-----"
+# desc_vars
+# desc_vars_validated
 desc_vars.each do |k,v|
-  measures_with_vars << k
-  v.each do |k2,v2|
-    puts "#{v2.size} variables for #{k2}: #{v2.inspect}"
-    vars << k2
-    var_vals << v2.size
+  next if v.size == 0
+  if ! desc_vars_validated.has_key?(k)
+    missing_measures_with_vars << k
+    puts "**** #{osw_path} at doesn't have a measure named #{k}, requested variables will be ignored for osa generation. ****"
+  else
+    measures_with_vars << k
+    v.each do |k2,v2|
+
+      if ! desc_vars_validated[k].has_key?(k2)
+        puts "**** #{osw_path} at doesn't have a measure argument named #{k2} for measure #{k}, requested variable will be ignored for osa generation. ****"
+      else
+        puts "#{v2.size} variables for #{k2}: #{v2.inspect}"
+        vars << k2
+        var_vals << v2.size
+      end
+    end
   end
 end
 puts "-----"
