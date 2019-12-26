@@ -98,8 +98,97 @@ class MergeFloorspaceJsWithModel < OpenStudio::Measure::ModelMeasure
 
     # intersect and match surfaces for each space in the vector
     # todo - add in diagnostic intersect as option
-    OpenStudio::Model.intersectSurfaces(spaces)
-    OpenStudio::Model.matchSurfaces(spaces)
+    #OpenStudio::Model.intersectSurfaces(spaces)
+    #OpenStudio::Model.matchSurfaces(spaces)
+
+    # removing duplicate points in a surface
+    model.getPlanarSurfaces.each do |surface|
+      array = []
+      vertices = surface.vertices
+      fixed = false
+      vertices.each do |vertex|
+        next if fixed
+        if array.include?(vertex)
+          # create a new set of vertices
+          new_vertices = OpenStudio::Point3dVector.new
+          array_b = []
+          surface.vertices.each do |vertex_b|
+            next if array_b.include?(vertex_b)
+            new_vertices << vertex_b
+            array_b << vertex_b
+          end
+          surface.setVertices(new_vertices)
+          num_removed = vertices.size - surface.vertices.size
+          runner.registerWarning("#{surface.name} has duplicate vertices. Started with #{vertices.size} vertices, removed #{num_removed}.")
+          fixed = true
+        else
+          array << vertex
+        end
+      end
+    end
+
+    # remove collinear points in a surface
+    model.getPlanarSurfaces.each do |surface|
+      new_vertices = OpenStudio.removeCollinear(surface.vertices)
+      starting_count = surface.vertices.size
+      final_count = new_vertices.size
+      if final_count < starting_count
+        runner.registerWarning("Removing #{starting_count - final_count} collinear vertices from #{surface.name}.")
+        surface.setVertices(new_vertices)
+      end
+    end
+
+    # remove duplicate surfaces in a space (should be done after remove duplicate and collinear points)
+    model.getSpaces.each do |space|
+
+      # secondary array to compare against
+      surfaces_b = space.surfaces.sort
+
+      space.surfaces.sort.each do |surface_a|
+
+        # delete from secondary array
+        surfaces_b.delete(surface_a)
+
+        surfaces_b.each do |surface_b|
+          next if surface_a == surface_b # dont' test against same surface
+          if surface_a.equalVertices(surface_b)
+            runner.registerWarning("#{surface_a.name} and #{surface_b.name} in #{space.name} have duplicate geometry, removing #{surface_b.name}.")
+            surface_b.remove
+          elsif surface_a.reverseEqualVertices(surface_b)
+            # todo - add logic to determine which face naormal is reversed and which is correct
+            runner.registerWarning("#{surface_a.name} and #{surface_b.name} in #{space.name} have reversed geometry, removing #{surface_b.name}.")
+            surface_b.remove
+          end
+
+        end
+
+      end
+    end
+
+    # secondary array of spaces that we can remove items from once they have gone through in primary loop
+    spaces_b = model.getSpaces.sort
+
+    # looping through vector of each space
+    model.getSpaces.sort.each do |space_a|
+
+      runner.registerInfo("Intersecting and matching surfaces for #{space_a.name}.")
+
+      # delete from secondary array
+      spaces_b.delete(space_a)
+
+      spaces_b.each do |space_b|
+
+        #runner.registerInfo("Intersecting and matching surfaces between #{space_a.name} and #{space.name}")
+        spaces = OpenStudio::Model::SpaceVector.new
+        spaces << space_a
+        spaces << space_b
+
+        # intersect and match surfaces in pair of spaces
+        OpenStudio::Model.intersectSurfaces(spaces)
+        OpenStudio::Model.matchSurfaces(spaces)
+
+      end
+    end
 
     json = JSON.parse(File.read(path.get.to_s))
 

@@ -2,8 +2,8 @@
   <schema_version>3.0</schema_version>
   <name>merge_floorspace_js_with_model</name>
   <uid>16ef6369-6420-4f17-894c-a767895bcaa4</uid>
-  <version_id>5e66d876-9c14-46fa-98bc-f8235805b79a</version_id>
-  <version_modified>20191226T170027Z</version_modified>
+  <version_id>aaa3fffd-37fd-4b57-941a-39f6f4edfbf1</version_id>
+  <version_modified>20191226T174003Z</version_modified>
   <xml_checksum>0AD1E2E2</xml_checksum>
   <class_name>MergeFloorspaceJsWithModel</class_name>
   <display_name>Merge FloorspaceJs with Model</display_name>
@@ -71,17 +71,6 @@
       <checksum>00000000</checksum>
     </file>
     <file>
-      <version>
-        <software_program>OpenStudio</software_program>
-        <identifier>2.9.0</identifier>
-        <min_compatible>2.9.0</min_compatible>
-      </version>
-      <filename>measure.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>script</usage_type>
-      <checksum>9C248585</checksum>
-    </file>
-    <file>
       <filename>merge_floorspace_js_with_model_test.rb</filename>
       <filetype>rb</filetype>
       <usage_type>test</usage_type>
@@ -110,6 +99,17 @@
       <filetype>md</filetype>
       <usage_type>readme</usage_type>
       <checksum>31568C75</checksum>
+    </file>
+    <file>
+      <version>
+        <software_program>OpenStudio</software_program>
+        <identifier>2.9.0</identifier>
+        <min_compatible>2.9.0</min_compatible>
+      </version>
+      <filename>measure.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>script</usage_type>
+      <checksum>FCF44865</checksum>
     </file>
   </files>
 </measure>
