@@ -5,7 +5,7 @@ This repo is a sample deployment of ruby scripts used to generate OSA files from
     - workflows
         - This contains OSW files that can be run on their own, or used with `osw_2_osa.rb` to setup one or multiple OSA files.
         - bar_typical
-        - blend_typical (this is not ready for use with script)
+        - blend_typical
         - floorspace_typical
         - osm_typical (does not exist, will import osm with stub space types using ReplaceModel and run create_typical measure. Measure is not on public repo yet)
     - measures
@@ -38,6 +38,8 @@ This repo is a sample deployment of ruby scripts used to generate OSA files from
         - This contains an exmaple worker initialization script that installs a custom version of the `openstudio-standards` gem for an analysis.
     - run (only on local checkout)
         - after you run 'osw_2_osa.rb' this directory will be generated and populated with analysis JSON files and an analysis zip file. These are what are required by the OpenStudio meta-CLI to run an analysis.
+    - docs
+        - This jsut contains image files embeded in this readme file.
 - Additional public repositories need to be checked out to setup the example analysis projects using `osw_2_osa.rb`. (I may use gem install at some point to get sample measures). These repositories contain most of the measured used by the workflow. The paths in OSW assume these repositories are checked out next to the osw2osa repository.
     - https://github.com/NREL/openstudio-model-articulation-gem/tree/develop
     - https://github.com/NREL/openstudio-common-measures-gem/tree/develop
@@ -47,11 +49,14 @@ This repo is a sample deployment of ruby scripts used to generate OSA files from
     - ARGV[0] json file is generated unless false. Default value is true.
     - ARGV[1] zip file is generated unless false. Default value is true.
     - ARGV[2] variable set name. Default value is `generic`. Other example variable sets are listed below. These are defined by the `custom_var_set_mapper.rb` file.
-        - generic
-        - pv_fraction
-        - pv_bool
-        - bar_study_1
-        - bar_study_2
+        - generic (uses bar_typical)
+        - pv_fraction (uses floorspace_typical)
+        - pv_bool (uses floorspace_typical)
+        - bar_study_1 (uses bar_typical)
+        - bar_study_2 (uses bar_typical)
+        - *blend_typical (uses blend_typical)
+        - *blend_skip_true (use blend_typical but skip blend and urban geometry measures)
+        - *(Not working yet in OSA, measure requires files from repo outside of the measure)
     - ARGV[3] parent directory name for source osw (can also be picked based on analysis name in ARGV[3]). Default varies based on variable set. Currently the expected OSW name is `in.osw` within the selected directory.
     - ARG[4] file name for template osa. Default value is `osa_template_doe`.
 - Testing
@@ -60,6 +65,8 @@ This repo is a sample deployment of ruby scripts used to generate OSA files from
     - Update to use 2.9.0 version of measures and test
     - add configuration to adjust local path to checkout of other repos, unless I instead use rake and bundle to install gems here with gemspec file to define branch.
     - Figure out how to get OSA to work with `runner.workflow.FindPath` instead having to set relative path for use with OSA, while it seems the path is wrong for OSW run, extra file paths are added into OSW when it is run.
+    - get ServerDirectoryCleanup on public repo and put in OSW with flat to skip in `custom_var_set_mapping`. Note that it doesn't always clean up sizing run, need to make it more robust.
+    - once using newer openstudio_results that adds runner.registerValue for repported climate zone (not just argument value) add that to output of template OSA files. It makes graphics much easier than using weather file name.
 
 Run Individual Workflow using CLI using 
 <br>`openstudio run --workflow /path/to/workflow.osw`. 
@@ -70,5 +77,39 @@ Run Individual Workflow using CLI using
 Below is a sample command line call to run `osw_2_osa.rb`. The script does use OpenStudio runner methods so it is necessary for your system ruby to be able `require openstudio`. In this example the template OSW and OSA are not passed in, so it will be selected based on the variable set`bar_study_1`.
 <br>`ruby osw_2_osa.rb true true bar_study_1`
 
+Example output log from `osw_2_osa.rb`.
+
+<pre><code>user_name$ ruby osw_2_osa.rb true true generic
+source OSW is workflows/bar_typical/in.osw
+template OSA is template_osa_files/osa_template_doe.json
+loading template OSA
+generating analysis zip file
+adding scripts to analysis zip
+adding external files to analysis zip
+adding weather files to analysis zip
+setting seed file to seed_empty.osm
+adding seed model to analysis zip
+processing source OSW
+ - gathering data for ChangeBuildingLocation
+ - gathering data for create_bar_from_building_type_ratios
+ - gathering data for create_typical_building_from_model
+ - gathering data for ViewModel
+ - gathering data for add_rooftop_pv
+ - gathering data for openstudio_results
+saving modified OSA
+-----
+5 values for ChangeBuildingLocation weather_file_name: ["USA_AZ_Davis-Monthan.AFB.722745_TMY3.epw", "USA_GA_Atlanta-Hartsfield-Jackson.Intl.AP.722190_TMY3.epw", "USA_CA_Chula.Vista-Brown.Field.Muni.AP.722904_TMY3.epw", "USA_NY_Buffalo-Greater.Buffalo.Intl.AP.725280_TMY3.epw", "USA_MN_International.Falls.Intl.AP.727470_TMY3.epw"]
+2 values for create_bar_from_building_type_ratios template: ["90.1-2004", "90.1-2013"]
+2 values for create_bar_from_building_type_ratios num_stories_above_grade: [1.0, 2.0]
+2 values for add_rooftop_pv fraction_of_surface: [0.5, 0.75]
+-----
+3 measures have variables ["ChangeBuildingLocation", "create_bar_from_building_type_ratios", "add_rooftop_pv"].
+The analysis has 4 variables ["weather_file_name", "template", "num_stories_above_grade", "fraction_of_surface"].
+With DOE algorithm the analysis will have 40 datapoints.</code></pre>
+
 Run OSA files generated by `osw_2_osa.rb` using the OpenStudio meta CLI using code similar to 
 <br>`openstudio_meta run_analysis --debug --verbose --ruby-lib-path="/Applications/OpenStudio-2.9.0/ParametricAnalysisTool.app/Contents/Resources/ruby" "osw_2_osa_pv_bool.json" "http://already_running_os_server_url:8080/" -a doe`
+
+Can quickly send generated OSA's to server to queue up multiple analyses.
+
+![OpenStudio Server Screenshot](docs/osa_test_run.png "OpenStudio Server Screenshot")

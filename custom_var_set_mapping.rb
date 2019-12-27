@@ -2,7 +2,7 @@
 
 # list of valid_var_sets
 def valid_var_sets
-  return ['generic','pv_fraction','pv_bool','bar_study_1','bar_study_2','blend_skip_true']
+  return ['generic','pv_fraction','pv_bool','bar_study_1','bar_study_2'] # 'blend_skip_true','blend_typical'
 end
 
 # logic to select var set
@@ -24,7 +24,7 @@ def select_osw(var_set)
     # add logic to use different default based on analysis chosen
     if ['bar_study_1','bar_study_2','generic'].include?(var_set)
       osw_path = OpenStudio::Path.new("workflows/bar_typical/in.osw")
-    elsif var_set = 'blend_skip_true'
+    elsif ['blend_skip_true','blend_typical'].include?(var_set)
       osw_path = OpenStudio::Path.new("workflows/blend_typical/in.osw")
     else
       osw_path = OpenStudio::Path.new("workflows/floorspace_typical/in.osw")
@@ -106,7 +106,7 @@ def var_mapping(var_set,osw_path)
     else
       desc_vars['create_bar_from_building_type_ratios']['template'] = var_template
     end
-  elsif ['generic','blend_skip_true'].include?(var_set)
+  elsif ['generic','blend_skip_true','blend_typical'].include?(var_set)
     var_template = []
     var_template << '90.1-2004'
     var_template << '90.1-2013'
@@ -160,6 +160,12 @@ def update_static_arg_val(var_set)
     desc_args['blended_space_type_from_model']['__SKIP__'] = true
     desc_args['urban_geometry_creation'] = {}
     desc_args['urban_geometry_creation']['__SKIP__'] = true
+    # todo - even when skip is true need valid geojson that can be found remove this once using workflow.runner.findFile
+    desc_args['urban_geometry_creation']['urban_geometry_creation'] = "../files/prototype_mesa_footprints.geojson"
+  elsif var_set == 'blend_typical'
+    desc_args['urban_geometry_creation'] = {}
+    # todo - remove this once using workflow.runner.findFile
+    desc_args['urban_geometry_creation']['urban_geometry_creation'] = "../files/prototype_mesa_footprints.geojson"
   end
 
   # manual switch to enable or disable zone conditions in OpenStudio results. It is off by default to avoid the hour zone time series temperature and humidity values that are needed

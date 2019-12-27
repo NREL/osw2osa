@@ -254,7 +254,7 @@ desc_vars.each do |k,v|
       if ! desc_vars_validated[k].has_key?(k2)
         puts "**** #{osw_path} at doesn't have a measure argument named #{k2} for measure #{k}, requested variable will be ignored for osa generation. ****"
       else
-        puts "#{v2.size} variables for #{k2}: #{v2.inspect}"
+        puts "#{v2.size} values for #{k} #{k2}: #{v2.inspect}"
         vars << k2
         var_vals << v2.size
       end
