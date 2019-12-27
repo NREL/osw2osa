@@ -118,7 +118,7 @@ end
 
 # todo - I can't figure out how to setup an OSA to run with null seed or weather. While it is valid for an OSW, I don't know if it is valid for an OSA
 
-# define discrete variables (nested hash of measure instance name and argument name)
+# define discrete variables (nested hash of measure instance name and argument name. Value is an array of variable values)
 desc_vars = var_mapping(osw_path,var_set)
 
 # populate workflow of OSA with steps from OSW
@@ -221,8 +221,6 @@ if make_json
     f.puts JSON.pretty_generate(hash)
   end
 end
-
-# todo - add in warning if I choose custom OSW that doesn't have measure used as a variable, also update stats below
 
 # report number of variables
 measures_with_vars = []

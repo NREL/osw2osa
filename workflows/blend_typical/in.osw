@@ -36,6 +36,7 @@
     },
     {
       "arguments": {
+        "__SKIP__": false,
         "blend_method": "Building Story"
       },
       "measure_dir_name": "blended_space_type_from_model"

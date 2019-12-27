@@ -87,7 +87,7 @@ def var_mapping(osw_path,var_set)
   desc_vars['create_bar_from_building_type_ratios'] = {}
   desc_vars['create_typical_building_from_model'] = {} # used on worfkflow that doesn't have create_bar
 
-# template
+# template (note that depending on the workflow, a different measure is chosen to set template for)
   if ["bar_study_1","bar_study_2"].include?(var_set)
     var_template = []
     var_template << 'DOE Ref Pre-1980'
@@ -138,7 +138,8 @@ def var_mapping(osw_path,var_set)
   end
 
 # todo - add in example showing how to handle variables on measures with multiple instances in a workflow
-#  if wanted to use second instance of measure key would be SetWindowToWallRatioByFacade_2
+# if wanted to use second instance of measure key would be SetWindowToWallRatioByFacade_2.
+# I don't require or make use of the name field on the OSW, only the measure directory.
 
   return desc_vars
 end
