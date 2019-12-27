@@ -262,13 +262,9 @@ workflow.workflowSteps.each do |step|
     measure_step.arguments.each do |k,v|
       if v.to_s == "true" then v = true end
       if v.to_s == "false" then v = false end
-      # remap argument that relies on external files in OSW that
-      # todo - I have not figured out how to implement in OSA
-      if k == "floorplan_path"
-        arg_hash = {"name" => k,"value" => "../files/#{v}"}
-      else
-        arg_hash = {"name" => k,"value" => v}
-      end
+      arg_hash = {"name" => k,"value" => v}
+
+      # setup variables and arguments
       if desc_vars.has_key?(inst_name) && desc_vars[inst_name].has_key?(k)
 
         # update validated hash for reporting of script

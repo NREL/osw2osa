@@ -3,8 +3,7 @@
   "weather_file": "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw",
   "file_paths": [
     "../../seeds",
-    "../../weather",
-    "../../files"
+    "../../weather"
   ],
   "measure_paths": [
     "../../../openstudio-common-measures-gem/lib/measures",
@@ -21,7 +20,7 @@
     },
     {
       "arguments": {
-        "floorplan_path": "office_floorplan.json"
+        "floorplan_path": "../files/office_floorplan.json"
       },
       "measure_dir_name": "merge_floorspace_js_with_model"
     },
