@@ -7,7 +7,7 @@ This repo is a sample deployment of a ruby script used to generate OSA files inc
     - measures
         - Currently this contains a measure to merge a `FloorspaceJS` file into an OpenStudio model. This will be moved to another public repository soon.
         - You would generally use this for single purpose measures that don't exist in another repository and that you don't think will be useful outside of the current project you are setting up.
-    - resources
+    - files
         - This contains files that are be used by measures when an OSW or OSA is run. This includes `geojson` and `FloorspaceJS` json files, but may also include any file needed by a measure that isn't already contained within the measure.
     - run (only on local checkout)
         - after you run 'osw_2_osa.rb' this directory will be generated and populated with analysis JSON files and an analysis zip file. These are what are required by the OpenStudio meta-CLI to run an analysis.
@@ -47,7 +47,7 @@ This repo is a sample deployment of a ruby script used to generate OSA files inc
     - Update to use 2.9.0 version of measure and test
     - add configuration to adjust local path to checkout of other repos, unless I instead use rake and bundle to install gems here with gemspec file to define branch.
     - Once measure are updated, including results that record climate zone, add that as output to tempalte OSA
-    - test OSA with geoJSON once that measure is updated to use `runner.workflow.FindPath` instead of having full path to json file in the measure.
+    - get script to work better with `runner.workflow.FindPath` instead of havng to alter it in the script
 
 Run Individual Workflow using CLI using 
 <br>`openstudio run --workflow /path/to/workflow.osw`. 

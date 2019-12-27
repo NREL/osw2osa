@@ -98,7 +98,7 @@ if make_zip
 
   # bring in external files (hard coded for now vs. dynamic from OSW)
   puts "adding external files to analysis zip"
-  zip_file.addDirectory("resources","lib/resources")
+  zip_file.addDirectory("files","files")
 
   # bring in all weather files
   puts "adding weather files to analysis zip"
@@ -262,10 +262,10 @@ workflow.workflowSteps.each do |step|
     measure_step.arguments.each do |k,v|
       if v.to_s == "true" then v = true end
       if v.to_s == "false" then v = false end
-      # remap argument that relies on external files in OSW that I have not figured out how to implement in OSA
+      # remap argument that relies on external files in OSW that
+      # todo - I have not figured out how to implement in OSA
       if k == "floorplan_path"
-        #arg_hash = {"name" => k,"value" => "../lib/files/#{v}"}
-        arg_hash = {"name" => k,"value" => v}
+        arg_hash = {"name" => k,"value" => "../files/#{v}"}
       else
         arg_hash = {"name" => k,"value" => v}
       end

@@ -4,7 +4,7 @@
   "file_paths": [
     "../../seeds",
     "../../weather",
-    "../../resources"
+    "../../files"
   ],
   "measure_paths": [
     "../../../openstudio-common-measures-gem/lib/measures",
