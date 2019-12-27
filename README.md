@@ -22,6 +22,13 @@ This repo is a sample deployment of ruby scripts used to generate OSA files from
         - This script is the primary file for the repository that everything else supports. The script arguments are described later in this readme. This is currently just setup for discrete variables, but could support more in the future.
     - custom_var_set_mapping.rb
         - This is called by `osw_2_osa.rb` to identify the mapping for variables, OSA template, and the source OSW.
+        - Methods in script
+            - `valid_var_sets` is just basic error handeling to look for unexpected arguments passed in for argument in main script
+            - `selected_var_set` determines the default variable set to use if argument is not passed in. For basic use cases with one one primary analysis this makes calling the script cleaner.
+            - `select_osw` is used to pick the template OSW based on the `var_set` unless the user specifically enters an argument for a specific template OSW.
+            - `select_osa` is used pick the template OSA if an argument for this isn't passed in by the user.
+            - `var_mapping` sets up discrete variables in the final OSA. This can be enhanced in the future to support other variable types.
+            - `update_static_arg_val` can be used to alter static argument values for a specific analysis. This can be used to change a default value from what is in an OSW, or can be used to skip measures in an OSW by making use of the `__SKIP__` argument and setting it it `true`. This allows you to get more use out of a smaller number of OSW files which is easier ot maintain as you make chagnes or add reports.
     - template_osa_files
         - The template OSA files are used for their output variables, objective functions, algorithm settings, and their server scripts. 
         - If the template OSW has defined a seed model and weather file, it will be used in place of what is in the template OSA. 
@@ -52,7 +59,6 @@ This repo is a sample deployment of ruby scripts used to generate OSA files from
 - Future code development tasks
     - Update to use 2.9.0 version of measures and test
     - add configuration to adjust local path to checkout of other repos, unless I instead use rake and bundle to install gems here with gemspec file to define branch.
-    - Once measure are updated, including results that record climate zone, add that as output to template OSA
     - Figure out how to get OSA to work with `runner.workflow.FindPath` instead having to set relative path for use with OSA, while it seems the path is wrong for OSW run, extra file paths are added into OSW when it is run.
 
 Run Individual Workflow using CLI using 

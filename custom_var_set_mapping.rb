@@ -2,7 +2,7 @@
 
 # list of valid_var_sets
 def valid_var_sets
-  return ['generic','pv_fraction','pv_bool','bar_study_1','bar_study_2']
+  return ['generic','pv_fraction','pv_bool','bar_study_1','bar_study_2','blend_skip_true']
 end
 
 # logic to select var set
@@ -24,6 +24,8 @@ def select_osw(var_set)
     # add logic to use different default based on analysis chosen
     if ['bar_study_1','bar_study_2','generic'].include?(var_set)
       osw_path = OpenStudio::Path.new("workflows/bar_typical/in.osw")
+    elsif var_set = 'blend_skip_true'
+      osw_path = OpenStudio::Path.new("workflows/blend_typical/in.osw")
     else
       osw_path = OpenStudio::Path.new("workflows/floorspace_typical/in.osw")
     end
@@ -34,7 +36,10 @@ def select_osw(var_set)
 end
 
 # logic to select OSA
-def select_osa
+def select_osa(var_set)
+
+  # not currently using var_set to pick OSA but you can.
+
   if ARGV[4].nil?
     osa_template_path = OpenStudio::Path.new("template_osa_files/osa_template_doe.json")
   else
@@ -44,7 +49,7 @@ def select_osa
 end
 
 # logic define variables
-def var_mapping(osw_path,var_set)
+def var_mapping(var_set,osw_path)
   desc_vars = {}
 
 # weather_file
@@ -101,7 +106,7 @@ def var_mapping(osw_path,var_set)
     else
       desc_vars['create_bar_from_building_type_ratios']['template'] = var_template
     end
-  elsif ['generic'].include?(var_set)
+  elsif ['generic','blend_skip_true'].include?(var_set)
     var_template = []
     var_template << '90.1-2004'
     var_template << '90.1-2013'
@@ -142,4 +147,27 @@ def var_mapping(osw_path,var_set)
 # I don't require or make use of the name field on the OSW, only the measure directory.
 
   return desc_vars
+end
+
+# this is used to update static values for measure arguments for a specific variable set
+# this demonstrates that you don't need to make unique OSW if you just want to enable/disable an extra measure or if you want to change a static value. Having less OSW's variable set specific logic here is easier to maintain then having a unique OSW for every variable set or analysis.
+def update_static_arg_val(var_set)
+  desc_args = {}
+
+  # if var_set is blend_skip_true then turn off the blend and urban geometry measures
+  if var_set == 'blend_skip_true'
+    desc_args['blended_space_type_from_model'] = {}
+    desc_args['blended_space_type_from_model']['__SKIP__'] = true
+    desc_args['urban_geometry_creation'] = {}
+    desc_args['urban_geometry_creation']['__SKIP__'] = true
+  end
+
+  # manual switch to enable or disable zone conditions in OpenStudio results. It is off by default to avoid the hour zone time series temperature and humidity values that are needed
+  zone_conditions = false # this coudl be set by a var_set
+  if zone_conditions
+    desc_args['openstudio_results'] = {}
+    desc_args['openstudio_results']['zone_condition_section'] = true
+  end
+
+  return desc_args
 end

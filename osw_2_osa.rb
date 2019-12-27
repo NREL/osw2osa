@@ -41,7 +41,7 @@ end
 osw_path = select_osw(var_set)
 puts "source OSW is #{osw_path}"
 
-osa_template_path = select_osa
+osa_template_path = select_osa(var_set)
 puts "template OSA is #{osa_template_path}"
 
 # load a copy of template OSA file
@@ -119,7 +119,10 @@ end
 # todo - I can't figure out how to setup an OSA to run with null seed or weather. While it is valid for an OSW, I don't know if it is valid for an OSA
 
 # define discrete variables (nested hash of measure instance name and argument name. Value is an array of variable values)
-desc_vars = var_mapping(osw_path,var_set)
+desc_vars = var_mapping(var_set,osw_path)
+
+# store var_set specific changes to argument values
+desc_args = update_static_arg_val(var_set)
 
 # populate workflow of OSA with steps from OSW
 puts "processing source OSW"
@@ -154,7 +157,16 @@ workflow.workflowSteps.each do |step|
     measure_step.arguments.each do |k,v|
       if v.to_s == "true" then v = true end
       if v.to_s == "false" then v = false end
-      arg_hash = {"name" => k,"value" => v}
+
+      # change arguments per var_set specifications
+      # inst_name is measure_dir_name unless more than one instance exists when _# is added starting with _2
+      if desc_args.has_key?(inst_name) && desc_args[inst_name].has_key?(k) && desc_args[inst_name][k] != v
+        custom_val = desc_args[inst_name][k]
+        puts "For #{k} argument in measure named #{inst_name} value from template OSW is being chagned to #{custom_val}"
+        arg_hash = {"name" => k,"value" => custom_val}
+      else
+        arg_hash = {"name" => k,"value" => v}
+      end
 
       # setup variables and arguments
       if desc_vars.has_key?(inst_name) && desc_vars[inst_name].has_key?(k)

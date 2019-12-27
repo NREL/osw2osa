@@ -44,7 +44,7 @@
     {
       "arguments": {
         "__SKIP__": false,
-        "geojson_file": "/Users/dgoldwas/Documents/GitHub/Personal/osw2osa/resources/prototype_mesa_footprints.geojson",
+        "geojson_file": "/Users/dgoldwas/Documents/GitHub/Personal/osw2osa/files/prototype_mesa_footprints.geojson",
         "feature_id": "59c942af53ff6b03c8620152",
         "surrounding_buildings": "None"
       },
