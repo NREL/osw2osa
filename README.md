@@ -29,6 +29,9 @@ This repo is a sample deployment of a ruby script used to generate OSA files inc
         - floorspace_typical
         - osm_typical (does not exist, will import osm with stub space types and run create_typical measure)
     - osw_2_osa.rb
+        - This script is the primary file for the repository that everything else supports. The script arguments are described later in this readme. This is currently just setup for discrete variables, but could support more in the future.
+    - custom_var_set_mapping.rb
+        - This is called by `osw_2_osa.rb` to identify the mapping for variables, OSA template, and the source OSW.
 - Additional public repositories need to be checked out to setup the example analysis projects using `osw_2_osa.rb`. (I may use gem install at some point to get sample measures). These repositories contain most of the measured used by the workflow. The paths in OSW assume these repositories are checked out next to the osw2osa repository.
     - https://github.com/NREL/openstudio-model-articulation-gem/tree/develop
     - https://github.com/NREL/openstudio-common-measures-gem/tree/develop
@@ -37,7 +40,12 @@ This repo is a sample deployment of a ruby script used to generate OSA files inc
 - Script Arguments
     - ARGV[0] json file is generated unless false. Default value is true.
     - ARGV[1] zip file is generated unless false. Default value is true.
-    - ARGV[2] variable set name. Default value is `generic`
+    - ARGV[2] variable set name. Default value is `generic`. Other example variable sets are listed below.
+        - generic
+        - pv_fraction
+        - pv_bool
+        - bar_study_1
+        - bar_study_2
     - ARGV[3] parent directory name for source osw (can also be picked based on analysis name in ARGV[3]). Default varies based on variable set.
     - ARG[4] file name for template osa. Default value is `osa_template_doe`.
 - Testing
