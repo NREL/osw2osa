@@ -1,7 +1,7 @@
 {
   "analysis": {
-    "display_name": "OSW 2 OSA - DOE Algorithm",
-    "name": "osw_2_osa_doe",
+    "display_name": "OSW 2 OSA - DOE Algorithm NO Script",
+    "name": "osw_2_osa_doe_no_script",
     "output_variables": [
       {
         "objective_function": false,

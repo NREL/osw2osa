@@ -3,7 +3,7 @@
 # It works by populating the workflow of a template OSA file with measure steps from the OSW
 # ARGV[0] json file is generated unless false
 # ARGV[1] zip file is generated unless false
-# ARGV[2] analysis name
+# ARGV[2] variable set name
 # ARGV[3] parent directory name for source osw (can also be picked based on analysis name in ARGV[3])
 # ARG[4] file name for template osa
 
@@ -92,6 +92,7 @@ if make_zip
   puts "generating analysis zip file"
 
   # bring in scripts (not from OSW)
+  # todo - inspect selected OSA to see if any scripts are needed
   puts "adding scripts to analysis zip"
   zip_file.addDirectory("analysis_scripts","scripts")
 
@@ -263,7 +264,8 @@ workflow.workflowSteps.each do |step|
       if v.to_s == "false" then v = false end
       # remap argument that relies on external files in OSW that I have not figured out how to implement in OSA
       if k == "floorplan_path"
-        arg_hash = {"name" => k,"value" => "../lib/files/#{v}"}
+        #arg_hash = {"name" => k,"value" => "../lib/files/#{v}"}
+        arg_hash = {"name" => k,"value" => v}
       else
         arg_hash = {"name" => k,"value" => v}
       end
