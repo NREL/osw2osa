@@ -81,6 +81,8 @@ class MergeSpacesFromExternalFile < OpenStudio::Measure::ModelMeasure
     merge_geometry.setDefaultValue(true)
     args << merge_geometry
 
+    # todo - add argument to disable surface matching (useful when running this large number of models to merge in)
+
     # merge internal loads
     merge_loads = OpenStudio::Measure::OSArgument.makeBoolArgument('merge_loads', true)
     merge_loads.setDisplayName('Merge Internal Loads from External Model')

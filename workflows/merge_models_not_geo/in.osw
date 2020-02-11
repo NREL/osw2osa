@@ -1,5 +1,5 @@
 {
-  "seed_file": "example_multi_template.osm",
+  "seed_file": "example_multi_custom_geo.osm",
   "file_paths": [
     "../../seeds",
     "../../weather"
@@ -19,7 +19,7 @@
     {
       "arguments": {
         "external_model_name": "../../seeds/unit_101.osm",
-        "merge_geometry": true,
+        "merge_geometry": false,
         "add_spaces": true,
         "remove_spaces": false
       },
@@ -28,7 +28,7 @@
     {
       "arguments": {
         "external_model_name": "../../seeds/unit_102.osm",
-        "merge_geometry": true,
+        "merge_geometry": false,
         "add_spaces": true,
         "remove_spaces": false
       },
@@ -37,7 +37,7 @@
     {
       "arguments": {
         "external_model_name": "../../seeds/unit_103.osm",
-        "merge_geometry": true,
+        "merge_geometry": false,
         "add_spaces": true,
         "remove_spaces": false      
       },
@@ -46,7 +46,7 @@
     {
       "arguments": {
         "external_model_name": "../../seeds/unit_104.osm",
-        "merge_geometry": true,
+        "merge_geometry": false,
         "add_spaces": true,
         "remove_spaces": false      
       },
@@ -55,7 +55,7 @@
     {
       "arguments": {
         "external_model_name": "../../seeds/unit_105.osm",
-        "merge_geometry": true,
+        "merge_geometry": false,
         "add_spaces": true,
         "remove_spaces": false      
       },
@@ -64,7 +64,7 @@
     {
       "arguments": {
         "external_model_name": "../../seeds/unit_106.osm",
-        "merge_geometry": true,
+        "merge_geometry": false,
         "add_spaces": true,
         "remove_spaces": false      
       },
@@ -73,7 +73,7 @@
     {
       "arguments": {
         "external_model_name": "../../seeds/unit_107.osm",
-        "merge_geometry": true,
+        "merge_geometry": false,
         "add_spaces": true,
         "remove_spaces": false      
       },
@@ -82,7 +82,7 @@
     {
       "arguments": {
         "external_model_name": "../../seeds/unit_108.osm",
-        "merge_geometry": true,
+        "merge_geometry": false,
         "add_spaces": true,
         "remove_spaces": false      
       },
@@ -91,7 +91,7 @@
     {
       "arguments": {
         "external_model_name": "../../seeds/unit_109.osm",
-        "merge_geometry": true,
+        "merge_geometry": false,
         "add_spaces": true,
         "remove_spaces": false     
       },
@@ -100,7 +100,7 @@
     {
       "arguments": {
         "external_model_name": "../../seeds/unit_201.osm",
-        "merge_geometry": true,
+        "merge_geometry": false,
         "add_spaces": true,
         "remove_spaces": false
       },
@@ -109,7 +109,7 @@
     {
       "arguments": {
         "external_model_name": "../../seeds/unit_202.osm",
-        "merge_geometry": true,
+        "merge_geometry": false,
         "add_spaces": true,
         "remove_spaces": false      
       },
@@ -118,7 +118,7 @@
     {
       "arguments": {
         "external_model_name": "../../seeds/unit_203.osm",
-        "merge_geometry": true,
+        "merge_geometry": false,
         "add_spaces": true,
         "remove_spaces": false      
       },
@@ -127,7 +127,7 @@
     {
       "arguments": {
         "external_model_name": "../../seeds/unit_204.osm",
-        "merge_geometry": true,
+        "merge_geometry": false,
         "add_spaces": true,
         "remove_spaces": false      
       },
@@ -136,7 +136,7 @@
     {
       "arguments": {
         "external_model_name": "../../seeds/unit_205.osm",
-        "merge_geometry": true,
+        "merge_geometry": false,
         "add_spaces": true,
         "remove_spaces": false      
       },
@@ -145,7 +145,7 @@
     {
       "arguments": {
         "external_model_name": "../../seeds/unit_206.osm",
-        "merge_geometry": true,
+        "merge_geometry": false,
         "add_spaces": true,
         "remove_spaces": false      
       },
@@ -154,7 +154,7 @@
     {
       "arguments": {
         "external_model_name": "../../seeds/unit_207.osm",
-        "merge_geometry": true,
+        "merge_geometry": false,
         "add_spaces": true,
         "remove_spaces": false      
       },
@@ -163,7 +163,7 @@
     {
       "arguments": {
         "external_model_name": "../../seeds/unit_208.osm",
-        "merge_geometry": true,
+        "merge_geometry": false,
         "add_spaces": true,
         "remove_spaces": false      
       },
@@ -172,7 +172,7 @@
     {
       "arguments": {
         "external_model_name": "../../seeds/unit_209.osm",
-        "merge_geometry": true,
+        "merge_geometry": false,
         "add_spaces": true,
         "remove_spaces": false      
       },
