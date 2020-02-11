@@ -5,3 +5,4 @@
 **/generated_files
 out.osw
 */*/tests/output
+.DS_Store
