@@ -28,7 +28,26 @@
     },
     {
       "arguments": {
-        "__SKIP__": false
+        "__SKIP__": false,
+        "add_hvac": false
+      },
+      "measure_dir_name": "create_typical_doe_building_from_model"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "add_constructions": false,
+        "add_space_type_loads": false,
+        "add_elevators": false,
+        "add_internal_mass": false,
+        "add_exterior_lights": false,
+        "add_exhaust": false,
+        "add_swh": false,
+        "add_thermostat": false,
+        "add_refrigeration": false,
+        "add_hvac": true,
+        "use_upstream_args": false,
+        "template": "90.1-2013"
       },
       "measure_dir_name": "create_typical_doe_building_from_model"
     },
