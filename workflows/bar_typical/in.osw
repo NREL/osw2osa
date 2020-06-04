@@ -22,7 +22,9 @@
         "bldg_type_a": "SecondarySchool",
         "total_bldg_floor_area": "210887",
         "ns_to_ew_ratio": "0.0",
-        "num_stories_above_grade": "2.0"
+        "num_stories_above_grade": "2.0",
+        "num_stories_below_grade": "1",
+        "make_mid_story_surfaces_adiabatic": true
       },
       "measure_dir_name": "create_bar_from_doe_building_type_ratios"
     },
