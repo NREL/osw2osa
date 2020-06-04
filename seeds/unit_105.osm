@@ -6,7 +6,7 @@ OS:Version,
 OS:Space,
   {311e1bc1-a309-46e6-a78e-e30b6a67c99c}, !- Handle
   Space 105,                              !- Name
-  ,                                       !- Space Type Name
+  {da657995-d561-44aa-9b65-be9a466a5503}, !- Space Type Name
   ,                                       !- Default Construction Set Name
   ,                                       !- Default Schedule Set Name
   ,                                       !- Direction of Relative North {deg}
@@ -222,4 +222,764 @@ OS:Surface,
   0, 0, 3.048,                            !- X,Y,Z Vertex 2 {m}
   -30.48, 0, 3.048,                       !- X,Y,Z Vertex 3 {m}
   -30.48, -1.524, 3.048;                  !- X,Y,Z Vertex 4 {m}
+
+OS:Site,
+  {6a8a6bdc-5ab4-4596-9946-6316c23ff4dc}, !- Handle
+  Site 1,                                 !- Name
+  ,                                       !- Latitude {deg}
+  ,                                       !- Longitude {deg}
+  ,                                       !- Time Zone {hr}
+  ,                                       !- Elevation {m}
+  ;                                       !- Terrain
+
+OS:YearDescription,
+  {54b7ddad-a98d-4283-9d53-7a83fbfcdb5b}; !- Handle
+
+OS:ClimateZones,
+  {56c6fd55-244c-45d2-aab0-ec55a70ce4fc}, !- Handle
+  ASHRAE,                                 !- Climate Zone Institution Name 1
+  ANSI/ASHRAE Standard 169,               !- Climate Zone Document Name 1
+  2006,                                   !- Climate Zone Document Year 1
+  ,                                       !- Climate Zone Value 1
+  CEC,                                    !- Climate Zone Institution Name 2
+  California Climate Zone Descriptions,   !- Climate Zone Document Name 2
+  1995,                                   !- Climate Zone Document Year 2
+  ;                                       !- Climate Zone Value 2
+
+OS:Building,
+  {8f8b2c91-f91d-43d2-bfbd-35c47bcb5cc1}, !- Handle
+  Building 1,                             !- Name
+  ,                                       !- Building Sector Type
+  ,                                       !- North Axis {deg}
+  ,                                       !- Nominal Floor to Floor Height {m}
+  ,                                       !- Space Type Name
+  ,                                       !- Default Construction Set Name
+  ;                                       !- Default Schedule Set Name
+
+OS:Facility,
+  {1a5b15c3-1d91-46ea-b093-83fe419ef37c}; !- Handle
+
+OS:SimulationControl,
+  {5f7544f7-6fca-43aa-97b2-efc5b5f5a7dd}; !- Handle
+
+OS:Sizing:Parameters,
+  {637ca89d-a9d3-4a29-85cd-ba74e10f03da}, !- Handle
+  1.25,                                   !- Heating Sizing Factor
+  1.15;                                   !- Cooling Sizing Factor
+
+OS:Timestep,
+  {5955078b-7df7-4a9c-916a-66a038e3bb83}, !- Handle
+  6;                                      !- Number of Timesteps per Hour
+
+OS:ShadowCalculation,
+  {d4167e6b-81d1-42da-80ab-2bc8b5b021d6}, !- Handle
+  PolygonClipping,                        !- Shading Calculation Method
+  ,                                       !- Shading Calculation Update Frequency Method
+  20,                                     !- Shading Calculation Update Frequency
+  15000,                                  !- Maximum Figures in Shadow Overlap Calculations
+  ,                                       !- Polygon Clipping Algorithm
+  512,                                    !- Pixel Counting Resolution
+  ,                                       !- Sky Diffuse Modeling Algorithm
+  No,                                     !- Output External Shading Calculation Results
+  No,                                     !- Disable Self-Shading Within Shading Zone Groups
+  No;                                     !- Disable Self-Shading From Shading Zone Groups to Other Zones
+
+OS:HeatBalanceAlgorithm,
+  {047f4497-3783-45b7-8c89-54984a5fc515}, !- Handle
+  ConductionTransferFunction,             !- Algorithm
+  200;                                    !- Surface Temperature Upper Limit {C}
+
+OS:RunPeriod,
+  {f55ec4be-56b0-4778-989a-7c18091bc86b}, !- Handle
+  Run Period 1,                           !- Name
+  1,                                      !- Begin Month
+  1,                                      !- Begin Day of Month
+  12,                                     !- End Month
+  31,                                     !- End Day of Month
+  ,                                       !- Use Weather File Holidays and Special Days
+  ,                                       !- Use Weather File Daylight Saving Period
+  ,                                       !- Apply Weekend Holiday Rule
+  ,                                       !- Use Weather File Rain Indicators
+  ,                                       !- Use Weather File Snow Indicators
+  ;                                       !- Number of Times Runperiod to be Repeated
+
+OS:LifeCycleCost:Parameters,
+  {cc4cc3f4-3bcf-4392-ba17-0b16d408beaa}, !- Handle
+  ,                                       !- Analysis Type
+  ,                                       !- Discounting Convention
+  ,                                       !- Inflation Approach
+  ,                                       !- Real Discount Rate
+  ,                                       !- Nominal Discount Rate
+  ,                                       !- Inflation
+  ,                                       !- Base Date Month
+  ,                                       !- Base Date Year
+  ,                                       !- Service Date Month
+  ,                                       !- Service Date Year
+  ;                                       !- Length of Study Period in Years
+
+OS:SpaceType,
+  {da657995-d561-44aa-9b65-be9a466a5503}, !- Handle
+  189.1-2009 - Office - Corridor - CZ4-8, !- Name
+  ,                                       !- Default Construction Set Name
+  {1a59e386-ebbf-457a-819f-499d9d7d56e7}, !- Default Schedule Set Name
+  {3899d455-0e70-47c2-97b8-0a8d054eb525}, !- Group Rendering Name
+  {531b2c68-14de-4764-917a-a84819399f5b}, !- Design Specification Outdoor Air Object Name
+  ,                                       !- Standards Template
+  Office,                                 !- Standards Building Type
+  Corridor;                               !- Standards Space Type
+
+OS:DefaultScheduleSet,
+  {1a59e386-ebbf-457a-819f-499d9d7d56e7}, !- Handle
+  189.1-2009 - Office - Corridor - CZ4-8 Schedule Set, !- Name
+  ,                                       !- Hours of Operation Schedule Name
+  {43dbbcaa-ecd3-4270-9145-819d11690efd}, !- Number of People Schedule Name
+  {221db498-b6a7-49bf-8642-ff89c099706a}, !- People Activity Level Schedule Name
+  {f0ce59ea-d072-4d56-bc10-1151962e1df2}, !- Lighting Schedule Name
+  {c17f3de7-7ceb-41fb-840c-84b56076a2a8}, !- Electric Equipment Schedule Name
+  ,                                       !- Gas Equipment Schedule Name
+  ,                                       !- Hot Water Equipment Schedule Name
+  {ff1073a3-e504-4ad6-9866-20b5bd310a25}, !- Infiltration Schedule Name
+  ,                                       !- Steam Equipment Schedule Name
+  ;                                       !- Other Equipment Schedule Name
+
+OS:Rendering:Color,
+  {3899d455-0e70-47c2-97b8-0a8d054eb525}, !- Handle
+  Rendering Color 20,                     !- Name
+  169,                                    !- Rendering Red Value
+  31,                                     !- Rendering Green Value
+  31;                                     !- Rendering Blue Value
+
+OS:DesignSpecification:OutdoorAir,
+  {531b2c68-14de-4764-917a-a84819399f5b}, !- Handle
+  189.1-2009 - Office - Corridor - CZ4-8 Ventilation, !- Name
+  Sum,                                    !- Outdoor Air Method
+  ,                                       !- Outdoor Air Flow per Person {m3/s-person}
+  0.000254,                               !- Outdoor Air Flow per Floor Area {m3/s-m2}
+  ,                                       !- Outdoor Air Flow Rate {m3/s}
+  ,                                       !- Outdoor Air Flow Air Changes per Hour {1/hr}
+  ;                                       !- Outdoor Air Flow Rate Fraction Schedule Name
+
+OS:Schedule:Ruleset,
+  {43dbbcaa-ecd3-4270-9145-819d11690efd}, ! Handle
+  Office Work Occ,                        ! Name
+  {47b5f9a1-e69f-4492-a9ff-a87b74126dfd}, ! Schedule Type Limits Name
+  {9c71fed1-f306-4bd2-ae2f-2bd0e5596b8b}, ! Default Day Schedule Name
+  {93a557d7-cc08-4f89-a8fa-c87d2c5ead8e}, ! Summer Design Day Schedule Name
+  {8e163db0-3c65-4326-8334-dcd74ec5d31a}; ! Winter Design Day Schedule Name
+
+OS:Schedule:Day,
+  {9c71fed1-f306-4bd2-ae2f-2bd0e5596b8b}, ! Handle
+  Office Bldg Occ Default Schedule,       ! Name
+  {47b5f9a1-e69f-4492-a9ff-a87b74126dfd}, ! Schedule Type Limits Name
+  ,                                       ! Interpolate to Timestep
+  6,                                      !- Hour 1
+  0,                                      !- Minute 1
+  0,                                      !- Value Until Time 1
+  7,                                      !- Hour 2
+  0,                                      !- Minute 2
+  0.100000001490116,                      !- Value Until Time 2
+  8,                                      !- Hour 3
+  0,                                      !- Minute 3
+  0.200000002980232,                      !- Value Until Time 3
+  12,                                     !- Hour 4
+  0,                                      !- Minute 4
+  0.850000023841858,                      !- Value Until Time 4
+  13,                                     !- Hour 5
+  0,                                      !- Minute 5
+  0.5,                                    !- Value Until Time 5
+  17,                                     !- Hour 6
+  0,                                      !- Minute 6
+  0.850000023841858,                      !- Value Until Time 6
+  18,                                     !- Hour 7
+  0,                                      !- Minute 7
+  0.699999988079071,                      !- Value Until Time 7
+  20,                                     !- Hour 8
+  0,                                      !- Minute 8
+  0.400000005960464,                      !- Value Until Time 8
+  22,                                     !- Hour 9
+  0,                                      !- Minute 9
+  0.100000001490116,                      !- Value Until Time 9
+  24,                                     !- Hour 10
+  0,                                      !- Minute 10
+  0.0500000007450581;                     !- Value Until Time 10
+
+OS:Schedule:Day,
+  {93a557d7-cc08-4f89-a8fa-c87d2c5ead8e}, ! Handle
+  Office Bldg Occ Summer Design Day,      ! Name
+  {47b5f9a1-e69f-4492-a9ff-a87b74126dfd}, ! Schedule Type Limits Name
+  ,                                       ! Interpolate to Timestep
+  6,                                      ! Hour 1
+  0,                                      ! Minute 1
+  0,                                      ! Value Until Time 1
+  22,                                     ! Hour 2
+  0,                                      ! Minute 2
+  1,                                      ! Value Until Time 2
+  24,                                     ! Hour 3
+  0,                                      ! Minute 3
+  0.050000000000000003;                   ! Value Until Time 3
+
+OS:Schedule:Day,
+  {8e163db0-3c65-4326-8334-dcd74ec5d31a}, ! Handle
+  Office Bldg Occ Winter Design Day,      ! Name
+  {47b5f9a1-e69f-4492-a9ff-a87b74126dfd}, ! Schedule Type Limits Name
+  ,                                       ! Interpolate to Timestep
+  24,                                     ! Hour 1
+  0,                                      ! Minute 1
+  0;                                      ! Value Until Time 1
+
+OS:Schedule:Rule,
+  {a1150c73-b7e9-4f9d-ac0c-fb6c16aed32a}, !- Handle
+  Office Work Occ Rule 1,                 !- Name
+  {43dbbcaa-ecd3-4270-9145-819d11690efd}, !- Schedule Ruleset Name
+  0,                                      !- Rule Order
+  {f496ec36-4565-4359-911c-1516048492e6}, !- Day Schedule Name
+  Yes,                                    !- Apply Sunday
+  No,                                     !- Apply Monday
+  No,                                     !- Apply Tuesday
+  No,                                     !- Apply Wednesday
+  No,                                     !- Apply Thursday
+  No,                                     !- Apply Friday
+  No,                                     !- Apply Saturday
+  DateRange,                              !- Date Specification Type
+  1,                                      !- Start Month
+  1,                                      !- Start Day
+  12,                                     !- End Month
+  31;                                     !- End Day
+
+OS:Schedule:Rule,
+  {de93134a-873c-419e-88a5-e25bd51bdeb5}, !- Handle
+  Office Work Occ Rule 2,                 !- Name
+  {43dbbcaa-ecd3-4270-9145-819d11690efd}, !- Schedule Ruleset Name
+  1,                                      !- Rule Order
+  {1669fdef-6532-4aab-a566-745a0eecb19b}, !- Day Schedule Name
+  No,                                     !- Apply Sunday
+  No,                                     !- Apply Monday
+  No,                                     !- Apply Tuesday
+  No,                                     !- Apply Wednesday
+  No,                                     !- Apply Thursday
+  No,                                     !- Apply Friday
+  Yes,                                    !- Apply Saturday
+  DateRange,                              !- Date Specification Type
+  1,                                      !- Start Month
+  1,                                      !- Start Day
+  12,                                     !- End Month
+  31;                                     !- End Day
+
+OS:Schedule:Day,
+  {f496ec36-4565-4359-911c-1516048492e6}, ! Handle
+  Office Bldg Occ Rule 1 Day Schedule,    ! Name
+  {47b5f9a1-e69f-4492-a9ff-a87b74126dfd}, ! Schedule Type Limits Name
+  ,                                       ! Interpolate to Timestep
+  24,                                     ! Hour 1
+  0,                                      ! Minute 1
+  0;                                      ! Value Until Time 1
+
+OS:Schedule:Day,
+  {1669fdef-6532-4aab-a566-745a0eecb19b}, ! Handle
+  Office Bldg Occ Rule 2 Day Schedule,    ! Name
+  {47b5f9a1-e69f-4492-a9ff-a87b74126dfd}, ! Schedule Type Limits Name
+  ,                                       ! Interpolate to Timestep
+  6,                                      !- Hour 1
+  0,                                      !- Minute 1
+  0,                                      !- Value Until Time 1
+  8,                                      !- Hour 2
+  0,                                      !- Minute 2
+  0.100000001490116,                      !- Value Until Time 2
+  14,                                     !- Hour 3
+  0,                                      !- Minute 3
+  0.400000005960464,                      !- Value Until Time 3
+  17,                                     !- Hour 4
+  0,                                      !- Minute 4
+  0.100000001490116,                      !- Value Until Time 4
+  24,                                     !- Hour 5
+  0,                                      !- Minute 5
+  0;                                      !- Value Until Time 5
+
+OS:Schedule:Ruleset,
+  {221db498-b6a7-49bf-8642-ff89c099706a}, ! Handle
+  Office Activity,                        ! Name
+  {e165e81f-3be0-49aa-90ff-7c0103986e48}, ! Schedule Type Limits Name
+  {0487485e-d777-4327-81e7-906018e6d5a0}, ! Default Day Schedule Name
+  {243fa50a-5a63-4369-8fe2-35c7db2d11b5}, ! Summer Design Day Schedule Name
+  {6379812e-1944-4a04-9d99-25bd008c5734}; ! Winter Design Day Schedule Name
+
+OS:Schedule:Day,
+  {0487485e-d777-4327-81e7-906018e6d5a0}, ! Handle
+  Office Activity Default Schedule,       ! Name
+  {e165e81f-3be0-49aa-90ff-7c0103986e48}, ! Schedule Type Limits Name
+  ,                                       ! Interpolate to Timestep
+  24,                                     !- Hour 1
+  0,                                      !- Minute 1
+  132;                                    !- Value Until Time 1
+
+OS:Schedule:Day,
+  {243fa50a-5a63-4369-8fe2-35c7db2d11b5}, ! Handle
+  Office Activity Summer Design Day,      ! Name
+  {e165e81f-3be0-49aa-90ff-7c0103986e48}, ! Schedule Type Limits Name
+  ,                                       ! Interpolate to Timestep
+  24,                                     !- Hour 1
+  0,                                      !- Minute 1
+  132;                                    !- Value Until Time 1
+
+OS:Schedule:Day,
+  {6379812e-1944-4a04-9d99-25bd008c5734}, ! Handle
+  Office Activity Winter Design Day,      ! Name
+  {e165e81f-3be0-49aa-90ff-7c0103986e48}, ! Schedule Type Limits Name
+  ,                                       ! Interpolate to Timestep
+  24,                                     !- Hour 1
+  0,                                      !- Minute 1
+  132;                                    !- Value Until Time 1
+
+OS:Schedule:Ruleset,
+  {f0ce59ea-d072-4d56-bc10-1151962e1df2}, ! Handle
+  Office Bldg Light,                      ! Name
+  {47b5f9a1-e69f-4492-a9ff-a87b74126dfd}, ! Schedule Type Limits Name
+  {692c3eb2-a72b-4967-82c7-8dcafcc4cdc5}, ! Default Day Schedule Name
+  {e0980969-ea63-48b2-8dd1-61f1e76a6387}, ! Summer Design Day Schedule Name
+  {c74db2d6-52db-434b-8fb5-de93cdf1797a}; ! Winter Design Day Schedule Name
+
+OS:Schedule:Day,
+  {692c3eb2-a72b-4967-82c7-8dcafcc4cdc5}, ! Handle
+  Office Bldg Light Default Schedule,     ! Name
+  {47b5f9a1-e69f-4492-a9ff-a87b74126dfd}, ! Schedule Type Limits Name
+  ,                                       ! Interpolate to Timestep
+  5,                                      !- Hour 1
+  0,                                      !- Minute 1
+  0.05,                                   !- Value Until Time 1
+  7,                                      !- Hour 2
+  0,                                      !- Minute 2
+  0.1,                                    !- Value Until Time 2
+  8,                                      !- Hour 3
+  0,                                      !- Minute 3
+  0.3,                                    !- Value Until Time 3
+  17,                                     !- Hour 4
+  0,                                      !- Minute 4
+  0.9,                                    !- Value Until Time 4
+  18,                                     !- Hour 5
+  0,                                      !- Minute 5
+  0.7,                                    !- Value Until Time 5
+  20,                                     !- Hour 6
+  0,                                      !- Minute 6
+  0.5,                                    !- Value Until Time 6
+  22,                                     !- Hour 7
+  0,                                      !- Minute 7
+  0.3,                                    !- Value Until Time 7
+  23,                                     !- Hour 8
+  0,                                      !- Minute 8
+  0.1,                                    !- Value Until Time 8
+  24,                                     !- Hour 9
+  0,                                      !- Minute 9
+  0.05;                                   !- Value Until Time 9
+
+OS:Schedule:Day,
+  {e0980969-ea63-48b2-8dd1-61f1e76a6387}, ! Handle
+  Office Bldg Light Summer Design Day,    ! Name
+  {47b5f9a1-e69f-4492-a9ff-a87b74126dfd}, ! Schedule Type Limits Name
+  ,                                       ! Interpolate to Timestep
+  24,                                     ! Hour 1
+  0,                                      ! Minute 1
+  1;                                      ! Value Until Time 1
+
+OS:Schedule:Day,
+  {c74db2d6-52db-434b-8fb5-de93cdf1797a}, ! Handle
+  Office Bldg Light Winter Design Day,    ! Name
+  {47b5f9a1-e69f-4492-a9ff-a87b74126dfd}, ! Schedule Type Limits Name
+  ,                                       ! Interpolate to Timestep
+  24,                                     ! Hour 1
+  0,                                      ! Minute 1
+  0;                                      ! Value Until Time 1
+
+OS:Schedule:Rule,
+  {f14939f8-3c5f-4a9f-86aa-8368cbf3ce33}, !- Handle
+  Office Bldg Light Rule 1,               !- Name
+  {f0ce59ea-d072-4d56-bc10-1151962e1df2}, !- Schedule Ruleset Name
+  0,                                      !- Rule Order
+  {fec82337-470f-4e23-a0c6-ebaf0bc8e811}, !- Day Schedule Name
+  Yes,                                    !- Apply Sunday
+  No,                                     !- Apply Monday
+  No,                                     !- Apply Tuesday
+  No,                                     !- Apply Wednesday
+  No,                                     !- Apply Thursday
+  No,                                     !- Apply Friday
+  No,                                     !- Apply Saturday
+  DateRange,                              !- Date Specification Type
+  1,                                      !- Start Month
+  1,                                      !- Start Day
+  12,                                     !- End Month
+  31;                                     !- End Day
+
+OS:Schedule:Rule,
+  {296e9d67-c004-4c23-9cd8-d322e7a982c7}, !- Handle
+  Office Bldg Light Rule 2,               !- Name
+  {f0ce59ea-d072-4d56-bc10-1151962e1df2}, !- Schedule Ruleset Name
+  1,                                      !- Rule Order
+  {6e5d493f-ca1c-45d1-9139-0b281fb97b7c}, !- Day Schedule Name
+  No,                                     !- Apply Sunday
+  No,                                     !- Apply Monday
+  No,                                     !- Apply Tuesday
+  No,                                     !- Apply Wednesday
+  No,                                     !- Apply Thursday
+  No,                                     !- Apply Friday
+  Yes,                                    !- Apply Saturday
+  DateRange,                              !- Date Specification Type
+  1,                                      !- Start Month
+  1,                                      !- Start Day
+  12,                                     !- End Month
+  31;                                     !- End Day
+
+OS:Schedule:Day,
+  {fec82337-470f-4e23-a0c6-ebaf0bc8e811}, ! Handle
+  Office Bldg Light Rule 1 Day Schedule,  ! Name
+  {47b5f9a1-e69f-4492-a9ff-a87b74126dfd}, ! Schedule Type Limits Name
+  ,                                       ! Interpolate to Timestep
+  24,                                     ! Hour 1
+  0,                                      ! Minute 1
+  0.050000000000000003;                   ! Value Until Time 1
+
+OS:Schedule:Day,
+  {6e5d493f-ca1c-45d1-9139-0b281fb97b7c}, ! Handle
+  Office Bldg Light Rule 2 Day Schedule,  ! Name
+  {47b5f9a1-e69f-4492-a9ff-a87b74126dfd}, ! Schedule Type Limits Name
+  ,                                       ! Interpolate to Timestep
+  6,                                      ! Hour 1
+  0,                                      ! Minute 1
+  0.050000000000000003,                   ! Value Until Time 1
+  8,                                      ! Hour 2
+  0,                                      ! Minute 2
+  0.10000000000000001,                    ! Value Until Time 2
+  14,                                     ! Hour 3
+  0,                                      ! Minute 3
+  0.5,                                    ! Value Until Time 3
+  17,                                     ! Hour 4
+  0,                                      ! Minute 4
+  0.14999999999999999,                    ! Value Until Time 4
+  24,                                     ! Hour 5
+  0,                                      ! Minute 5
+  0.050000000000000003;                   ! Value Until Time 5
+
+OS:Schedule:Ruleset,
+  {c17f3de7-7ceb-41fb-840c-84b56076a2a8}, ! Handle
+  Office Bldg Equip,                      ! Name
+  {47b5f9a1-e69f-4492-a9ff-a87b74126dfd}, ! Schedule Type Limits Name
+  {b7522896-37c0-4bd5-8284-d41974d3e3f7}, ! Default Day Schedule Name
+  {33a66ebe-9820-41f2-9bbf-8b0b53ee7c60}, ! Summer Design Day Schedule Name
+  {55b544c0-841f-4c32-8ee5-eabcdcc541de}; ! Winter Design Day Schedule Name
+
+OS:Schedule:Day,
+  {b7522896-37c0-4bd5-8284-d41974d3e3f7}, ! Handle
+  Office Bldg Equip Default Schedule,     ! Name
+  {47b5f9a1-e69f-4492-a9ff-a87b74126dfd}, ! Schedule Type Limits Name
+  ,                                       ! Interpolate to Timestep
+  8,                                      !- Hour 1
+  0,                                      !- Minute 1
+  0.4,                                    !- Value Until Time 1
+  12,                                     !- Hour 2
+  0,                                      !- Minute 2
+  0.9,                                    !- Value Until Time 2
+  13,                                     !- Hour 3
+  0,                                      !- Minute 3
+  0.8,                                    !- Value Until Time 3
+  17,                                     !- Hour 4
+  0,                                      !- Minute 4
+  0.9,                                    !- Value Until Time 4
+  18,                                     !- Hour 5
+  0,                                      !- Minute 5
+  0.8,                                    !- Value Until Time 5
+  20,                                     !- Hour 6
+  0,                                      !- Minute 6
+  0.6,                                    !- Value Until Time 6
+  22,                                     !- Hour 7
+  0,                                      !- Minute 7
+  0.5,                                    !- Value Until Time 7
+  24,                                     !- Hour 8
+  0,                                      !- Minute 8
+  0.4;                                    !- Value Until Time 8
+
+OS:Schedule:Day,
+  {33a66ebe-9820-41f2-9bbf-8b0b53ee7c60}, ! Handle
+  Office Bldg Equip Summer Design Day,    ! Name
+  {47b5f9a1-e69f-4492-a9ff-a87b74126dfd}, ! Schedule Type Limits Name
+  ,                                       ! Interpolate to Timestep
+  24,                                     ! Hour 1
+  0,                                      ! Minute 1
+  1;                                      ! Value Until Time 1
+
+OS:Schedule:Day,
+  {55b544c0-841f-4c32-8ee5-eabcdcc541de}, ! Handle
+  Office Bldg Equip Winter Design Day,    ! Name
+  {47b5f9a1-e69f-4492-a9ff-a87b74126dfd}, ! Schedule Type Limits Name
+  ,                                       ! Interpolate to Timestep
+  24,                                     ! Hour 1
+  0,                                      ! Minute 1
+  0;                                      ! Value Until Time 1
+
+OS:Schedule:Rule,
+  {0ada83bd-334b-43c0-9b46-5077018422d0}, !- Handle
+  Office Bldg Equip Rule 1,               !- Name
+  {c17f3de7-7ceb-41fb-840c-84b56076a2a8}, !- Schedule Ruleset Name
+  0,                                      !- Rule Order
+  {9f20e73c-0bd5-4f6e-a805-1929185a7711}, !- Day Schedule Name
+  Yes,                                    !- Apply Sunday
+  No,                                     !- Apply Monday
+  No,                                     !- Apply Tuesday
+  No,                                     !- Apply Wednesday
+  No,                                     !- Apply Thursday
+  No,                                     !- Apply Friday
+  No,                                     !- Apply Saturday
+  DateRange,                              !- Date Specification Type
+  1,                                      !- Start Month
+  1,                                      !- Start Day
+  12,                                     !- End Month
+  31;                                     !- End Day
+
+OS:Schedule:Rule,
+  {f6a6689b-d7fe-40b1-a694-43db041cc2ff}, !- Handle
+  Office Bldg Equip Rule 2,               !- Name
+  {c17f3de7-7ceb-41fb-840c-84b56076a2a8}, !- Schedule Ruleset Name
+  1,                                      !- Rule Order
+  {790801c9-76d0-4813-a66f-be80cbd87395}, !- Day Schedule Name
+  No,                                     !- Apply Sunday
+  No,                                     !- Apply Monday
+  No,                                     !- Apply Tuesday
+  No,                                     !- Apply Wednesday
+  No,                                     !- Apply Thursday
+  No,                                     !- Apply Friday
+  Yes,                                    !- Apply Saturday
+  DateRange,                              !- Date Specification Type
+  1,                                      !- Start Month
+  1,                                      !- Start Day
+  12,                                     !- End Month
+  31;                                     !- End Day
+
+OS:Schedule:Day,
+  {9f20e73c-0bd5-4f6e-a805-1929185a7711}, ! Handle
+  Office Bldg Equip Rule 1 Day Schedule,  ! Name
+  {47b5f9a1-e69f-4492-a9ff-a87b74126dfd}, ! Schedule Type Limits Name
+  ,                                       ! Interpolate to Timestep
+  24,                                     ! Hour 1
+  0,                                      ! Minute 1
+  0.29999999999999999;                    ! Value Until Time 1
+
+OS:Schedule:Day,
+  {790801c9-76d0-4813-a66f-be80cbd87395}, ! Handle
+  Office Bldg Equip Rule 2 Day Schedule,  ! Name
+  {47b5f9a1-e69f-4492-a9ff-a87b74126dfd}, ! Schedule Type Limits Name
+  ,                                       ! Interpolate to Timestep
+  6,                                      ! Hour 1
+  0,                                      ! Minute 1
+  0.29999999999999999,                    ! Value Until Time 1
+  8,                                      ! Hour 2
+  0,                                      ! Minute 2
+  0.40000000000000002,                    ! Value Until Time 2
+  14,                                     ! Hour 3
+  0,                                      ! Minute 3
+  0.5,                                    ! Value Until Time 3
+  17,                                     ! Hour 4
+  0,                                      ! Minute 4
+  0.34999999999999998,                    ! Value Until Time 4
+  24,                                     ! Hour 5
+  0,                                      ! Minute 5
+  0.29999999999999999;                    ! Value Until Time 5
+
+OS:Schedule:Ruleset,
+  {ff1073a3-e504-4ad6-9866-20b5bd310a25}, ! Handle
+  Office Infil Quarter On,                ! Name
+  {47b5f9a1-e69f-4492-a9ff-a87b74126dfd}, ! Schedule Type Limits Name
+  {c8ad7b48-1203-42be-a07f-798989b1783c}, ! Default Day Schedule Name
+  {0240b8a1-55ad-4ad2-85c7-9081158d38b2}, ! Summer Design Day Schedule Name
+  {b2257a7a-4979-45f1-92d4-5ef0e2e11f6f}; ! Winter Design Day Schedule Name
+
+OS:Schedule:Day,
+  {c8ad7b48-1203-42be-a07f-798989b1783c}, ! Handle
+  Office Infil Quarter On Default Schedule, ! Name
+  {47b5f9a1-e69f-4492-a9ff-a87b74126dfd}, ! Schedule Type Limits Name
+  ,                                       ! Interpolate to Timestep
+  6,                                      !- Hour 1
+  0,                                      !- Minute 1
+  1,                                      !- Value Until Time 1
+  22,                                     !- Hour 2
+  0,                                      !- Minute 2
+  0.25,                                   !- Value Until Time 2
+  24,                                     !- Hour 3
+  0,                                      !- Minute 3
+  1;                                      !- Value Until Time 3
+
+OS:Schedule:Day,
+  {0240b8a1-55ad-4ad2-85c7-9081158d38b2}, ! Handle
+  Office Infil Quarter On Summer Design Day, ! Name
+  {47b5f9a1-e69f-4492-a9ff-a87b74126dfd}, ! Schedule Type Limits Name
+  ,                                       ! Interpolate to Timestep
+  6,                                      ! Hour 1
+  0,                                      ! Minute 1
+  1,                                      ! Value Until Time 1
+  22,                                     ! Hour 2
+  0,                                      ! Minute 2
+  0.25,                                   ! Value Until Time 2
+  24,                                     ! Hour 3
+  0,                                      ! Minute 3
+  1;                                      ! Value Until Time 3
+
+OS:Schedule:Day,
+  {b2257a7a-4979-45f1-92d4-5ef0e2e11f6f}, ! Handle
+  Office Infil Quarter On Winter Design Day, ! Name
+  {47b5f9a1-e69f-4492-a9ff-a87b74126dfd}, ! Schedule Type Limits Name
+  ,                                       ! Interpolate to Timestep
+  6,                                      ! Hour 1
+  0,                                      ! Minute 1
+  1,                                      ! Value Until Time 1
+  18,                                     ! Hour 2
+  0,                                      ! Minute 2
+  0.25,                                   ! Value Until Time 2
+  24,                                     ! Hour 3
+  0,                                      ! Minute 3
+  1;                                      ! Value Until Time 3
+
+OS:Schedule:Rule,
+  {56cd0f62-0e6f-4c04-9525-223d053503f4}, !- Handle
+  Office Infil Quarter On Rule 1,         !- Name
+  {ff1073a3-e504-4ad6-9866-20b5bd310a25}, !- Schedule Ruleset Name
+  0,                                      !- Rule Order
+  {929173e4-df73-453c-8d73-c1f177bfd1f8}, !- Day Schedule Name
+  Yes,                                    !- Apply Sunday
+  No,                                     !- Apply Monday
+  No,                                     !- Apply Tuesday
+  No,                                     !- Apply Wednesday
+  No,                                     !- Apply Thursday
+  No,                                     !- Apply Friday
+  No,                                     !- Apply Saturday
+  DateRange,                              !- Date Specification Type
+  1,                                      !- Start Month
+  1,                                      !- Start Day
+  12,                                     !- End Month
+  31;                                     !- End Day
+
+OS:Schedule:Rule,
+  {8266e267-6572-4ee4-b0d1-523f0840c74a}, !- Handle
+  Office Infil Quarter On Rule 2,         !- Name
+  {ff1073a3-e504-4ad6-9866-20b5bd310a25}, !- Schedule Ruleset Name
+  1,                                      !- Rule Order
+  {39d68b88-7d64-4a99-9c36-ecf189de0572}, !- Day Schedule Name
+  No,                                     !- Apply Sunday
+  No,                                     !- Apply Monday
+  No,                                     !- Apply Tuesday
+  No,                                     !- Apply Wednesday
+  No,                                     !- Apply Thursday
+  No,                                     !- Apply Friday
+  Yes,                                    !- Apply Saturday
+  DateRange,                              !- Date Specification Type
+  1,                                      !- Start Month
+  1,                                      !- Start Day
+  12,                                     !- End Month
+  31;                                     !- End Day
+
+OS:Schedule:Day,
+  {929173e4-df73-453c-8d73-c1f177bfd1f8}, ! Handle
+  Office Infil Quarter On Rule 1 Day Schedule, ! Name
+  {47b5f9a1-e69f-4492-a9ff-a87b74126dfd}, ! Schedule Type Limits Name
+  ,                                       ! Interpolate to Timestep
+  24,                                     ! Hour 1
+  0,                                      ! Minute 1
+  1;                                      ! Value Until Time 1
+
+OS:Schedule:Day,
+  {39d68b88-7d64-4a99-9c36-ecf189de0572}, ! Handle
+  Office Infil Quarter On Rule 2 Day Schedule, ! Name
+  {47b5f9a1-e69f-4492-a9ff-a87b74126dfd}, ! Schedule Type Limits Name
+  ,                                       ! Interpolate to Timestep
+  6,                                      ! Hour 1
+  0,                                      ! Minute 1
+  1,                                      ! Value Until Time 1
+  18,                                     ! Hour 2
+  0,                                      ! Minute 2
+  0.25,                                   ! Value Until Time 2
+  24,                                     ! Hour 3
+  0,                                      ! Minute 3
+  1;                                      ! Value Until Time 3
+
+OS:ScheduleTypeLimits,
+  {47b5f9a1-e69f-4492-a9ff-a87b74126dfd}, ! Handle
+  Fraction,                               ! Name
+  0,                                      ! Lower Limit Value
+  1,                                      ! Upper Limit Value
+  CONTINUOUS;                             ! Numeric Type
+
+OS:ScheduleTypeLimits,
+  {e165e81f-3be0-49aa-90ff-7c0103986e48}, !- Handle
+  ActivityLevel,                          !- Name
+  0,                                      !- Lower Limit Value
+  ,                                       !- Upper Limit Value
+  Continuous,                             !- Numeric Type
+  ActivityLevel;                          !- Unit Type
+
+OS:People,
+  {60e961b8-0ea6-4a09-8d9c-251e31cf72b1}, !- Handle
+  189.1-2009 - Office - Corridor - CZ4-8 People, !- Name
+  {9f40af5c-6d1f-4eb9-83f1-3850912dd171}, !- People Definition Name
+  {da657995-d561-44aa-9b65-be9a466a5503}, !- Space or SpaceType Name
+  ,                                       !- Number of People Schedule Name
+  ,                                       !- Activity Level Schedule Name
+  ,                                       !- Surface Name/Angle Factor List Name
+  ,                                       !- Work Efficiency Schedule Name
+  ,                                       !- Clothing Insulation Schedule Name
+  ,                                       !- Air Velocity Schedule Name
+  1;                                      !- Multiplier
+
+OS:People:Definition,
+  {9f40af5c-6d1f-4eb9-83f1-3850912dd171}, !- Handle
+  189.1-2009 - Office - Corridor - CZ4-8 People Definition, !- Name
+  People/Area,                            !- Number of People Calculation Method
+  ,                                       !- Number of People {people}
+  0.0107639104167097,                     !- People per Space Floor Area {person/m2}
+  ,                                       !- Space Floor Area per Person {m2/person}
+  0.3;                                    !- Fraction Radiant
+
+OS:Lights,
+  {dbbe59fa-d2bf-43d9-b1a5-8d2dc32ce16f}, !- Handle
+  189.1-2009 - Office - Corridor - CZ4-8 Lights, !- Name
+  {040bea30-2a6d-46df-bce8-db59e7d327a7}, !- Lights Definition Name
+  {da657995-d561-44aa-9b65-be9a466a5503}, !- Space or SpaceType Name
+  ,                                       !- Schedule Name
+  ,                                       !- Fraction Replaceable
+  ,                                       !- Multiplier
+  General;                                !- End-Use Subcategory
+
+OS:Lights:Definition,
+  {040bea30-2a6d-46df-bce8-db59e7d327a7}, !- Handle
+  189.1-2009 - Office - Corridor - CZ4-8 Lights Definition, !- Name
+  Watts/Area,                             !- Design Level Calculation Method
+  ,                                       !- Lighting Level {W}
+  4.84375968751938,                       !- Watts per Space Floor Area {W/m2}
+  ;                                       !- Watts per Person {W/person}
+
+OS:ElectricEquipment,
+  {68cb1072-5146-4b34-a831-6be0e85e7526}, !- Handle
+  189.1-2009 - Office - Corridor - CZ4-8 Electric Equipment, !- Name
+  {91dc0a91-da9d-49ef-9173-7c40b3704cc4}, !- Electric Equipment Definition Name
+  {da657995-d561-44aa-9b65-be9a466a5503}, !- Space or SpaceType Name
+  ,                                       !- Schedule Name
+  ,                                       !- Multiplier
+  General;                                !- End-Use Subcategory
+
+OS:ElectricEquipment:Definition,
+  {91dc0a91-da9d-49ef-9173-7c40b3704cc4}, !- Handle
+  189.1-2009 - Office - Corridor - CZ4-8 Electric Equipment Definition, !- Name
+  Watts/Area,                             !- Design Level Calculation Method
+  ,                                       !- Design Level {W}
+  1.72222566667356,                       !- Watts per Space Floor Area {W/m2}
+  ;                                       !- Watts per Person {W/person}
+
+OS:SpaceInfiltration:DesignFlowRate,
+  {83cd5a77-46f1-485d-8a28-1b82b3c43220}, !- Handle
+  189.1-2009 - Office - Corridor - CZ4-8 Infiltration, !- Name
+  {da657995-d561-44aa-9b65-be9a466a5503}, !- Space or SpaceType Name
+  ,                                       !- Schedule Name
+  Flow/ExteriorArea,                      !- Design Flow Rate Calculation Method
+  ,                                       !- Design Flow Rate {m3/s}
+  ,                                       !- Flow per Space Floor Area {m3/s-m2}
+  0.000226568,                            !- Flow per Exterior Surface Area {m3/s-m2}
+  ,                                       !- Air Changes per Hour {1/hr}
+  ,                                       !- Constant Term Coefficient
+  ,                                       !- Temperature Term Coefficient
+  ,                                       !- Velocity Term Coefficient
+  ;                                       !- Velocity Squared Term Coefficient
 

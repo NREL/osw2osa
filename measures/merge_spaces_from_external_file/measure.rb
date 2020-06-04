@@ -93,7 +93,7 @@ class MergeSpacesFromExternalFile < OpenStudio::Measure::ModelMeasure
     # merge space attributes
     merge_attribute_names = OpenStudio::Measure::OSArgument.makeBoolArgument('merge_attribute_names', true)
     merge_attribute_names.setDisplayName('Merge Space Attribute names from External Model')
-    merge_attribute_names.setDescription('Replace space attribute names in current model with space attribute names from external models. When external model has unkown attribute name that object will be cloned into the current model.')
+    merge_attribute_names.setDescription('Replace space attribute names in current model with space attribute names from external models. When external model has unknown attribute name that object will be cloned into the current model.')
     merge_attribute_names.setDefaultValue(true)
     args << merge_attribute_names
 
@@ -107,7 +107,7 @@ class MergeSpacesFromExternalFile < OpenStudio::Measure::ModelMeasure
     # remove_spaces
     remove_spaces = OpenStudio::Measure::OSArgument.makeBoolArgument('remove_spaces', true)
     remove_spaces.setDisplayName('Remove Spaces from Current Model')
-    remove_spaces.setDescription('Remove spaces from current model that do not exist in externa model.')
+    remove_spaces.setDescription('Remove spaces from current model that do not exist in external model.')
     remove_spaces.setDefaultValue(true)
     args << remove_spaces
 
@@ -115,7 +115,7 @@ class MergeSpacesFromExternalFile < OpenStudio::Measure::ModelMeasure
     # doesn't bring in schedules from external model that are not used in current model, this measures isn't mean to load in resources that are not used
     merge_schedules = OpenStudio::Measure::OSArgument.makeBoolArgument('merge_schedules', true)
     merge_schedules.setDisplayName('Merge Schedules from External Model')
-    merge_schedules.setDescription("This isn't limited to spaces, this will replace any scheules in the current model with schedules of the same name in the external model. It will not replace schedule named 'a' from an internal load in th emodel with a schedule named 'b' from an internal load by that same name in the external model, to perform that task currently, you must merge loads.")
+    merge_schedules.setDescription("This isn't limited to spaces, this will replace any schedules in the current model with schedules of the same name in the external model. It will not replace schedule named 'a' from an internal load in th emodel with a schedule named 'b' from an internal load by that same name in the external model, to perform that task currently, you must merge loads.")
     merge_schedules.setDefaultValue(true)
     args << merge_schedules
 
