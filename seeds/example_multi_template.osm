@@ -1,7 +1,7 @@
 
 OS:Version,
   {21c3b51c-abc8-4798-b641-dc2f7c9397c8}, !- Handle
-  3.0.0-rc1;                              !- Version Identifier
+  3.0.0;                                  !- Version Identifier
 
 OS:Schedule:Constant,
   {6df7b15a-0b93-4176-8f5e-c4d23ce29d44}, !- Handle
@@ -142,7 +142,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   No,                                     ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -171,7 +170,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   Yes,                                    ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -293,7 +291,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   No,                                     ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -322,7 +319,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   Yes,                                    ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -474,7 +470,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   No,                                     ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -503,7 +498,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   Yes,                                    ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -608,7 +602,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   No,                                     ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -637,7 +630,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   Yes,                                    ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -733,7 +725,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   No,                                     ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -762,7 +753,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   Yes,                                    ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -852,7 +842,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   No,                                     ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -881,7 +870,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   Yes,                                    ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -1055,7 +1043,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   No,                                     ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -1084,7 +1071,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   Yes,                                    ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -2382,7 +2368,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   No,                                     ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -2411,7 +2396,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   Yes,                                    ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -2545,7 +2529,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   No,                                     ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -2574,7 +2557,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   Yes,                                    ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -2726,7 +2708,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   No,                                     ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -2755,7 +2736,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   Yes,                                    ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -2860,7 +2840,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   No,                                     ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -2889,7 +2868,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   Yes,                                    ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -2985,7 +2963,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   No,                                     ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -3014,7 +2991,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   Yes,                                    ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -3104,7 +3080,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   No,                                     ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -3133,7 +3108,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   Yes,                                    ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -3307,7 +3281,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   No,                                     ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -3336,7 +3309,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   Yes,                                    ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -3488,7 +3460,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   No,                                     ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -3517,7 +3488,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   Yes,                                    ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -3622,7 +3592,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   No,                                     ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -3651,7 +3620,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   Yes,                                    ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -3834,7 +3802,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   No,                                     ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -3863,7 +3830,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   Yes,                                    ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -4015,7 +3981,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   No,                                     ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -4044,7 +4009,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   Yes,                                    ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -4143,7 +4107,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   No,                                     ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -4172,7 +4135,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   Yes,                                    ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -4268,7 +4230,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   No,                                     ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -4297,7 +4258,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   Yes,                                    ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -4387,7 +4347,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   No,                                     ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -4416,7 +4375,6 @@ OS:Schedule:Rule,
   No,                                     ! Apply Thursday
   No,                                     ! Apply Friday
   Yes,                                    ! Apply Saturday
-  ,                                       ! Apply Holiday
   DateRange,                              ! Date Specification Type
   1,                                      ! Start Month
   1,                                      ! Start Day
@@ -7509,19 +7467,6 @@ OS:Site,
 OS:YearDescription,
   {ced9d852-3dbd-4e6c-ade7-1e572711c3f2}; !- Handle
 
-OS:ClimateZones,
-  {f9298a12-fa75-446c-a6a6-301b9e4dc7b8}, !- Handle
-  ,                                       !- Active Institution
-  ,                                       !- Active Year
-  ASHRAE,                                 !- Climate Zone Institution Name 1
-  ANSI/ASHRAE Standard 169,               !- Climate Zone Document Name 1
-  2006,                                   !- Climate Zone Document Year 1
-  ,                                       !- Climate Zone Value 1
-  CEC,                                    !- Climate Zone Institution Name 2
-  California Climate Zone Descriptions,   !- Climate Zone Document Name 2
-  1995,                                   !- Climate Zone Document Year 2
-  ;                                       !- Climate Zone Value 2
-
 OS:LifeCycleCost:Parameters,
   {fb618376-732f-4376-831c-e5bee8e3ceba}, !- Handle
   FEMP,                                   !- Analysis Type
@@ -7907,8 +7852,6 @@ OS:Sizing:Zone,
   ,                                       !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
   ,                                       !- Heating Maximum Air Flow {m3/s}
   ,                                       !- Heating Maximum Air Flow Fraction
-  ,                                       !- Design Zone Air Distribution Effectiveness in Cooling Mode
-  ,                                       !- Design Zone Air Distribution Effectiveness in Heating Mode
   No,                                     !- Account for Dedicated Outdoor Air System
   NeutralSupplyAir,                       !- Dedicated Outdoor Air System Control Strategy
   autosize,                               !- Dedicated Outdoor Air Low Setpoint Temperature for Design {C}
@@ -7994,8 +7937,6 @@ OS:Sizing:Zone,
   ,                                       !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
   ,                                       !- Heating Maximum Air Flow {m3/s}
   ,                                       !- Heating Maximum Air Flow Fraction
-  ,                                       !- Design Zone Air Distribution Effectiveness in Cooling Mode
-  ,                                       !- Design Zone Air Distribution Effectiveness in Heating Mode
   No,                                     !- Account for Dedicated Outdoor Air System
   NeutralSupplyAir,                       !- Dedicated Outdoor Air System Control Strategy
   autosize,                               !- Dedicated Outdoor Air Low Setpoint Temperature for Design {C}
@@ -8081,8 +8022,6 @@ OS:Sizing:Zone,
   ,                                       !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
   ,                                       !- Heating Maximum Air Flow {m3/s}
   ,                                       !- Heating Maximum Air Flow Fraction
-  ,                                       !- Design Zone Air Distribution Effectiveness in Cooling Mode
-  ,                                       !- Design Zone Air Distribution Effectiveness in Heating Mode
   No,                                     !- Account for Dedicated Outdoor Air System
   NeutralSupplyAir,                       !- Dedicated Outdoor Air System Control Strategy
   autosize,                               !- Dedicated Outdoor Air Low Setpoint Temperature for Design {C}
@@ -8168,8 +8107,6 @@ OS:Sizing:Zone,
   ,                                       !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
   ,                                       !- Heating Maximum Air Flow {m3/s}
   ,                                       !- Heating Maximum Air Flow Fraction
-  ,                                       !- Design Zone Air Distribution Effectiveness in Cooling Mode
-  ,                                       !- Design Zone Air Distribution Effectiveness in Heating Mode
   No,                                     !- Account for Dedicated Outdoor Air System
   NeutralSupplyAir,                       !- Dedicated Outdoor Air System Control Strategy
   autosize,                               !- Dedicated Outdoor Air Low Setpoint Temperature for Design {C}
@@ -8255,8 +8192,6 @@ OS:Sizing:Zone,
   ,                                       !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
   ,                                       !- Heating Maximum Air Flow {m3/s}
   ,                                       !- Heating Maximum Air Flow Fraction
-  ,                                       !- Design Zone Air Distribution Effectiveness in Cooling Mode
-  ,                                       !- Design Zone Air Distribution Effectiveness in Heating Mode
   No,                                     !- Account for Dedicated Outdoor Air System
   NeutralSupplyAir,                       !- Dedicated Outdoor Air System Control Strategy
   autosize,                               !- Dedicated Outdoor Air Low Setpoint Temperature for Design {C}
@@ -8342,8 +8277,6 @@ OS:Sizing:Zone,
   ,                                       !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
   ,                                       !- Heating Maximum Air Flow {m3/s}
   ,                                       !- Heating Maximum Air Flow Fraction
-  ,                                       !- Design Zone Air Distribution Effectiveness in Cooling Mode
-  ,                                       !- Design Zone Air Distribution Effectiveness in Heating Mode
   No,                                     !- Account for Dedicated Outdoor Air System
   NeutralSupplyAir,                       !- Dedicated Outdoor Air System Control Strategy
   autosize,                               !- Dedicated Outdoor Air Low Setpoint Temperature for Design {C}
@@ -8429,8 +8362,6 @@ OS:Sizing:Zone,
   ,                                       !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
   ,                                       !- Heating Maximum Air Flow {m3/s}
   ,                                       !- Heating Maximum Air Flow Fraction
-  ,                                       !- Design Zone Air Distribution Effectiveness in Cooling Mode
-  ,                                       !- Design Zone Air Distribution Effectiveness in Heating Mode
   No,                                     !- Account for Dedicated Outdoor Air System
   NeutralSupplyAir,                       !- Dedicated Outdoor Air System Control Strategy
   autosize,                               !- Dedicated Outdoor Air Low Setpoint Temperature for Design {C}
@@ -8516,8 +8447,6 @@ OS:Sizing:Zone,
   ,                                       !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
   ,                                       !- Heating Maximum Air Flow {m3/s}
   ,                                       !- Heating Maximum Air Flow Fraction
-  ,                                       !- Design Zone Air Distribution Effectiveness in Cooling Mode
-  ,                                       !- Design Zone Air Distribution Effectiveness in Heating Mode
   No,                                     !- Account for Dedicated Outdoor Air System
   NeutralSupplyAir,                       !- Dedicated Outdoor Air System Control Strategy
   autosize,                               !- Dedicated Outdoor Air Low Setpoint Temperature for Design {C}
@@ -8603,8 +8532,6 @@ OS:Sizing:Zone,
   ,                                       !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
   ,                                       !- Heating Maximum Air Flow {m3/s}
   ,                                       !- Heating Maximum Air Flow Fraction
-  ,                                       !- Design Zone Air Distribution Effectiveness in Cooling Mode
-  ,                                       !- Design Zone Air Distribution Effectiveness in Heating Mode
   No,                                     !- Account for Dedicated Outdoor Air System
   NeutralSupplyAir,                       !- Dedicated Outdoor Air System Control Strategy
   autosize,                               !- Dedicated Outdoor Air Low Setpoint Temperature for Design {C}
@@ -8690,8 +8617,6 @@ OS:Sizing:Zone,
   ,                                       !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
   ,                                       !- Heating Maximum Air Flow {m3/s}
   ,                                       !- Heating Maximum Air Flow Fraction
-  ,                                       !- Design Zone Air Distribution Effectiveness in Cooling Mode
-  ,                                       !- Design Zone Air Distribution Effectiveness in Heating Mode
   No,                                     !- Account for Dedicated Outdoor Air System
   NeutralSupplyAir,                       !- Dedicated Outdoor Air System Control Strategy
   autosize,                               !- Dedicated Outdoor Air Low Setpoint Temperature for Design {C}
@@ -8777,8 +8702,6 @@ OS:Sizing:Zone,
   ,                                       !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
   ,                                       !- Heating Maximum Air Flow {m3/s}
   ,                                       !- Heating Maximum Air Flow Fraction
-  ,                                       !- Design Zone Air Distribution Effectiveness in Cooling Mode
-  ,                                       !- Design Zone Air Distribution Effectiveness in Heating Mode
   No,                                     !- Account for Dedicated Outdoor Air System
   NeutralSupplyAir,                       !- Dedicated Outdoor Air System Control Strategy
   autosize,                               !- Dedicated Outdoor Air Low Setpoint Temperature for Design {C}
@@ -8864,8 +8787,6 @@ OS:Sizing:Zone,
   ,                                       !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
   ,                                       !- Heating Maximum Air Flow {m3/s}
   ,                                       !- Heating Maximum Air Flow Fraction
-  ,                                       !- Design Zone Air Distribution Effectiveness in Cooling Mode
-  ,                                       !- Design Zone Air Distribution Effectiveness in Heating Mode
   No,                                     !- Account for Dedicated Outdoor Air System
   NeutralSupplyAir,                       !- Dedicated Outdoor Air System Control Strategy
   autosize,                               !- Dedicated Outdoor Air Low Setpoint Temperature for Design {C}
@@ -8951,8 +8872,6 @@ OS:Sizing:Zone,
   ,                                       !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
   ,                                       !- Heating Maximum Air Flow {m3/s}
   ,                                       !- Heating Maximum Air Flow Fraction
-  ,                                       !- Design Zone Air Distribution Effectiveness in Cooling Mode
-  ,                                       !- Design Zone Air Distribution Effectiveness in Heating Mode
   No,                                     !- Account for Dedicated Outdoor Air System
   NeutralSupplyAir,                       !- Dedicated Outdoor Air System Control Strategy
   autosize,                               !- Dedicated Outdoor Air Low Setpoint Temperature for Design {C}
@@ -9038,8 +8957,6 @@ OS:Sizing:Zone,
   ,                                       !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
   ,                                       !- Heating Maximum Air Flow {m3/s}
   ,                                       !- Heating Maximum Air Flow Fraction
-  ,                                       !- Design Zone Air Distribution Effectiveness in Cooling Mode
-  ,                                       !- Design Zone Air Distribution Effectiveness in Heating Mode
   No,                                     !- Account for Dedicated Outdoor Air System
   NeutralSupplyAir,                       !- Dedicated Outdoor Air System Control Strategy
   autosize,                               !- Dedicated Outdoor Air Low Setpoint Temperature for Design {C}
@@ -9125,8 +9042,6 @@ OS:Sizing:Zone,
   ,                                       !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
   ,                                       !- Heating Maximum Air Flow {m3/s}
   ,                                       !- Heating Maximum Air Flow Fraction
-  ,                                       !- Design Zone Air Distribution Effectiveness in Cooling Mode
-  ,                                       !- Design Zone Air Distribution Effectiveness in Heating Mode
   No,                                     !- Account for Dedicated Outdoor Air System
   NeutralSupplyAir,                       !- Dedicated Outdoor Air System Control Strategy
   autosize,                               !- Dedicated Outdoor Air Low Setpoint Temperature for Design {C}
@@ -9213,8 +9128,6 @@ OS:Sizing:Zone,
   ,                                       !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
   ,                                       !- Heating Maximum Air Flow {m3/s}
   ,                                       !- Heating Maximum Air Flow Fraction
-  ,                                       !- Design Zone Air Distribution Effectiveness in Cooling Mode
-  ,                                       !- Design Zone Air Distribution Effectiveness in Heating Mode
   No,                                     !- Account for Dedicated Outdoor Air System
   NeutralSupplyAir,                       !- Dedicated Outdoor Air System Control Strategy
   autosize,                               !- Dedicated Outdoor Air Low Setpoint Temperature for Design {C}
@@ -9300,8 +9213,6 @@ OS:Sizing:Zone,
   ,                                       !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
   ,                                       !- Heating Maximum Air Flow {m3/s}
   ,                                       !- Heating Maximum Air Flow Fraction
-  ,                                       !- Design Zone Air Distribution Effectiveness in Cooling Mode
-  ,                                       !- Design Zone Air Distribution Effectiveness in Heating Mode
   No,                                     !- Account for Dedicated Outdoor Air System
   NeutralSupplyAir,                       !- Dedicated Outdoor Air System Control Strategy
   autosize,                               !- Dedicated Outdoor Air Low Setpoint Temperature for Design {C}
@@ -9387,8 +9298,6 @@ OS:Sizing:Zone,
   ,                                       !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}
   ,                                       !- Heating Maximum Air Flow {m3/s}
   ,                                       !- Heating Maximum Air Flow Fraction
-  ,                                       !- Design Zone Air Distribution Effectiveness in Cooling Mode
-  ,                                       !- Design Zone Air Distribution Effectiveness in Heating Mode
   No,                                     !- Account for Dedicated Outdoor Air System
   NeutralSupplyAir,                       !- Dedicated Outdoor Air System Control Strategy
   autosize,                               !- Dedicated Outdoor Air Low Setpoint Temperature for Design {C}

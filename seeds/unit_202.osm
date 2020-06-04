@@ -1,7 +1,7 @@
 
 OS:Version,
   {364f04a4-ad35-4932-abd2-a90e9e18570b}, !- Handle
-  3.0.0-rc1;                              !- Version Identifier
+  3.0.0;                                  !- Version Identifier
 
 OS:Space,
   {aecab9e1-1511-4cad-9410-ea60dd9c1cb9}, !- Handle
