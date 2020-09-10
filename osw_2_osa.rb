@@ -132,9 +132,9 @@ workflow.workflowSteps.each do |step|
 
     measure_step = step.to_MeasureStep.get
     measure_dir_name = measure_step.measureDirName
-    puts " - gathering data for #{measure_dir_name}"
+    source_path = workflow.findMeasure(measure_dir_name.to_s).get
+    puts " - gathering data for #{measure_dir_name} from #{source_path}."
     if zip_file
-      source_path = workflow.findMeasure(measure_dir_name.to_s).get
       zip_file.addDirectory(source_path,OpenStudio::Path.new("measures/#{measure_dir_name}"))
     end
 
