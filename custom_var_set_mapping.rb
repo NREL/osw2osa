@@ -88,8 +88,8 @@ def var_mapping(var_set,osw_path)
     desc_vars['ChangeBuildingLocation']['weather_file_name'] = var_epw
   end
 
-# setup multiple variables for create_bar_from_building_type_ratios
-  desc_vars['create_bar_from_building_type_ratios'] = {}
+# setup multiple variables for create_bar_from_doe_building_type_ratios
+  desc_vars['create_bar_from_doe_building_type_ratios'] = {}
   desc_vars['create_typical_building_from_model'] = {} # used on worfkflow that doesn't have create_bar
 
 # template (note that depending on the workflow, a different measure is chosen to set template for)
@@ -104,7 +104,7 @@ def var_mapping(var_set,osw_path)
     if osw_path.to_s.include?("floorspace_typical")
       desc_vars['create_typical_building_from_model']['template'] = var_template
     else
-      desc_vars['create_bar_from_building_type_ratios']['template'] = var_template
+      desc_vars['create_bar_from_doe_building_type_ratios']['template'] = var_template
     end
   elsif ['generic','blend_skip_true','blend_typical'].include?(var_set)
     var_template = []
@@ -113,17 +113,17 @@ def var_mapping(var_set,osw_path)
     if osw_path.to_s.include?("floorspace_typical")
       desc_vars['create_typical_building_from_model']['template'] = var_template
     else
-      desc_vars['create_bar_from_building_type_ratios']['template'] = var_template
+      desc_vars['create_bar_from_doe_building_type_ratios']['template'] = var_template
     end
   end
 
 # num_stories_above_grade
   if ["bar_study_2"].include?(var_set)
     var_num_stories = [1.0,1.5,2.0,2.5,3.0] # when arg is integer instead of double store as string
-    desc_vars['create_bar_from_building_type_ratios']['num_stories_above_grade'] = var_num_stories
+    desc_vars['create_bar_from_doe_building_type_ratios']['num_stories_above_grade'] = var_num_stories
   elsif ["generic"].include?(var_set)
     var_num_stories = [1.0,2.0]
-    desc_vars['create_bar_from_building_type_ratios']['num_stories_above_grade'] = var_num_stories
+    desc_vars['create_bar_from_doe_building_type_ratios']['num_stories_above_grade'] = var_num_stories
   end
 
 # fraction_of_surface or skip measure var
