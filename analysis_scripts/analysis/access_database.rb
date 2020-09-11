@@ -52,19 +52,20 @@ r[:data].each do |datapoint|
     lowest_eui_id = id
     eui_min = datapoint_outputs[:eui] 
   end
-  puts "Lowest EUI of #{eui_min} belongs to datapoint #{lowest_eui_id}"
 
   # high_uh checks
   if datapoint_outputs[:uh_clg] > uh_limit
     high_uh_clg_ids[id] = datapoint_outputs
   end
-  puts "#{high_uh_clg_ids.size} datapoints have more than #{uh_limit} hours of unmet occupied cooling."
   if datapoint_outputs[:uh_htg] > uh_limit
     high_uh_htg_ids[id] = datapoint_outputs
   end
-  puts "#{high_uh_htg_ids.size} datapoints have more than #{uh_limit} hours of unmet occupied heating."
 
 end
+
+puts "Lowest EUI of #{eui_min} belongs to datapoint #{lowest_eui_id}"
+puts "#{high_uh_clg_ids.size} datapoints have more than #{uh_limit} hours of unmet occupied cooling."
+puts "#{high_uh_htg_ids.size} datapoints have more than #{uh_limit} hours of unmet occupied heating."
 
 # update database
 puts "Updating Analysis results"
