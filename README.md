@@ -1,5 +1,5 @@
 # osw2osa
-This repo is a sample deployment of ruby scripts used to generate OSA files from template OSW and OSA files. This creates the analysis JSON file as well as the ZIP file containing measures, weather, seed models,  analysis scripts, and other resources. The script supports defining variable values for measure arguments found in the template OSW file. You can run the script with a clean checkout by calling `ruby osw_2_osa_rb` from the top level of the repository. This will populate the run directory with a JSON and ZIp file for the default analysis described in 'custom_var_set_mappping.rb'
+This repo is a sample deployment of ruby scripts used to generate OSA files from template OSW and OSA files. This creates the analysis JSON file as well as the ZIP file containing measures, weather, seed models,  analysis scripts, and other resources. The script supports defining variable values for measure arguments found in the template OSW file. You can run the script with a clean checkout (of required repositories) by calling `ruby osw_2_osa_rb` from the top level of this repository. This will populate the run directory with a JSON and ZIp file for the default analysis described in 'custom_var_set_mappping.rb'
 
 - Repository File Structure
     - workflows
@@ -9,15 +9,18 @@ This repo is a sample deployment of ruby scripts used to generate OSA files from
         - floorspace_typical
         - osm_typical (does not exist, will import osm with stub space types using ReplaceModel and run create_typical measure. Measure is not on public repo yet)
     - measures
-        - Currently this contains a measure to merge a `FloorspaceJS` file into an OpenStudio model. This will be moved to another public repository soon.
         - You would generally use this for single purpose measures that don't exist in another repository and that you don't think will be useful outside of the current project you are setting up.
-        - Seed models that will be used by one or more of the template OSW files and the resulting OSA files.
     - weather
         - Contains weather files that are used by OSW, OSA, or by measures such as the `ChangeBuildingLocaiton` which requires additional EPW, DDY, and STAT files.
     - seeds
         - Seed models that will be used by one or more of the template OSW files and the resulting OSA files.
     - files
         - This contains files that are be used by measures when an OSW or OSA is run. This includes `geojson` and `FloorspaceJS` json files, but may also include any file needed by a measure that isn't already contained within the measure.
+    - GemFile
+        - Defines which Ruby gems will be installed by `bundle install`
+    - `.bundle`
+        - config file defines where `bundle install` will be placed (only on local checkout)
+        -   This location is defined at `.bundle/install/ruby/2.5.0/bundler/gems/`.
     - osw_2_osa.rb
         - This script is the primary file for the repository that everything else supports. The script arguments are described later in this readme. This is currently just setup for discrete variables, but could support more in the future.
     - custom_var_set_mapping.rb
@@ -39,12 +42,20 @@ This repo is a sample deployment of ruby scripts used to generate OSA files from
     - run (only on local checkout)
         - after you run 'osw_2_osa.rb' this directory will be generated and populated with analysis JSON files and an analysis zip file. These are what are required by the OpenStudio meta-CLI to run an analysis.
     - docs
-        - This jsut contains image files embeded in this readme file.
-- Additional public repositories need to be checked out to setup the example analysis projects using `osw_2_osa.rb`. (I may use gem install at some point to get sample measures). These repositories contain most of the measured used by the workflow. The paths in OSW assume these repositories are checked out next to the osw2osa repository.
+        - This just contains image files embedded in this readme file.
+- Preferred Workflow: Only requires this repository to be checked out
+    - Instructions
+        - Requires Ruby (5.5).
+        - install bundle using `gem install bundle` at the command prompt
+        - from top level of repository type `bundle install` at the command prompt
+           - This should result in a `.bundle` directory which contains all of the measure gems necessary for the workflows described in this repository. Any measures that are not in a measure gem and are unique to this project can be in the `measure` directory at the top level of the repository.
+           - Do not add altered copies of measures from other repositories in this repositories `measure` directory. Instead alter the `Gemfile` for the branch of the measure gem repository that has the desired version of the measure.
+       - (todo) Run rake task to create modified OSW files in run directory that setup measure paths to the gems nested under `.bundle`
+    - (todo) Support for generating OSA's using the preferred workflow will be added soon
+- Legacy Workflow: Additional public repositories need to be checked out to setup the example analysis projects using `osw_2_osa.rb`. These repositories contain most of the measured used by the workflow. The paths in OSW assume these repositories are checked out next to the osw2osa repository.
     - https://github.com/NREL/openstudio-model-articulation-gem/tree/develop
     - https://github.com/NREL/openstudio-common-measures-gem/tree/develop
     - https://github.com/urbanopt/urbanopt-geojson-gem/tree/develop
-    - https://github.com/macumber/openstudio-vA3C/tree/master
 - Script Arguments
     - ARGV[0] json file is generated unless false. Default value is true.
     - ARGV[1] zip file is generated unless false. Default value is true.
@@ -66,7 +77,7 @@ This repo is a sample deployment of ruby scripts used to generate OSA files from
     - add configuration to adjust local path to checkout of other repos, unless I instead use rake and bundle to install gems here with gemspec file to define branch.
     - Figure out how to get OSA to work with `runner.workflow.FindPath` instead having to set relative path for use with OSA, while it seems the path is wrong for OSW run, extra file paths are added into OSW when it is run.
     - get ServerDirectoryCleanup on public repo and put in OSW with flat to skip in `custom_var_set_mapping`. Note that it doesn't always clean up sizing run, need to make it more robust.
-    - once using newer openstudio_results that adds runner.registerValue for repported climate zone (not just argument value) add that to output of template OSA files. It makes graphics much easier than using weather file name.
+    - once using newer openstudio_results that adds runner.registerValue for reported climate zone (not just argument value) add that to output of template OSA files. It makes graphics much easier than using weather file name.
 
 Run Individual Workflow using CLI using 
 <br>`openstudio run --workflow /path/to/workflow.osw`. 
