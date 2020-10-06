@@ -17,16 +17,6 @@ task :clear_run do
 
 end
 
-desc 'Delete contents under setup directory'
-task :clear_setup do
-
-  puts 'Deleting setup diretory and underlying contents'
-
-  # remove run directory
-  FileUtils.rm_rf('setup')
-
-end
-
 desc 'Find Bundle measure paths to add to bundle osws'
 task :find_bundle_measure_paths do
 
