@@ -4,6 +4,7 @@ Bundler.setup
 require 'rake'
 require 'fileutils'
 require 'openstudio'
+require 'parallel'
 
 #task default: 'tbd'
 
@@ -90,7 +91,7 @@ task :setup_osw , [:workflow_name] do |task, args|
 end
 
 desc 'Setup all osw files to use bundler gems for measure paths'
-task :setup_all_osw do
+task :setup_all_osws do
   find_osws.each do |workflow_name|
     setup_osw(workflow_name)
   end
@@ -116,6 +117,7 @@ task :find_osws do
   find_osws
 end
 
+# todo - can get rid of this and always use run_osws unless people want to use without parallel
 def run_osw(workflow_name, measures_only = false)
   puts "Running #{workflow_name}"
   if measures_only
@@ -125,11 +127,38 @@ def run_osw(workflow_name, measures_only = false)
   end
 end
 
+def run_osws(workflow_names, measures_only = false)
+  jobs = []
+  workflow_names.each do |workflow_name|
+    puts "Running #{workflow_name}"
+    if measures_only
+      jobs << "openstudio run -m -w run/workflows/#{workflow_name}/in.osw"
+    else
+      jobs << "openstudio run -w run/workflows/#{workflow_name}/in.osw"
+    end
+  end
+
+  # run simulations
+  num_parallel = 12 # can it default or input something like n-1
+  Parallel.each(jobs, in_threads: num_parallel) do |job|
+    puts job
+    system(job)
+  end
+
+end
+
 desc 'Run single osw'
 task :run_osw , [:workflow_name] do |task, args|
   args.with_defaults(workflow_name: 'bar_typical')
   workflow_name = args.workflow_name.inspect.delete('"')
+  puts "Running #{workflow_name}"
   run_osw(workflow_name)
+end
+
+desc 'Run all osws'
+task :run_all_osws do
+  puts "Running all osws"
+  run_osws(find_osws)
 end
 
 desc 'Run single osw measures ony'

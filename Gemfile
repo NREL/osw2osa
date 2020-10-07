@@ -11,3 +11,6 @@ source 'http://rubygems.org'
 gem 'openstudio-model-articulation', github: 'NREL/openstudio-model-articulation-gem', branch: 'develop'
 gem 'openstudio-common-measures', github: 'NREL/openstudio-common-measures-gem', branch: 'develop'
 gem 'urbanopt-geojson', github: 'URBANopt/urbanopt-geojson-gem', branch: 'develop'
+
+# other gems
+gem 'parallel', '~> 1.19', '>= 1.19.2'
