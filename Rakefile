@@ -7,19 +7,19 @@ require 'openstudio'
 
 #task default: 'tbd'
 
-desc 'Delete contents under run directory'
-task :clear_run do
-
+def clear_run
   puts 'Deleting run diretory and underlying contents'
 
   # remove run directory
   FileUtils.rm_rf('run')
-
 end
 
-desc 'Find Bundle measure paths to add to bundle osws'
-task :find_bundle_measure_paths do
+desc 'Delete contents under run directory'
+task :clear_run do
+  clear_run
+end
 
+def find_bundle_measure_paths
   bundle_base_gem_path = '.bundle/install/ruby/2.5.0/bundler/gems'
   bundle_measure_paths = []
 
@@ -35,19 +35,16 @@ task :find_bundle_measure_paths do
   puts "found #{bundle_measure_paths.size} measure directories"
   puts "bundle_measure_paths:#{bundle_measure_paths.inspect}"
 
-  bundle_measure_paths
-
+  return bundle_measure_paths
 end
 
-desc 'Setup single osw file to use bundler gems for measure paths'
-task :setup_osw , [:var] do |task, args|
+desc 'Find Bundle measure paths to add to bundle osws'
+task :find_bundle_measure_paths do
+  find_bundle_measure_paths
+end
 
-  args.with_defaults(var: 'bar_typical')
-  workflow_name = args.var.inspect.delete('"')
+def setup_osw(workflow_name)
   puts "Adding copy in run/workflows directory of #{workflow_name} in workflow directory with updated measure paths set to use .bundle measure gems."
-
-  # get measure paths (seems like method below is calling the task twice)
-  bundle_measure_paths = Rake::Task["find_bundle_measure_paths"].execute.first.call
 
   # confirm directory exists
   Dir.mkdir("run") unless File.exists?("run")
@@ -62,7 +59,7 @@ task :setup_osw , [:var] do |task, args|
   # replace measure paths, add in measure gem paths and measures from this repo
   puts "updating measure_paths to use the bundle measure gems"
   workflow.resetMeasurePaths
-  bundle_measure_paths.each do |path|
+  find_bundle_measure_paths.each do |path|
     workflow.addMeasurePath("../../../#{path}")
   end
 
@@ -84,37 +81,74 @@ task :setup_osw , [:var] do |task, args|
   osw_path = "run/workflows/#{workflow_name}/in.osw"
   workflow.saveAs(osw_path)
 
+  return workflow
+end
+
+desc 'Setup single osw file to use bundler gems for measure paths'
+task :setup_osw , [:workflow_name] do |task, args|
+  args.with_defaults(workflow_name: 'bar_typical')
+  workflow_name = args.workflow_name.inspect.delete('"')
+  setup_osw(workflow_name)
+end
+
+desc 'Setup all osw files to use bundler gems for measure paths'
+task :setup_all do
+  find_osws.each do |workflow_name|
+    setup_osw(workflow_name)
+  end
+end
+
+def find_osws
+  puts "Get names of workflows in workflows directory"
+  workflow_names = []
+  workflows = Dir.entries('workflows')
+  workflows.each do |workflow|
+    # check if has lib/measures
+    workflow_path = "workflows/#{workflow}/in.osw"
+    next if ! File.exists?(workflow_path)
+    workflow_names << workflow
+  end
+  puts workflow_names
+
+  return workflow_names
+end
+
+desc 'List OSW files in the measures workflows directory'
+task :find_osws do
+  find_osws
+end
+
+def run_osw(workflow_name, measures_only = false)
+  puts "Running #{workflow_name}"
+  if measures_only
+    system("openstudio run -m -w run/workflows/#{workflow_name}/in.osw")
+  else
+    system("openstudio run -w run/workflows/#{workflow_name}/in.osw")
+  end
 end
 
 desc 'Run single osw'
-task :run_osw , [:var] do |task, args|
-
-  args.with_defaults(var: 'bar_typical')
-  workflow_path = "run/workflows/#{args.var.inspect.delete('"')}/in.osw"
-  puts "Running #{workflow_path}"
-  system("openstudio run -w #{workflow_path}")
+task :run_osw , [:workflow_name] do |task, args|
+  args.with_defaults(workflow_name: 'bar_typical')
+  workflow_name = args.workflow_name.inspect.delete('"')
+  run_osw(workflow_name)
 end
 
-# todo - put as second arg in run_osw
-desc 'Run single osw measures only'
-task :run_osw_measures_only , [:var] do |task, args|
-
-  args.with_defaults(var: 'bar_typical')
-  workflow_path = "run/workflows/#{args.var.inspect.delete('"')}/in.osw"
-  puts "Running #{workflow_path}"
-  system("openstudio run -m -w #{workflow_path}")
+desc 'Run single osw measures ony'
+task :run_osw_measures_only , [:workflow_name] do |task, args|
+  args.with_defaults(workflow_name: 'bar_typical')
+  workflow_name = args.workflow_name.inspect.delete('"')
+  run_osw(workflow_name, true)
 end
 
-# todo - add task that does setup and run in single step
 desc 'Setup and run single osw'
-task :setup_run_osw , [:var] do |task, args|
+task :setup_run_osw , [:workflow_name] do |task, args|
 
-  args.with_defaults(var: 'bar_typical')
-  arg = args.var.inspect.delete('"')
-
-  bundle_measure_paths = Rake::Task["setup_osw"].execute
-  bundle_measure_paths = Rake::Task["run_osw"].execute
-
+  args.with_defaults(workflow_name: 'bar_typical')
+  arg = args.workflow_name.inspect.delete('"')
+  workflow_name = args.workflow_name.inspect.delete('"')
+  setup_osw(workflow_name)
+  run_osw(workflow_name)
 end
 
-# todo - add task that does setup run for all OSW files using parallel to run
+# todo - add task to setup OSA task (need to work with more arguments)
