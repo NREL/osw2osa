@@ -176,12 +176,28 @@ task :setup_run_osw , [:workflow_name] do |task, args|
   run_osw(workflow_name)
 end
 
-desc 'Setup an analysis including zip file and OSA'
-task :setup_osa , [:tbd_multiple_args] do |task, args|
+# ARGV[0] json file is generated unless false
+# ARGV[1] zip file is generated unless false
+# ARGV[2] variable set name
+# ARGV[3] parent directory name for source osw (can also be picked based on analysis name in ARGV[3])
+# ARG[4] file name for template osa
+desc 'Setup an analysis including zip file and OSA (can run with all defaults'
+task :setup_osa , [:json_bool, :zip_bool, :var_set, :select_osw, :select_osa] do |task, args|
   # todo update osw2osa to contain method that is called to make calling it with arguments cleaner
   # todo - update this to take multiple arguments
   # todo - consider running setup first or when know which OSW will be called
-  system("ruby osw_2_osa.rb")
+
+  # osw_2_osa.rb has defaults so they are not needed here.
+
+  puts "Inspecting Rake task arguments"
+  puts "json file is generated: #{args[:json_bool]}"
+  puts "zip file is generated: #{args[:zip_bool]}"
+  puts "variable set name: #{args[:var_set]}"
+  puts "source osw_name: #{args[:select_osw]}"
+  puts "template osa name: #{args[:select_osa]}"
+  puts "calling osw_2_osa.rb"
+  puts "--------------"
+  system("ruby osw_2_osa.rb #{args[:json_bool]} #{args[:zip_bool]} #{args[:var_set]} #{args[:select_osw]} #{args[:select_osa]}")
 end
 
 # todo - create task to meta CLI (there is more setup for computer for this to work provide good instructions)

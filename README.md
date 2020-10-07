@@ -8,15 +8,16 @@ This repo is a sample deployment of ruby scripts used to generate OSA files from
        - This should result in a `.bundle` directory which contains all of the measure gems necessary for the workflows described in this repository. Any measures that are not in a measure gems and are unique to this project can be in the `measures` directory at the top level of the repository.
        - Do not add altered copies of measures from other repositories in this repositories `measures` directory. Instead alter the `Gemfile` for the branch of the measure gem repository that has the desired version of the measure.
     - Most functionality is via Rake tasks. At the command prompt type `bundle exec rake -T` to see a list of functions; some of which are described below. When calling any tasks use `bundle exec rake task_name`. Some tasks take an argument `bundle exec rake task_name[args]`.
-        - rake clear_run                             # Delete contents under run directory
-        - rake find_bundle_measure_paths             # Find Bundle measure paths to add to bundle osws
-        - rake find_osws                             # List OSW files in the measures workflows directory
-        - rake run_osw[workflow_name]                # Run single osw
-        - rake run_osw_measures_only[workflow_name]  # Run single osw measures ony
-        - rake setup_all_osw                         # Setup all osw files to use bundler gems for measure paths
-        - rake setup_osa[tbd_multiple_args]          # Setup an analysis including zip file and OSA
-        - rake setup_osw[workflow_name]              # Setup single osw file to use bundler gems for measure paths
-        - rake setup_run_osw[workflow_name]          # Setup and run single osw
+            rake clear_run                             # Delete contents under run directory
+            rake find_bundle_measure_paths             # Find Bundle measure paths to add to bundle osws
+            rake find_osws                             # List OSW files in the measures workflows directory
+            rake run_all_osws                          # Run all osws
+            rake run_osw[workflow_name]                # Run single osw
+            rake run_osw_measures_only[workflow_name]  # Run single osw measures ony
+            rake setup_all_osws                        # Setup all osw files to use bundler gems for measure paths
+            rake setup_osa[osw_2_osa_args]             # Setup an analysis including zip file and OSA
+            rake setup_osw[workflow_name]              # Setup single osw file to use bundler gems for measure paths
+            rake setup_run_osw[workflow_name]          # Setup and run single osw
     - Typical chronology Rake tasks are used in.
         - `setup_osw` makes a copy of one of the OSW files from the `workflows` directory into the `run/workflows` directory. measure paths are adjusted to use the measure gems that are nested deep under `.bundle` when you run bundle install.
         - `run_osw` will run the OSW file in the `run/workflows` directory. For testing you can run quicker variation that runs the measures but not EnergyPlus
@@ -73,7 +74,7 @@ This repo is a sample deployment of ruby scripts used to generate OSA files from
             - after you run 'osw_2_osa.rb' this directory will be generated and populated with analysis JSON files and an analysis zip file. These are what are required by the OpenStudio meta-CLI to run an analysis.
     - docs
         - This just contains image files embedded in this readme file.
-- Script Arguments
+- `osw_2_osa.rb` Arguments
     - ARGV[0] json file is generated unless false. Default value is true.
     - ARGV[1] zip file is generated unless false. Default value is true.
     - ARGV[2] variable set name. Default value is `generic`. Other example variable sets are listed below. These are defined by the `custom_var_set_mapper.rb` file.
@@ -87,6 +88,7 @@ This repo is a sample deployment of ruby scripts used to generate OSA files from
         - *(Not working yet in OSA, measure requires files from repo outside of the measure)
     - ARGV[3] parent directory name for source osw (can also be picked based on analysis name in ARGV[3]). Default varies based on variable set. Currently the expected OSW name is `in.osw` within the selected directory.
     - ARG[4] file name for template osa. Default value is `osa_template_doe`.
+    - An example call with arguments would be `ruby osw_2_osa.rb true true pv_fraction bar_typical_split osa_template_single_run`
 - Testing
     - Tested using develop checkout of source repositories as of 12/26 using OpenStudio 2.9.0. Tested local OSW runs, and OpenStudio Server based OSA runs.
 - Future code development tasks

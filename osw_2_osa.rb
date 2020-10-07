@@ -33,7 +33,7 @@ var_set = select_var_set
 # supported var_set values
 valid_sets = valid_var_sets
 if !valid_sets.include?(var_set)
-  puts "this is an unexpected variable set, please confirm requested var_set in custom variable set mapping file."
+  puts "#{var_set} is an unexpected variable set, please confirm requested var_set in custom variable set mapping file."
   return false
 end
 
