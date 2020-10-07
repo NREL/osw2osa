@@ -8,16 +8,15 @@ This repo is a sample deployment of ruby scripts used to generate OSA files from
        - This should result in a `.bundle` directory which contains all of the measure gems necessary for the workflows described in this repository. Any measures that are not in a measure gems and are unique to this project can be in the `measures` directory at the top level of the repository.
        - Do not add altered copies of measures from other repositories in this repositories `measures` directory. Instead alter the `Gemfile` for the branch of the measure gem repository that has the desired version of the measure.
     - Most functionality is via Rake tasks. At the command prompt type `bundle exec rake -T` to see a list of functions; some of which are described below. When calling any tasks use `bundle exec rake task_name`. Some tasks take an argument `bundle exec rake task_name[args]`.
-            rake clear_run                             # Delete contents under run directory
-            rake find_bundle_measure_paths             # Find Bundle measure paths to add to bundle osws
-            rake find_osws                             # List OSW files in the measures workflows directory
-            rake run_all_osws                          # Run all osws
-            rake run_osw[workflow_name]                # Run single osw
-            rake run_osw_measures_only[workflow_name]  # Run single osw measures ony
-            rake setup_all_osws                        # Setup all osw files to use bundler gems for measure paths
-            rake setup_osa[osw_2_osa_args]             # Setup an analysis including zip file and OSA
-            rake setup_osw[workflow_name]              # Setup single osw file to use bundler gems for measure paths
-            rake setup_run_osw[workflow_name]          # Setup and run single osw
+            rake clear_run                                                    # Delete contents under run directory
+            rake find_bundle_measure_paths                                    # Find Bundle measure paths to add to bundle osws
+            rake find_osws                                                    # List OSW files in the measures workflows directory
+            rake run_all_osws                                                 # Run all osws
+            rake run_osw[workflow_name,measures_only]                         # Run single osw
+            rake setup_all_osws                                               # Setup all osw files to use bundler gems for measure paths
+            rake setup_osa[json_bool,zip_bool,var_set,select_osw,select_osa]  # Setup an analysis including zip file and OSA (can run with all defaults
+            rake setup_osw[workflow_name]                                     # Setup single osw file to use bundler gems for measure paths
+            rake setup_run_osw[workflow_name]                                 # Setup and run single osw
     - Typical chronology Rake tasks are used in.
         - `setup_osw` makes a copy of one of the OSW files from the `workflows` directory into the `run/workflows` directory. measure paths are adjusted to use the measure gems that are nested deep under `.bundle` when you run bundle install.
         - `run_osw` will run the OSW file in the `run/workflows` directory. For testing you can run quicker variation that runs the measures but not EnergyPlus

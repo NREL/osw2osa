@@ -132,19 +132,21 @@ task :find_osws do
   find_osws
 end
 
-# todo - can get rid of this and always use run_osws unless people want to use without parallel
+# just takes single osw and turns it into array
 def run_osw(workflow_name, measures_only = false)
-  puts "Running #{workflow_name}"
-  if measures_only
-    system("openstudio run -m -w run/workflows/#{workflow_name}/in.osw")
-  else
-    system("openstudio run -w run/workflows/#{workflow_name}/in.osw")
-  end
+  run_osws([workflow_name],measures_only)
 end
 
 def run_osws(workflow_names, measures_only = false)
   jobs = []
   workflow_names.each do |workflow_name|
+
+    # setup osw if it insn't already (don't always run setup to maintain changes in run/workflows user may have made for testing)
+    if ! find_setup_osws.include?(workflow_name)
+      puts "did not find #{workflow_name} setup in run/workflow directory, running setup_osw."
+      setup_osw(workflow_name)
+    end
+
     puts "Running #{workflow_name}"
     if measures_only
       jobs << "openstudio run -m -w run/workflows/#{workflow_name}/in.osw"
@@ -163,24 +165,17 @@ def run_osws(workflow_names, measures_only = false)
 end
 
 desc 'Run single osw'
-task :run_osw , [:workflow_name] do |task, args|
+task :run_osw , [:workflow_name, :measures_only] do |task, args|
   args.with_defaults(workflow_name: 'bar_typical')
-  workflow_name = args.workflow_name.inspect.delete('"')
-  puts "Running #{workflow_name}"
-  run_osw(workflow_name)
+  args.with_defaults(measures_only: 'false')
+  workflow_name = args[:workflow_name]
+  run_osw(workflow_name, args[:measures_only])
 end
 
 desc 'Run all osws'
 task :run_all_osws do
   puts "Running all osws"
   run_osws(find_osws)
-end
-
-desc 'Run single osw measures ony'
-task :run_osw_measures_only , [:workflow_name] do |task, args|
-  args.with_defaults(workflow_name: 'bar_typical')
-  workflow_name = args.workflow_name.inspect.delete('"')
-  run_osw(workflow_name, true)
 end
 
 desc 'Setup and run single osw'
