@@ -112,6 +112,21 @@ def find_osws
   return workflow_names
 end
 
+def find_setup_osws
+  puts "Get names of workflows in run/workflows directory"
+  workflow_names = []
+  workflows = Dir.entries('run/workflows')
+  workflows.each do |workflow|
+    # check if has lib/measures
+    workflow_path = "run/workflows/#{workflow}/in.osw"
+    next if ! File.exists?(workflow_path)
+    workflow_names << workflow
+  end
+  puts workflow_names
+
+  return workflow_names
+end
+
 desc 'List OSW files in the measures workflows directory'
 task :find_osws do
   find_osws
@@ -183,9 +198,12 @@ end
 # ARG[4] file name for template osa
 desc 'Setup an analysis including zip file and OSA (can run with all defaults'
 task :setup_osa , [:json_bool, :zip_bool, :var_set, :select_osw, :select_osa] do |task, args|
-  # todo update osw2osa to contain method that is called to make calling it with arguments cleaner
-  # todo - update this to take multiple arguments
-  # todo - consider running setup first or when know which OSW will be called
+
+  # setup osw if it insn't already
+  if ! args[:select_osw].nil? && ! find_setup_osws.include?(args[:select_osw])
+    puts "did not find #{args[:select_osw]} setup in run/workflow directory, running setup_osw."
+    setup_osw(args[:select_osw])
+  end
 
   # osw_2_osa.rb has defaults so they are not needed here.
 
