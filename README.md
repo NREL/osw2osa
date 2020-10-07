@@ -1,5 +1,5 @@
 # osw2osa
-This repo is a sample deployment of ruby scripts used to generate OSA files from template OSW and OSA files. This creates the analysis JSON file as well as the ZIP file containing measures, weather, seed models, analysis scripts, and other resources. The script supports defining variable values for measure arguments found in the template OSW file. You can run the script with a clean checkout (of required repositories) by calling `ruby osw_2_osa_rb` from the top level of this repository. This will populate the run directory with a JSON and ZIp file for the default analysis described in 'custom_var_set_mappping.rb'
+This repo is a sample deployment of ruby scripts used to generate OSA files from template OSW and OSA files. It uses bundle to access measure from measure gem repositories so you don't have to check out any other GitHub repositories to use this one. OSW files can be run for testing prior to generating and running OSA projects. Rake tasks should be the primary interfaces for users of this repository. Additionally new OSW and OSA templates can be add without having to alter ruby code. If you want to setup new variable sets you will need to edut `custom_var_set_mapping.rb`. `osw_2_osa.rb` contains more generalized code that shouldn't be project specific. . This creates the analysis JSON file as well as the ZIP file containing measures, weather, seed models, analysis scripts, and other resources. The script supports defining variable values for measure arguments found in the template OSW file. You can run the script with a clean checkout (of required repositories) by calling `ruby osw_2_osa_rb` from the top level of this repository. This will populate the run directory with a JSON and ZIp file for the default analysis described in 'custom_var_set_mappping.rb'
 
 - Instructions
     - Requires Ruby (5.5).
@@ -53,7 +53,7 @@ This repo is a sample deployment of ruby scripts used to generate OSA files from
     - custom_var_set_mapping.rb
         - This is called by `osw_2_osa.rb` to identify the mapping for variables, OSA template, and the source OSW.
         - Methods in script
-            - `valid_var_sets` is just basic error handeling to look for unexpected arguments passed in for argument in main script
+            - `valid_var_sets` is just basic error handling to look for unexpected arguments passed in for argument in main script
             - `selected_var_set` determines the default variable set to use if argument is not passed in. For basic use cases with one one primary analysis this makes calling the script cleaner.
             - `select_osw` is used to pick the template OSW based on the `var_set` unless the user specifically enters an argument for a specific template OSW.
             - `select_osa` is used pick the template OSA if an argument for this isn't passed in by the user.
