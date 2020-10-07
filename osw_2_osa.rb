@@ -46,8 +46,8 @@ puts "template OSA is #{osa_template_path}"
 
 # load a copy of template OSA file
 project_name = "osw_2_osa_#{var_set}"
-run_directory = "run"
-Dir.mkdir(run_directory) unless File.exists?(run_directory)
+run_directory = "run/analyses"
+FileUtils.mkdir_p(run_directory)
 osa_target_path = "#{run_directory}/#{project_name}.json"
 zip_path = "#{run_directory}/#{project_name}.zip"
 json = File.read(osa_template_path.to_s)

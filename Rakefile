@@ -46,10 +46,8 @@ end
 def setup_osw(workflow_name)
   puts "Adding copy in run/workflows directory of #{workflow_name} in workflow directory with updated measure paths set to use .bundle measure gems."
 
-  # confirm directory exists
-  Dir.mkdir("run") unless File.exists?("run")
-  Dir.mkdir("run/workflows") unless File.exists?("run/workflows")
-  Dir.mkdir("run/workflows/#{workflow_name}") unless File.exists?("run/workflows/#{workflow_name}")
+  # make directory if does not exist
+  FileUtils.mkdir_p("run/workflows/#{workflow_name}")
 
   # load OSW file
   osw = OpenStudio::WorkflowJSON.load("workflows/#{workflow_name}/in.osw").get
@@ -92,7 +90,7 @@ task :setup_osw , [:workflow_name] do |task, args|
 end
 
 desc 'Setup all osw files to use bundler gems for measure paths'
-task :setup_all do
+task :setup_all_osw do
   find_osws.each do |workflow_name|
     setup_osw(workflow_name)
   end
@@ -143,12 +141,18 @@ end
 
 desc 'Setup and run single osw'
 task :setup_run_osw , [:workflow_name] do |task, args|
-
   args.with_defaults(workflow_name: 'bar_typical')
-  arg = args.workflow_name.inspect.delete('"')
   workflow_name = args.workflow_name.inspect.delete('"')
   setup_osw(workflow_name)
   run_osw(workflow_name)
 end
 
-# todo - add task to setup OSA task (need to work with more arguments)
+desc 'Setup an analysis including zip file and OSA'
+task :setup_osa , [:tbd_multiple_args] do |task, args|
+  # todo update osw2osa to contain method that is called to make calling it with arguments cleaner
+  # todo - update this to take multiple arguments
+  # todo - consider running setup first or when know which OSW will be called
+  system("ruby osw_2_osa.rb")
+end
+
+# todo - create task to meta CLI (there is more setup for computer for this to work provide good instructions)
