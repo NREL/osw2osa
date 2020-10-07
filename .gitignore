@@ -1,5 +1,6 @@
 .idea
-.bundle
+.bundle/install
+Gemfile.lock
 **/run
 **/reports
 **/generated_files

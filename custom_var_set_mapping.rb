@@ -23,14 +23,14 @@ def select_osw(var_set)
   if ARGV[3].nil?
     # add logic to use different default based on analysis chosen
     if ['bar_study_1','bar_study_2','generic'].include?(var_set)
-      osw_path = OpenStudio::Path.new("workflows/bar_typical/in.osw")
+      osw_path = OpenStudio::Path.new("run/workflows/bar_typical/in.osw")
     elsif ['blend_skip_true','blend_typical'].include?(var_set)
-      osw_path = OpenStudio::Path.new("workflows/blend_typical/in.osw")
+      osw_path = OpenStudio::Path.new("run/workflows/blend_typical/in.osw")
     else
-      osw_path = OpenStudio::Path.new("workflows/floorspace_typical/in.osw")
+      osw_path = OpenStudio::Path.new("run/workflows/floorspace_typical/in.osw")
     end
   else
-    osw_path = OpenStudio::Path.new("workflows/#{ARGV[3]}/in.osw")
+    osw_path = OpenStudio::Path.new("run/workflows/#{ARGV[3]}/in.osw")
   end
   return osw_path
 end
