@@ -20,8 +20,11 @@ task :clear_run do
   clear_run
 end
 
+def bundle_base_gem_path
+  return '.bundle/install/ruby/2.5.0/bundler/gems'
+end
+
 def find_bundle_measure_paths
-  bundle_base_gem_path = '.bundle/install/ruby/2.5.0/bundler/gems'
   bundle_measure_paths = []
 
   puts "Getting measure directories for bundle installed measure gems"
@@ -44,7 +47,7 @@ task :find_bundle_measure_paths do
   find_bundle_measure_paths
 end
 
-def setup_osw(workflow_name)
+def setup_osw(workflow_name,short_measure_path = false)
   puts "Adding copy in run/workflows directory of #{workflow_name} in workflow directory with updated measure paths set to use .bundle measure gems."
 
   # make directory if does not exist
@@ -55,11 +58,27 @@ def setup_osw(workflow_name)
   runner = OpenStudio::Measure::OSRunner.new(osw)
   workflow = runner.workflow
 
-  # replace measure paths, add in measure gem paths and measures from this repo
-  puts "updating measure_paths to use the bundle measure gems"
   workflow.resetMeasurePaths
-  find_bundle_measure_paths.each do |path|
-    workflow.addMeasurePath("../../../#{path}")
+  if ! short_measure_path
+    # replace measure paths, add in measure gem paths and measures from this repo
+    puts "updating measure_paths to use the bundle measure gems"
+    workflow.resetMeasurePaths
+    find_bundle_measure_paths.each do |path|
+      workflow.addMeasurePath("../../../#{path}")
+    end
+  else
+    # this is to try to avoid long file path issue on windows
+    # copy measures to new location (always copy even if there because they may be outdated)
+    puts "copying all bundle measure to run directory to shorten path"
+    short_path = "run/measures"
+    FileUtils.mkdir_p(short_path)
+    find_bundle_measure_paths.each do |path|
+      FileUtils.copy_entry(path, short_path)
+    end
+
+    # replace measure paths, add in measure gem paths and measures from this repo
+    puts "updating measure_path to use the short measure path, measure will be copied to new location"
+    workflow.addMeasurePath("../../measures")
   end
 
   # path to measures in this repo
@@ -84,15 +103,18 @@ def setup_osw(workflow_name)
 end
 
 desc 'Setup single osw file to use bundler gems for measure paths'
-task :setup_osw , [:workflow_name] do |task, args|
+task :setup_osw , [:workflow_name, :short_measures] do |task, args|
   args.with_defaults(workflow_name: 'bar_typical')
-  workflow_name = args.workflow_name.inspect.delete('"')
-  setup_osw(workflow_name)
+  args.with_defaults(short_measures: 'true')
+  workflow_name = args[:workflow_name]
+  short_measures = args[:short_measures]
+  setup_osw(workflow_name,short_measures) # leave bool for short measure false unless issues with long path on windows
 end
 
 desc 'Setup all osw files to use bundler gems for measure paths'
 task :setup_all_osws do
   find_osws.each do |workflow_name|
+    # todo - to update this to support short paths need to not copy measure for each osw
     setup_osw(workflow_name)
   end
 end
@@ -170,8 +192,7 @@ desc 'Run single osw'
 task :run_osw , [:workflow_name, :measures_only] do |task, args|
   args.with_defaults(workflow_name: 'bar_typical')
   args.with_defaults(measures_only: 'false')
-  workflow_name = args[:workflow_name]
-  run_osw(workflow_name, args[:measures_only])
+  run_osw(args[:workflow_name], args[:measures_only])
 end
 
 desc 'Run all osws'
