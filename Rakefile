@@ -105,7 +105,7 @@ end
 desc 'Setup single osw file to use bundler gems for measure paths'
 task :setup_osw , [:workflow_name, :short_measures] do |task, args|
   args.with_defaults(workflow_name: 'bar_typical')
-  args.with_defaults(short_measures: 'true')
+  args.with_defaults(short_measures: 'false')
   workflow_name = args[:workflow_name]
   short_measures = args[:short_measures]
   setup_osw(workflow_name,short_measures) # leave bool for short measure false unless issues with long path on windows
