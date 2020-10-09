@@ -115,6 +115,8 @@ end
 def find_setup_osws
   puts "Get names of workflows in run/workflows directory"
   workflow_names = []
+  # make directory if does not exist
+  FileUtils.mkdir_p('run/workflows')
   workflows = Dir.entries('run/workflows')
   workflows.each do |workflow|
     # check if has lib/measures
