@@ -29,7 +29,7 @@
         "__SKIP__": false,
         "template": "90.1-2013"
       },
-      "measure_dir_name": "create_typical_building_from_model"
+      "measure_dir_name": "create_typical_doe_building_from_model"
     },
     {
       "arguments": {

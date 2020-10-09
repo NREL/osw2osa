@@ -32,7 +32,7 @@
         "__SKIP__": false,
         "add_hvac": false
       },
-      "measure_dir_name": "create_typical_building_from_model"
+      "measure_dir_name": "create_typical_doe_building_from_model"
     },
     {
       "arguments": {
