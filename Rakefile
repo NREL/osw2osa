@@ -47,8 +47,15 @@ task :find_bundle_measure_paths do
   find_bundle_measure_paths
 end
 
-def setup_osw(workflow_name,short_measure_path = false)
+# copy_measures should be exposed in rake task directly it is there to support running this method multiple times from a task
+def setup_osw(workflow_name,short_measure_path = false, copy_measures = true)
   puts "Adding copy in run/workflows directory of #{workflow_name} in workflow directory with updated measure paths set to use .bundle measure gems."
+
+  # convert string to bool
+  if short_measure_path == 'true' then short_measure_path = true end
+  if short_measure_path == 'false' then short_measure_path = false end
+  if copy_measures == 'true' then copy_measures = true end
+  if copy_measures == 'false' then copy_measures = false end
 
   # make directory if does not exist
   FileUtils.mkdir_p("run/workflows/#{workflow_name}")
@@ -59,7 +66,7 @@ def setup_osw(workflow_name,short_measure_path = false)
   workflow = runner.workflow
 
   workflow.resetMeasurePaths
-  if ! short_measure_path
+  if !short_measure_path
     # replace measure paths, add in measure gem paths and measures from this repo
     puts "updating measure_paths to use the bundle measure gems"
     workflow.resetMeasurePaths
@@ -68,12 +75,17 @@ def setup_osw(workflow_name,short_measure_path = false)
     end
   else
     # this is to try to avoid long file path issue on windows
-    # copy measures to new location (always copy even if there because they may be outdated)
-    puts "copying all bundle measure to run directory to shorten path"
-    short_path = "run/measures"
-    FileUtils.mkdir_p(short_path)
-    find_bundle_measure_paths.each do |path|
-      FileUtils.copy_entry(path, short_path)
+
+    # copy measures to new location
+    if copy_measures
+      # write rake tasks to always copy even if there because they may be outdated
+      # todo - currently copy all measures in gem, could downwelect to only ones used by osw to keep cleaner
+      puts "copying all bundle measures to run directory to shorten path"
+      short_path = "run/measures"
+      FileUtils.mkdir_p(short_path)
+      find_bundle_measure_paths.each do |path|
+        FileUtils.copy_entry(path, short_path)
+      end
     end
 
     # replace measure paths, add in measure gem paths and measures from this repo
@@ -105,17 +117,32 @@ end
 desc 'Setup single osw file to use bundler gems for measure paths'
 task :setup_osw , [:workflow_name, :short_measures] do |task, args|
   args.with_defaults(workflow_name: 'bar_typical')
-  args.with_defaults(short_measures: 'false')
+  args.with_defaults(short_measures: false)
   workflow_name = args[:workflow_name]
+  # converting string to bool
   short_measures = args[:short_measures]
+  if short_measures == 'true' then short_measures = true end
+  if short_measures == 'false' then short_measures = false end
   setup_osw(workflow_name,short_measures) # leave bool for short measure false unless issues with long path on windows
 end
 
 desc 'Setup all osw files to use bundler gems for measure paths'
-task :setup_all_osws do
+task :setup_all_osws , [:short_measures] do |task, args|
+  args.with_defaults(short_measures: false)
+  # convert string to bool
+  short_measures = args[:short_measures]
+  if short_measures == 'true' then short_measures = true end
+  if short_measures == 'false' then short_measures = false end
+  setup_already_run = false
   find_osws.each do |workflow_name|
-    # todo - to update this to support short paths need to not copy measure for each osw
-    setup_osw(workflow_name)
+    # bit of a hack when setting up multiple osw files to only copy the measure the first time through
+    # copy_measures is only used when short_measures is also true
+    if setup_already_run
+      setup_osw(workflow_name,short_measures,false)
+    else
+      setup_osw(workflow_name,short_measures,true)
+    end
+    setup_already_run = true
   end
 end
 
@@ -191,22 +218,18 @@ end
 desc 'Run single osw'
 task :run_osw , [:workflow_name, :measures_only] do |task, args|
   args.with_defaults(workflow_name: 'bar_typical')
-  args.with_defaults(measures_only: 'false')
-  run_osw(args[:workflow_name], args[:measures_only])
+  args.with_defaults(measures_only: false)
+  # convert string to bool
+  measures_only = args[:measures_only]
+  if  measures_only == 'true' then measures_only = true end
+  if  measures_only == 'false' then measures_only = false end
+  run_osw(args[:workflow_name], measures_only)
 end
 
 desc 'Run all osws'
 task :run_all_osws do
   puts "Running all osws"
   run_osws(find_osws)
-end
-
-desc 'Setup and run single osw'
-task :setup_run_osw , [:workflow_name] do |task, args|
-  args.with_defaults(workflow_name: 'bar_typical')
-  workflow_name = args.workflow_name.inspect.delete('"')
-  setup_osw(workflow_name)
-  run_osw(workflow_name)
 end
 
 # ARGV[0] json file is generated unless false
