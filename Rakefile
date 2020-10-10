@@ -47,15 +47,12 @@ task :find_bundle_measure_paths do
   find_bundle_measure_paths
 end
 
-# copy_measures should be exposed in rake task directly it is there to support running this method multiple times from a task
-def setup_osw(workflow_name,short_measure_path = false, copy_measures = true)
+def setup_osw(workflow_name,short_measure_path = false)
   puts "Adding copy in run/workflows directory of #{workflow_name} in workflow directory with updated measure paths set to use .bundle measure gems."
 
   # convert string to bool
   if short_measure_path == 'true' then short_measure_path = true end
   if short_measure_path == 'false' then short_measure_path = false end
-  if copy_measures == 'true' then copy_measures = true end
-  if copy_measures == 'false' then copy_measures = false end
 
   # make directory if does not exist
   FileUtils.mkdir_p("run/workflows/#{workflow_name}")
@@ -65,31 +62,38 @@ def setup_osw(workflow_name,short_measure_path = false, copy_measures = true)
   runner = OpenStudio::Measure::OSRunner.new(osw)
   workflow = runner.workflow
 
-  workflow.resetMeasurePaths
-  if !short_measure_path
-    # replace measure paths, add in measure gem paths and measures from this repo
-    puts "updating measure_paths to use the bundle measure gems"
-    workflow.resetMeasurePaths
-    find_bundle_measure_paths.each do |path|
-      workflow.addMeasurePath("../../../#{path}")
-    end
-  else
-    # this is to try to avoid long file path issue on windows
+  # saving osw early so I use findMeasure to copy to short path
+  osw_path = "run/workflows/#{workflow_name}/in.osw"
+  workflow.saveAs(osw_path)
 
-    # copy measures to new location
-    if copy_measures
-      # write rake tasks to always copy even if there because they may be outdated
-      # todo - currently copy all measures in gem, could downwelect to only ones used by osw to keep cleaner
-      puts "copying all bundle measures to run directory to shorten path"
-      short_path = "run/measures"
+  # replace measure paths, add in measure gem paths and measures from this repo
+  puts "updating measure_paths to use the bundle measure gems"
+  workflow.resetMeasurePaths
+  find_bundle_measure_paths.each do |path|
+    workflow.addMeasurePath("../../../#{path}")
+  end
+
+  # this is to try to avoid long file path issue on windows
+  if short_measure_path
+
+    # make short path if it doesn't exist
+    puts "Copying measures in #{workflow_name} to run/measures directory."
+    short_path = "run/measures"
       FileUtils.mkdir_p(short_path)
-      find_bundle_measure_paths.each do |path|
-        FileUtils.copy_entry(path, short_path)
+
+    # find path in gem to measures used in osw and copy them to short path
+    workflow.workflowSteps.each do |step|
+      if step.to_MeasureStep.is_initialized
+        measure_step = step.to_MeasureStep.get
+        measure_dir_name = measure_step.measureDirName
+        source_path = workflow.findMeasure(measure_dir_name.to_s).get.to_s
+        FileUtils.copy_entry(source_path, "#{short_path}/#{measure_dir_name}")
       end
     end
 
     # replace measure paths, add in measure gem paths and measures from this repo
     puts "updating measure_path to use the short measure path, measure will be copied to new location"
+    workflow.resetMeasurePaths
     workflow.addMeasurePath("../../measures")
   end
 
@@ -108,8 +112,7 @@ def setup_osw(workflow_name,short_measure_path = false, copy_measures = true)
 
   # save workflow
   puts "saving modified workflow"
-  osw_path = "run/workflows/#{workflow_name}/in.osw"
-  workflow.saveAs(osw_path)
+  workflow.save
 
   return workflow
 end
@@ -133,16 +136,8 @@ task :setup_all_osws , [:short_measures] do |task, args|
   short_measures = args[:short_measures]
   if short_measures == 'true' then short_measures = true end
   if short_measures == 'false' then short_measures = false end
-  setup_already_run = false
   find_osws.each do |workflow_name|
-    # bit of a hack when setting up multiple osw files to only copy the measure the first time through
-    # copy_measures is only used when short_measures is also true
-    if setup_already_run
-      setup_osw(workflow_name,short_measures,false)
-    else
-      setup_osw(workflow_name,short_measures,true)
-    end
-    setup_already_run = true
+    setup_osw(workflow_name,short_measures)
   end
 end
 
