@@ -8,6 +8,7 @@ require 'parallel'
 
 #task default: 'tbd'
 
+# throw way the run directory and everything in it.
 def clear_run
   puts 'Deleting run diretory and underlying contents'
 
@@ -20,10 +21,12 @@ task :clear_run do
   clear_run
 end
 
+# saving base path to measure gems to make it easier to maintain if it changes
 def bundle_base_gem_path
   return '.bundle/install/ruby/2.5.0/bundler/gems'
 end
 
+# print out measure gems that are were installed by bundle
 def find_bundle_measure_paths
   bundle_measure_paths = []
 
@@ -47,6 +50,7 @@ task :find_bundle_measure_paths do
   find_bundle_measure_paths
 end
 
+# copy osw to run directory make changes to file and measure paths, and copy measure to short path if requested
 def setup_osw(workflow_name,short_measure_path = false)
   puts "Adding copy in run/workflows directory of #{workflow_name} in workflow directory with updated measure paths set to use .bundle measure gems."
 
@@ -72,6 +76,8 @@ def setup_osw(workflow_name,short_measure_path = false)
   find_bundle_measure_paths.each do |path|
     workflow.addMeasurePath("../../../#{path}")
   end
+  # this is for measure at top level of repo
+  workflow.addMeasurePath("../../../measures")
 
   # this is to try to avoid long file path issue on windows
   if short_measure_path
@@ -95,10 +101,9 @@ def setup_osw(workflow_name,short_measure_path = false)
     puts "updating measure_path to use the short measure path, measure will be copied to new location"
     workflow.resetMeasurePaths
     workflow.addMeasurePath("../../measures")
+    # path to measures in this repo
+    workflow.addMeasurePath("../../../measures") # add aback because lost when reset paths
   end
-
-  # path to measures in this repo
-  workflow.addMeasurePath("../../../measures")
 
   # update other paths in the osw for new location (file_paths should be one level deeper)
   puts "updating file_paths to adjust for location of copied osw file."
@@ -109,6 +114,7 @@ def setup_osw(workflow_name,short_measure_path = false)
   workflow.addFilePath("../../../files")
 
   # generally should not need to use paths in measure arguments if use findFile within the measure
+  # If this is not followed moving osws files for setup may break measure arguments that include paths.
 
   # save workflow
   puts "saving modified workflow"
@@ -141,6 +147,7 @@ task :setup_all_osws , [:short_measures] do |task, args|
   end
 end
 
+# quick way to list osw files under the workflow directory for use in rake task used for setup_all_ows
 def find_osws
   puts "Get names of workflows in workflows directory"
   workflow_names = []
@@ -156,6 +163,7 @@ def find_osws
   return workflow_names
 end
 
+# quick way to see which osw files are in the run/workflows directory. Used for run_osws
 def find_setup_osws
   puts "Get names of workflows in run/workflows directory"
   workflow_names = []
@@ -178,11 +186,12 @@ task :find_osws do
   find_osws
 end
 
-# just takes single osw and turns it into array
+# just takes single osw and turns it into array to pass into run_osws
 def run_osw(workflow_name, measures_only = false)
   run_osws([workflow_name],measures_only)
 end
 
+# this runs an array of osws. Bool is to run full simulation or measures only
 def run_osws(workflow_names, measures_only = false)
   jobs = []
   workflow_names.each do |workflow_name|
