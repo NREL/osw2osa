@@ -7,8 +7,7 @@
   ],
   "measure_paths": [
     "../../../openstudio-common-measures-gem/lib/measures",
-    "../../../openstudio-model-articulation-gem/lib/measures",
-    "../../../openstudio-vA3C",
+    "../../../openstudio-model-articulation-gem/lib/measures"
     "../../measures"
   ],
   "steps": [
