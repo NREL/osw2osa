@@ -30,10 +30,10 @@ This repo is a sample deployment of ruby scripts used to generate OSA files from
         - This contains OSW files that can be run as single datapoints, or used with `osw_2_osa.rb` to setup one or multiple OSA files. Note that this repository was originally setup with measure repos checked out alongside this repository. The measure paths reflect that and can be run as is if the additional repositories are checked out and in the proper location. Generally however OSW's should be setup in the run directory to use measure gems installed by `bundle install`
         - bar_typical
         - bar_typical_split
-        - blend_typical (requires additional gems in CLI call, not setup to run yet.)
         - floorspace_typical
-        - merge_models (may be removed from here)
-        - merge_models_not_geo (may be removed from here)
+        - blend_typical (requires additional gems in CLI call, not setup to run yet.)
+        - merge_models (not currently functional, may be removed from here)
+        - merge_models_not_geo (not currently functional, may be removed from here)
         - osm_typical (does not exist, will import osm with stub space types using ReplaceModel and run create_typical measure. Measure is not on public repo yet)
         - mixed_use_multifamily (not here yet, will be based on zero energy mixed use multifamily workflow)
     - measures
