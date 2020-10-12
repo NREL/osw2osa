@@ -1,0 +1,404 @@
+{
+  "seed_file": "retail_seed.osm",
+  "file_paths": [
+    "../../seeds",
+    "../../weather"
+  ],
+  "measure_paths": [
+    "../../../OpenStudio-BuildStock/measures",
+    "../../../OpenStudio-BuildStock/resources/measures",
+    "../../../OpenStudio-measures/lib/measures",
+    "../../../openstudio-ee-gem/lib/measures",
+    "../../../openstudio-common-measures-gem/lib/measures",
+    "../../../openstudio-model-articulation-gem/lib/measures",
+    "../../../../URBANopt/openstudio-common-measures-gem/lib/measures",
+    "../../../../URBANopt/openstudio-model-articulation-gem/lib/measures",
+    "../../../../UnmetHours/openStudio-measures"
+  ],
+  "steps": [
+    {
+      "arguments": {
+        "__SKIP__": true,
+        "begin_day_of_month": "1",
+        "begin_month": "1",
+        "calendar_year": "2007",
+        "end_day_of_month": "2",
+        "end_month": "1",
+        "timesteps_per_hr": "6"
+      },
+      "measure_dir_name": "ResidentialSimulationControls"
+    },
+    {
+      "arguments": {
+        "__SKIP__": true
+      },
+      "measure_dir_name": "HPXMLtoOpenStudio"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "weather_file_name": "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw"
+      },
+      "measure_dir_name": "ChangeBuildingLocation"
+    },
+    {
+      "arguments": {
+        "floorplan_path": "floorplan.json",
+        "num_bedrooms": "2, 1, 1, 1, 0, 0, 0, 2, 2, 0, 1, 1, 1, 1, 3, 2, 1, 1, 1, 0, 0, 0, 2, 2, 0, 1, 1, 1, 1, 3, 2, 1, 1, 1, 0, 0, 0, 2, 2, 0, 1, 1, 1, 1, 3",
+        "num_bathrooms": "2",
+        "num_occupants": "auto",
+        "occupants_weekday_sch": "1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 0.88, 0.41, 0.24, 0.24, 0.24, 0.24, 0.24, 0.24, 0.24, 0.29, 0.55, 0.90, 0.90, 0.90, 1.00, 1.00, 1.00",
+        "occupants_weekend_sch": "1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 0.88, 0.41, 0.24, 0.24, 0.24, 0.24, 0.24, 0.24, 0.24, 0.29, 0.55, 0.90, 0.90, 0.90, 1.00, 1.00, 1.00",
+        "occupants_monthly_sch": "1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0"
+      },
+      "measure_dir_name": "ResidentialGeometryCreateFromFloorspaceJS"
+    },
+    {
+      "arguments": {
+        "__SKIP__": true,
+        "capacity": "40.0",
+        "energy_factor": "0.59",
+        "fuel_type": "gas",
+        "location": "auto",
+        "offcyc_power": "0",
+        "oncyc_power": "0",
+        "recovery_efficiency": "0.76",
+        "setpoint_temp": "125",
+        "tank_volume": "auto"
+      },
+      "measure_dir_name": "ResidentialHotWaterHeaterTank"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "ResidentialHotWaterHeaterHeatPump"
+    },
+    {
+      "arguments": {
+        "bath_mult": "1",
+        "plant_loop": "auto",
+        "schedule_day_shift": "0",
+        "shower_mult": "1",
+        "sink_mult": "1"
+      },
+      "measure_dir_name": "ResidentialHotWaterFixtures"
+    },
+    {
+      "arguments": {
+        "dist_ins": "0",
+        "dist_layout": "trunk and branch",
+        "pipe_mat": "copper",
+        "recirc_type": "none",
+        "space": "interior"
+      },
+      "measure_dir_name": "ResidentialHotWaterDistribution"
+    },
+    {
+      "arguments": {
+        "__SKIP__": true,
+        "cop": "3.05",
+        "cop_capacity_derate_1ton": "1",
+        "cop_capacity_derate_2ton": "1",
+        "cop_capacity_derate_3ton": "1",
+        "cop_capacity_derate_4ton": "1",
+        "cop_capacity_derate_5ton": "1",
+        "crankcase_capacity": "0.02",
+        "crankcase_temp": "55",
+        "dse": "NA",
+        "eer": "11.4",
+        "eer_capacity_derate_1ton": "1",
+        "eer_capacity_derate_2ton": "1",
+        "eer_capacity_derate_3ton": "1",
+        "eer_capacity_derate_4ton": "1",
+        "eer_capacity_derate_5ton": "1",
+        "fan_power_installed": "0.5",
+        "fan_power_rated": "0.365",
+        "heat_pump_capacity": "autosize",
+        "hspf": "7.7",
+        "min_temp": "0",
+        "seer": "13",
+        "shr": "0.73",
+        "supplemental_capacity": "autosize",
+        "supplemental_efficiency": "1"
+      },
+      "measure_dir_name": "ResidentialHVACAirSourceHeatPumpSingleSpeed"
+    },
+    {
+      "arguments": {
+        "season_end_month": "Dec",
+        "season_start_month": "Jan",
+        "use_auto_season": "false",
+        "weekday_offset_magnitude": "0",
+        "weekday_offset_schedule": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+        "weekday_setpoint": "71.0",
+        "weekend_offset_magnitude": "0",
+        "weekend_offset_schedule": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+        "weekend_setpoint": "71.0"
+      },
+      "measure_dir_name": "ResidentialHVACHeatingSetpoints"
+    },
+    {
+      "arguments": {
+        "season_end_month": "Dec",
+        "season_start_month": "Jan",
+        "use_auto_season": "false",
+        "weekday_offset_magnitude": "0",
+        "weekday_offset_schedule": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+        "weekday_setpoint": "76.0",
+        "weekend_offset_magnitude": "0",
+        "weekend_offset_schedule": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+        "weekend_setpoint": "76.0"
+      },
+      "measure_dir_name": "ResidentialHVACCoolingSetpoints"
+    },
+    {
+      "arguments": {
+        "location": "auto",
+        "monthly_sch": "0.837, 0.835, 1.084, 1.084, 1.084, 1.096, 1.096, 1.096, 1.096, 0.931, 0.925, 0.837",
+        "mult": "1",
+        "rated_annual_energy": "348",
+        "weekday_sch": "0.040, 0.039, 0.038, 0.037, 0.036, 0.036, 0.038, 0.040, 0.041, 0.041, 0.040, 0.040, 0.042, 0.042, 0.042, 0.041, 0.044, 0.048, 0.050, 0.048, 0.047, 0.046, 0.044, 0.041",
+        "weekend_sch": "0.040, 0.039, 0.038, 0.037, 0.036, 0.036, 0.038, 0.040, 0.041, 0.041, 0.040, 0.040, 0.042, 0.042, 0.042, 0.041, 0.044, 0.048, 0.050, 0.048, 0.047, 0.046, 0.044, 0.041"
+      },
+      "measure_dir_name": "ResidentialApplianceRefrigerator"
+    },
+    {
+      "arguments": {
+        "annual_cost": "7",
+        "cold_cycle": "false",
+        "drum_volume": "4.5",
+        "fill_sensor": "false",
+        "imef": "2.92",
+        "internal_heater": "false",
+        "location": "auto",
+        "mult_e": "1",
+        "mult_hw": "1",
+        "plant_loop": "auto",
+        "rated_annual_energy": "75",
+        "schedule_day_shift": "0",
+        "test_date": "2013",
+        "thermostatic_control": "true"
+      },
+      "measure_dir_name": "ResidentialApplianceClothesWasher"
+    },
+    {
+      "arguments": {
+        "fuel_type": "electric",
+        "cef": "5.2",
+        "fuel_split": "1.0",
+        "mult": "1.0",
+        "location": "auto"
+      },
+      "measure_dir_name": "ResidentialApplianceClothesDryer"
+    },
+    {
+      "arguments": {
+        "annual_gas_cost": "18",
+        "cold_inlet": "false",
+        "cold_use": "0",
+        "has_internal_heater": "true",
+        "location": "auto",
+        "mult_e": "1",
+        "mult_hw": "1",
+        "num_settings": "12",
+        "plant_loop": "auto",
+        "rated_annual_energy": "199",
+        "schedule_day_shift": "0",
+        "test_date": "2017"
+      },
+      "measure_dir_name": "ResidentialApplianceDishwasher"
+    },
+    {
+      "arguments": {
+        "fuel_type": "electric",
+        "cooktop_ef": "0.84",
+        "oven_ef": "0.11",
+        "has_elec_ignition": true,
+        "mult": "1.0",
+        "location": "auto",
+        "monthly_sch": "1.097, 1.097, 0.991, 0.987, 0.991, 0.890, 0.896, 0.896, 0.890, 1.085, 1.085, 1.097",
+        "weekday_sch": "0.007, 0.007, 0.004, 0.004, 0.007, 0.011, 0.025, 0.042, 0.046, 0.048, 0.042, 0.050, 0.057, 0.046, 0.057, 0.044, 0.092, 0.150, 0.117, 0.060, 0.035, 0.025, 0.016, 0.011",
+        "weekend_sch": "0.007, 0.007, 0.004, 0.004, 0.007, 0.011, 0.025, 0.042, 0.046, 0.048, 0.042, 0.050, 0.057, 0.046, 0.057, 0.044, 0.092, 0.150, 0.117, 0.060, 0.035, 0.025, 0.016, 0.011"
+      },
+      "measure_dir_name": "ResidentialApplianceCookingRange"
+    },
+    {
+      "arguments": {
+        "cfl_eff": "55",
+        "energy_use_interior": "900",
+        "hw_cfl": "0",
+        "hw_led": "1.0",
+        "hw_lfl": "0",
+        "in_eff": "15",
+        "led_eff": "80",
+        "lfl_eff": "88",
+        "monthly_sch": "1.248, 1.257, 0.993, 0.989, 0.993, 0.827, 0.821, 0.821, 0.827, 0.99, 0.987, 1.248",
+        "mult": "1",
+        "option_type": "Lamp Fractions",
+        "pg_cfl": "0",
+        "pg_led": "1.0",
+        "pg_lfl": "0",
+        "sch_option_type": "Calculated Lighting Schedule"
+      },
+      "measure_dir_name": "ResidentialLightingInterior"
+    },
+    {
+      "arguments": {
+        "__SKIP__": true,
+        "cfl_eff": "55",
+        "energy_use_exterior": "300",
+        "energy_use_garage": "100",
+        "holiday_daily_energy_use_exterior": "0",
+        "holiday_end_date": "January 6",
+        "holiday_sch": "0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.008168, 0.098016, 0.168028, 0.193699, 0.283547, 0.192532, 0.03734, 0.01867",
+        "holiday_start_date": "November 27",
+        "hw_cfl": "0.34",
+        "hw_led": "0",
+        "hw_lfl": "0",
+        "in_eff": "15",
+        "led_eff": "80",
+        "lfl_eff": "88",
+        "monthly_sch": "1.248, 1.257, 0.993, 0.989, 0.993, 0.827, 0.821, 0.821, 0.827, 0.99, 0.987, 1.248",
+        "mult": "1",
+        "option_type": "Lamp Fractions",
+        "pg_cfl": "0.34",
+        "pg_led": "0",
+        "pg_lfl": "0",
+        "sch_option_type": "Calculated Lighting Schedule",
+        "weekday_sch": "0.035, 0.033, 0.032, 0.031, 0.032, 0.033, 0.037, 0.042, 0.043, 0.043, 0.043, 0.044, 0.045, 0.045, 0.044, 0.046, 0.048, 0.052, 0.053, 0.05, 0.047, 0.045, 0.04, 0.036",
+        "weekend_sch": "0.035, 0.033, 0.032, 0.031, 0.032, 0.033, 0.037, 0.042, 0.043, 0.043, 0.043, 0.044, 0.045, 0.045, 0.044, 0.046, 0.048, 0.052, 0.053, 0.05, 0.047, 0.045, 0.04, 0.036"
+      },
+      "measure_dir_name": "ResidentialLightingOther"
+    },
+    {
+      "arguments": {
+        "energy_use": "2000",
+        "lat_frac": "0.021",
+        "monthly_sch": "1.248, 1.257, 0.993, 0.989, 0.993, 0.827, 0.821, 0.821, 0.827, 0.99, 0.987, 1.248",
+        "mult": "1",
+        "option_type": "Multiplier",
+        "sens_frac": "0.93",
+        "weekday_sch": "0.035, 0.033, 0.032, 0.031, 0.032, 0.033, 0.037, 0.042, 0.043, 0.043, 0.043, 0.044, 0.045, 0.045, 0.044, 0.046, 0.048, 0.052, 0.053, 0.05, 0.047, 0.045, 0.04, 0.036",
+        "weekend_sch": "0.035, 0.033, 0.032, 0.031, 0.032, 0.033, 0.037, 0.042, 0.043, 0.043, 0.043, 0.044, 0.045, 0.045, 0.044, 0.046, 0.048, 0.052, 0.053, 0.05, 0.047, 0.045, 0.04, 0.036"
+      },
+      "measure_dir_name": "ResidentialMiscPlugLoads"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "remove_adiabatic": true
+      },
+      "measure_dir_name": "surface_matching_diagnostic"
+    },
+    {
+      "arguments": {
+        "relative_building_rotation": 0.0
+      },
+      "measure_dir_name": "RotateBuilding"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "wwr": "0.3",
+        "facade": "All"
+      },
+      "measure_dir_name": "SetWindowToWallRatioByFacade"
+    },
+    {
+      "arguments": {
+        "__SKIP__": true,
+        "wwr": "0.3",
+        "facade": "South"
+      },
+      "measure_dir_name": "SetWindowToWallRatioByFacade"
+    },
+    {
+      "arguments": {
+        "__SKIP__": true,
+        "wwr": "0.3",
+        "facade": "East"
+      },
+      "measure_dir_name": "SetWindowToWallRatioByFacade"
+    },
+    {
+      "arguments": {
+        "__SKIP__": true,
+        "wwr": "0.3",
+        "facade": "West"
+      },
+      "measure_dir_name": "SetWindowToWallRatioByFacade"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "projection_factor": "1.0",
+        "facade": "South"
+      },
+      "measure_dir_name": "AddOverhangsByProjectionFactor"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "projection_factor": "1.0",
+        "facade": "East"
+      },
+      "measure_dir_name": "AddOverhangsByProjectionFactor"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "projection_factor": "1.0",
+        "facade": "West"
+      },
+      "measure_dir_name": "AddOverhangsByProjectionFactor"
+    },    
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "add_constructions": true,
+        "wall_roof_construction_template": "ZE AEDG Multifamily Recommendations",
+        "window_construction_template": "ZE AEDG Multifamily Recommendations",
+        "add_space_type_loads": false,
+        "add_elevators": false,
+        "add_exterior_lights": false,
+        "onsite_parking_fraction": "0.0",
+        "add_swh": false,
+        "add_thermostat": false,
+        "add_hvac": true,
+        "hvac_system_type": "Minisplit Heat Pumps with ERVs"
+      },
+      "measure_dir_name": "zero_energy_multifamily"
+    },
+    {
+      "arguments": {
+        "__SKIP__": true
+      },
+      "measure_dir_name": "set_ervs_to_hrvs"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "view_model"
+    },
+    {
+      "arguments": {
+        "zone_condition_section": true
+      },
+      "measure_dir_name": "openstudio_results"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "envelope_and_internal_load_breakdown"
+    },
+    {
+      "arguments": {
+        "__SKIP__": true
+      },
+      "measure_dir_name": "ServerDirectoryCleanup"
+    }
+  ]
+}
