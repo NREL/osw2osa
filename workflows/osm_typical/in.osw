@@ -1,0 +1,52 @@
+{
+  "seed_file": "seed_empty.osm",
+  "file_paths": [
+    "../../seeds",
+    "../../weather"
+  ],
+  "measure_paths": [
+    "../../../openstudio-common-measures-gem/lib/measures",
+    "../../../openstudio-model-articulation-gem/lib/measures"
+  ],
+  "steps": [
+    {
+      "arguments": {
+        "external_model_name": "geo_stub_space_types.osm"
+      },
+      "measure_dir_name": "ReplaceModel"
+    },
+    {
+      "arguments": {
+        "weather_file_name": "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw"
+      },
+      "measure_dir_name": "ChangeBuildingLocation"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "create_typical_doe_building_from_model"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "view_model"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "fraction_of_surface": "0.75",
+        "cell_efficiency": "0.1976",
+        "inverter_efficiency" : "0.96"
+      },
+      "measure_dir_name": "add_rooftop_pv"
+    },
+    {
+      "arguments": {
+        "zone_condition_section": false
+      },
+      "measure_dir_name": "openstudio_results"
+    }
+  ]
+}
