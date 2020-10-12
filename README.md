@@ -32,7 +32,7 @@ This repo is a sample deployment of ruby scripts used to generate OSA files from
         - floorspace_typical (geometry from 2d FloorSpaceJS)
         - osm_typical (geometry from OSM)
         - bar_typical_split (test running two instances of create_typical with HVAC in the second instance)
-        - blend_typical (requires additional gems in CLI call, not setup to run yet.)
+        - blend_typical (uses geojson footprint with blended space type requires additional gems in CLI call, not setup to run yet.)
         - merge_models (not currently functional, may be removed from here)
         - merge_models_not_geo (not currently functional, may be removed from here)
         - mixed_use_multifamily (not here yet, will be based on zero energy mixed use multifamily workflow)
