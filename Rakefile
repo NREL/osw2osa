@@ -42,7 +42,7 @@ def find_bundle_measure_paths
   puts "found #{bundle_measure_paths.size} measure directories"
   puts "bundle_measure_paths:#{bundle_measure_paths.inspect}"
 
-  return bundle_measure_paths
+  return bundle_measure_paths.sort
 end
 
 desc 'Find Bundle measure paths to add to bundle osws'
