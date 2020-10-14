@@ -32,11 +32,11 @@ This repo is a sample deployment of ruby scripts used to generate OSA files from
         - bar_typical (geometry from high level inputs)
         - floorspace_typical (geometry from 2d FloorSpaceJS)
         - osm_typical (geometry from OSM)
+        - mixed_use_multifamily (requires additional non-gem measures setup by setup_non_gem_measures rake task)
         - bar_typical_split (test running two instances of create_typical with HVAC in the second instance)
         - blend_typical (uses geojson footprint with blended space type requires additional gems in CLI call, not setup to run yet.)
         - merge_models (not currently functional, may be removed from here)
         - merge_models_not_geo (not currently functional, may be removed from here)
-        - mixed_use_multifamily (requires additinal no measure gems setup by setup_non_gem_measures rake task)
     - measures
         - You would generally use this for single purpose measures that don't exist in another repository and that you don't think will be useful outside of the current project you are setting up.
     - weather

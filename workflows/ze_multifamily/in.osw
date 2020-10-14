@@ -28,7 +28,7 @@
     },
     {
       "arguments": {
-        "floorplan_path": "floorplan.json",
+        "floorplan_path": "ze_multifamily_floorplan.json",
         "num_bedrooms": "2, 1, 1, 1, 0, 0, 0, 2, 2, 0, 1, 1, 1, 1, 3, 2, 1, 1, 1, 0, 0, 0, 2, 2, 0, 1, 1, 1, 1, 3, 2, 1, 1, 1, 0, 0, 0, 2, 2, 0, 1, 1, 1, 1, 3",
         "num_bathrooms": "2",
         "num_occupants": "auto",
@@ -234,30 +234,6 @@
     },
     {
       "arguments": {
-        "__SKIP__": true,
-        "wwr": "0.3",
-        "facade": "South"
-      },
-      "measure_dir_name": "SetWindowToWallRatioByFacade"
-    },
-    {
-      "arguments": {
-        "__SKIP__": true,
-        "wwr": "0.3",
-        "facade": "East"
-      },
-      "measure_dir_name": "SetWindowToWallRatioByFacade"
-    },
-    {
-      "arguments": {
-        "__SKIP__": true,
-        "wwr": "0.3",
-        "facade": "West"
-      },
-      "measure_dir_name": "SetWindowToWallRatioByFacade"
-    },
-    {
-      "arguments": {
         "__SKIP__": false,
         "projection_factor": "1.0",
         "facade": "South"
@@ -305,7 +281,7 @@
     },
     {
       "arguments": {
-        "__SKIP__": false,
+        "__SKIP__": true,
         "swh_type": "Waste Water Heat Pump 120F Supply and Electric Tank"
       },
       "measure_dir_name": "multifamily_central_wwhp"
