@@ -8,6 +8,7 @@ This repo is a sample deployment of ruby scripts used to generate OSA files from
     - from top level of repository type `bundle install` at the command prompt
        - This should result in a `.bundle` directory which contains all of the measure gems necessary for the workflows described in this repository. Any measures that are not in a measure gems and are unique to this project can be in the `measures` directory at the top level of the repository.
        - Do not add altered copies of measures from other repositories in this repositories `measures` directory. Instead alter the `Gemfile` for the branch of the measure gem repository that has the desired version of the measure.
+       - If bundle fails on windows because paths are too long try to enter `git config --system core.longpaths true` at the command promt, and then try `bundle install` again.
     - Most functionality is via Rake tasks. At the command prompt type `bundle exec rake -T` to see a list of functions; some of which are described below. When calling any tasks use `bundle exec rake task_name`. Some tasks take an argument `bundle exec rake task_name[args]`.
         - rake clear_run                                                    # Delete contents under run directory
         - rake find_bundle_measure_paths                                    # Find Bundle measure paths to add to bundle osws
