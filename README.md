@@ -15,6 +15,7 @@ This repo is a sample deployment of ruby scripts used to generate OSA files from
         - rake run_all_osws                                                 # Run all osws
         - rake run_osw[workflow_name,measures_only]                         # Run single osw
         - rake setup_all_osws                                               # Setup all osw files to use bundler gems for measure paths
+        - rake setup_non_gem_measures                                       # setup additional measures that are not measure gems as if they were installed with bundle install
         - rake setup_osa[json_bool,zip_bool,var_set,select_osw,select_osa]  # Setup an analysis including zip file and OSA (can run with all defaults
         - rake setup_osw[workflow_name]                                     # Setup single osw file to use bundler gems for measure paths
         - rake setup_run_osw[workflow_name]                                 # Setup and run single osw
@@ -35,7 +36,7 @@ This repo is a sample deployment of ruby scripts used to generate OSA files from
         - blend_typical (uses geojson footprint with blended space type requires additional gems in CLI call, not setup to run yet.)
         - merge_models (not currently functional, may be removed from here)
         - merge_models_not_geo (not currently functional, may be removed from here)
-        - mixed_use_multifamily (not here yet, will be based on zero energy mixed use multifamily workflow)
+        - mixed_use_multifamily (requires additinal no measure gems setup by setup_non_gem_measures rake task)
     - measures
         - You would generally use this for single purpose measures that don't exist in another repository and that you don't think will be useful outside of the current project you are setting up.
     - weather
