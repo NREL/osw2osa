@@ -1,7 +1,9 @@
 .idea
 .bundle/install
 Gemfile.lock
-**/run
+**/run/measures
+**/run/workflows
+**/run/analyses
 **/reports
 **/generated_files
 out.osw
