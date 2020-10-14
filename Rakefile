@@ -42,7 +42,7 @@ def find_bundle_measure_paths
   puts "found #{bundle_measure_paths.size} measure directories"
   puts "bundle_measure_paths:#{bundle_measure_paths.inspect}"
 
-  return bundle_measure_paths
+  return bundle_measure_paths.sort
 end
 
 desc 'Find Bundle measure paths to add to bundle osws'
@@ -234,6 +234,31 @@ desc 'Run all osws'
 task :run_all_osws do
   puts "Running all osws"
   run_osws(find_osws)
+end
+
+desc 'setup additional measures that are not measure gems as if they were installed with bundle install'
+task :setup_non_gem_measures do
+  puts "Extending bundler install with measures collections that are not currently setup as a ruby gem. This requires SVN"
+  puts "setup_osw tasks should be run after this method, or OSW files won't have access to these measures"
+
+  # gather additional measures
+  additional_measures = {}
+  additional_measures['build_stock_resources'] = "https://github.com/NREL/OpenStudio-BuildStock/branches/multifamily-zedg/resources/measures"
+  additional_measures['build_stock'] = "https://github.com/NREL/OpenStudio-BuildStock/branches/multifamily-zedg/measures"
+  # either because this is a master or I'm checking out the entire repo I seem to need to pass in a revision as well.
+  additional_measures['unmet_hours'] = "-r 99999  https://github.com/UnmetHours/openstudio-measures/branches/master"
+
+  # setup additional measures
+  additional_measures.each do |new_dir_name,measure_string|
+
+    non_gem_measures = "#{bundle_base_gem_path}/#{new_dir_name}/lib/measures"
+    FileUtils.mkdir_p(non_gem_measures)
+
+    # add measures
+    system("svn checkout #{measure_string} #{non_gem_measures}")
+  end
+
+
 end
 
 # ARGV[0] json file is generated unless false
