@@ -5,29 +5,14 @@
     "../../weather"
   ],
   "measure_paths": [
-    "../../../OpenStudio-BuildStock/measures",
-    "../../../OpenStudio-BuildStock/resources/measures",
-    "../../../OpenStudio-measures/lib/measures",
-    "../../../openstudio-ee-gem/lib/measures",
     "../../../openstudio-common-measures-gem/lib/measures",
     "../../../openstudio-model-articulation-gem/lib/measures",
-    "../../../../URBANopt/openstudio-common-measures-gem/lib/measures",
-    "../../../../URBANopt/openstudio-model-articulation-gem/lib/measures",
-    "../../../../UnmetHours/openStudio-measures"
+    "../../../openstudio-ee-gem/lib/measures",
+    "../../../OpenStudio-BuildStock/measures",
+    "../../../OpenStudio-BuildStock/resources/measures",
+    "../../../UnmetHours/openStudio-measures"
   ],
   "steps": [
-    {
-      "arguments": {
-        "__SKIP__": true,
-        "begin_day_of_month": "1",
-        "begin_month": "1",
-        "calendar_year": "2007",
-        "end_day_of_month": "2",
-        "end_month": "1",
-        "timesteps_per_hr": "6"
-      },
-      "measure_dir_name": "ResidentialSimulationControls"
-    },
     {
       "arguments": {
         "__SKIP__": true
@@ -93,36 +78,6 @@
         "space": "interior"
       },
       "measure_dir_name": "ResidentialHotWaterDistribution"
-    },
-    {
-      "arguments": {
-        "__SKIP__": true,
-        "cop": "3.05",
-        "cop_capacity_derate_1ton": "1",
-        "cop_capacity_derate_2ton": "1",
-        "cop_capacity_derate_3ton": "1",
-        "cop_capacity_derate_4ton": "1",
-        "cop_capacity_derate_5ton": "1",
-        "crankcase_capacity": "0.02",
-        "crankcase_temp": "55",
-        "dse": "NA",
-        "eer": "11.4",
-        "eer_capacity_derate_1ton": "1",
-        "eer_capacity_derate_2ton": "1",
-        "eer_capacity_derate_3ton": "1",
-        "eer_capacity_derate_4ton": "1",
-        "eer_capacity_derate_5ton": "1",
-        "fan_power_installed": "0.5",
-        "fan_power_rated": "0.365",
-        "heat_pump_capacity": "autosize",
-        "hspf": "7.7",
-        "min_temp": "0",
-        "seer": "13",
-        "shr": "0.73",
-        "supplemental_capacity": "autosize",
-        "supplemental_efficiency": "1"
-      },
-      "measure_dir_name": "ResidentialHVACAirSourceHeatPumpSingleSpeed"
     },
     {
       "arguments": {
@@ -245,34 +200,6 @@
     },
     {
       "arguments": {
-        "__SKIP__": true,
-        "cfl_eff": "55",
-        "energy_use_exterior": "300",
-        "energy_use_garage": "100",
-        "holiday_daily_energy_use_exterior": "0",
-        "holiday_end_date": "January 6",
-        "holiday_sch": "0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.008168, 0.098016, 0.168028, 0.193699, 0.283547, 0.192532, 0.03734, 0.01867",
-        "holiday_start_date": "November 27",
-        "hw_cfl": "0.34",
-        "hw_led": "0",
-        "hw_lfl": "0",
-        "in_eff": "15",
-        "led_eff": "80",
-        "lfl_eff": "88",
-        "monthly_sch": "1.248, 1.257, 0.993, 0.989, 0.993, 0.827, 0.821, 0.821, 0.827, 0.99, 0.987, 1.248",
-        "mult": "1",
-        "option_type": "Lamp Fractions",
-        "pg_cfl": "0.34",
-        "pg_led": "0",
-        "pg_lfl": "0",
-        "sch_option_type": "Calculated Lighting Schedule",
-        "weekday_sch": "0.035, 0.033, 0.032, 0.031, 0.032, 0.033, 0.037, 0.042, 0.043, 0.043, 0.043, 0.044, 0.045, 0.045, 0.044, 0.046, 0.048, 0.052, 0.053, 0.05, 0.047, 0.045, 0.04, 0.036",
-        "weekend_sch": "0.035, 0.033, 0.032, 0.031, 0.032, 0.033, 0.037, 0.042, 0.043, 0.043, 0.043, 0.044, 0.045, 0.045, 0.044, 0.046, 0.048, 0.052, 0.053, 0.05, 0.047, 0.045, 0.04, 0.036"
-      },
-      "measure_dir_name": "ResidentialLightingOther"
-    },
-    {
-      "arguments": {
         "energy_use": "2000",
         "lat_frac": "0.021",
         "monthly_sch": "1.248, 1.257, 0.993, 0.989, 0.993, 0.827, 0.821, 0.821, 0.827, 0.99, 0.987, 1.248",
@@ -375,6 +302,13 @@
         "__SKIP__": true
       },
       "measure_dir_name": "set_ervs_to_hrvs"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "swh_type": "Waste Water Heat Pump 120F Supply and Electric Tank"
+      },
+      "measure_dir_name": "multifamily_central_wwhp"
     },
     {
       "arguments": {
