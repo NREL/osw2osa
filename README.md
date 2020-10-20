@@ -3,7 +3,7 @@ This repo is a sample deployment of ruby scripts used to generate OSA files from
 
 - Instructions
     - Requires Ruby 2.5.5.
-    - Requires OpenStudio 3.0.x
+    - Requires OpenStudio 3.1.0
     - install bundle using `gem install bundle` at the command prompt
     - from top level of repository type `bundle install` at the command prompt
        - This should result in a `.bundle` directory which contains all of the measure gems necessary for the workflows described in this repository. Any measures that are not in a measure gems and are unique to this project can be in the `measures` directory at the top level of the repository.

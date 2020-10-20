@@ -21,13 +21,6 @@
     },
     {
       "arguments": {
-        "__SKIP__": false,
-        "weather_file_name": "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw"
-      },
-      "measure_dir_name": "ChangeBuildingLocation"
-    },
-    {
-      "arguments": {
         "floorplan_path": "ze_multifamily_floorplan.json",
         "num_bedrooms": "2, 1, 1, 1, 0, 0, 0, 2, 2, 0, 1, 1, 1, 1, 3, 2, 1, 1, 1, 0, 0, 0, 2, 2, 0, 1, 1, 1, 1, 3, 2, 1, 1, 1, 0, 0, 0, 2, 2, 0, 1, 1, 1, 1, 3",
         "num_bathrooms": "2",
@@ -37,6 +30,13 @@
         "occupants_monthly_sch": "1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0"
       },
       "measure_dir_name": "ResidentialGeometryCreateFromFloorspaceJS"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "weather_file_name": "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw"
+      },
+      "measure_dir_name": "ChangeBuildingLocation"
     },
     {
       "arguments": {

@@ -12,15 +12,15 @@
   "steps": [
     {
       "arguments": {
-        "weather_file_name": "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw"
-      },
-      "measure_dir_name": "ChangeBuildingLocation"
-    },
-    {
-      "arguments": {
         "floorplan_path": "../files/office_floorplan.json"
       },
       "measure_dir_name": "merge_floorspace_js_with_model"
+    },
+    {
+      "arguments": {
+        "weather_file_name": "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw"
+      },
+      "measure_dir_name": "ChangeBuildingLocation"
     },
     {
       "arguments": {
