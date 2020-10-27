@@ -231,9 +231,11 @@ task :run_osw , [:workflow_name, :measures_only] do |task, args|
 end
 
 desc 'Run all osws'
-task :run_all_osws do
+task :run_all_osws , [:measures_only] do |task, args|
+  args.with_defaults(measures_only: false)
+  measures_only = args[:measures_only]
   puts "Running all osws"
-  run_osws(find_osws)
+  run_osws(find_osws,measures_only)
 end
 
 desc 'setup additional measures that are not measure gems as if they were installed with bundle install'

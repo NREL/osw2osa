@@ -13,7 +13,8 @@ This repo is a sample deployment of ruby scripts used to generate OSA files from
         - rake clear_run                                                    # Delete contents under run directory
         - rake find_bundle_measure_paths                                    # Find Bundle measure paths to add to bundle osws
         - rake find_osws                                                    # List OSW files in the measures workflows directory
-        - rake run_all_osws                                                 # Run all osws
+        - rake run_all_osws[measures_only]                                  # Run all osws        
+        - rake run_osw[workflow_name,measures_only]                         # Run single osw
         - rake run_osw[workflow_name,measures_only]                         # Run single osw
         - rake setup_all_osws                                               # Setup all osw files to use bundler gems for measure paths
         - rake setup_non_gem_measures                                       # setup additional measures that are not measure gems as if they were installed with bundle install
