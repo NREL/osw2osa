@@ -10,8 +10,8 @@ source 'http://rubygems.org'
 # measure gems
 # todo - I should prboably change these to specific release instead of develop before I make a branch for it
 gem 'openstudio-model-articulation', github: 'NREL/openstudio-model-articulation-gem', branch: 'new_measures_oct2020_310'
-gem 'openstudio-common-measures', github: 'NREL/openstudio-common-measures-gem', branch: '3_1_0_upgrade'
-gem 'openstudio-ee', github: 'NREL/openstudio-ee-gem', branch: '3_1_0_upgrade'
+gem 'openstudio-common-measures', github: 'NREL/openstudio-common-measures-gem', branch: 'develop'
+gem 'openstudio-ee', github: 'NREL/openstudio-ee-gem', branch: 'develop'
 # todo - the urban geometry measure is failing, maybe need different branch or gem relese to use with OpenStudio 3.0.1
 #gem 'urbanopt-geojson', github: 'URBANopt/urbanopt-geojson-gem', branch: 'develop'
 
