@@ -34,6 +34,7 @@
     {
       "arguments": {
         "__SKIP__": false,
+        "set_year": "2019",
         "weather_file_name": "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw"
       },
       "measure_dir_name": "ChangeBuildingLocation"
