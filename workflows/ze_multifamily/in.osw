@@ -263,12 +263,12 @@
         "add_constructions": true,
         "wall_roof_construction_template": "ZE AEDG Multifamily Recommendations",
         "window_construction_template": "ZE AEDG Multifamily Recommendations",
-        "add_space_type_loads": false,
-        "add_elevators": false,
-        "add_exterior_lights": false,
+        "add_space_type_loads": true,
+        "add_elevators": true,
+        "add_exterior_lights": true,
         "onsite_parking_fraction": "0.0",
-        "add_swh": false,
-        "add_thermostat": false,
+        "add_swh": true,
+        "add_thermostat": true,
         "add_hvac": true,
         "hvac_system_type": "Minisplit Heat Pumps with ERVs"
       },
@@ -282,7 +282,7 @@
     },
     {
       "arguments": {
-        "__SKIP__": true,
+        "__SKIP__": false,
         "swh_type": "Waste Water Heat Pump 120F Supply and Electric Tank"
       },
       "measure_dir_name": "multifamily_central_wwhp"
