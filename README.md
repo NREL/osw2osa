@@ -18,6 +18,7 @@ This repo is a sample deployment of ruby scripts used to generate OSA files from
         - rake run_osw[workflow_name,measures_only]                         # Run single osw
         - rake setup_all_osws                                               # Setup all osw files to use bundler gems for measure paths
         - rake setup_non_gem_measures                                       # setup additional measures that are not measure gems as if they were installed with bundle install
+        - rake setup_os_app[workflow_name]                                  # In Run directory Setup OSW with OSM so can be opened and run in OpenStudio Applicaiton
         - rake setup_osa[json_bool,zip_bool,var_set,select_osw,select_osa]  # Setup an analysis including zip file and OSA (can run with all defaults
         - rake setup_osw[workflow_name]                                     # Setup single osw file to use bundler gems for measure paths
         - rake setup_run_osw[workflow_name]                                 # Setup and run single osw
