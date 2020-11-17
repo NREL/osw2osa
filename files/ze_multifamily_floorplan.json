@@ -426,91 +426,91 @@
     },
     {
       "color": "#F2C511",
-      "handle": "b70cb103-9ae3-4907-91d0-98b7c059e019",
+      "handle": null,
       "id": "273479",
       "name": "commercial",
       "type": "space_types"
     },
     {
       "color": "#C0382B",
-      "handle": "712459b7-0673-408c-925d-b392e0d73c3f",
+      "handle": null,
       "id": "2734898",
       "name": "corridor",
       "type": "space_types"
     },
     {
       "color": "#332288",
-      "handle": "714f3598-ca42-4592-a196-6199d07d9ad1",
+      "handle": null,
       "id": "2734899",
       "name": "elevator",
       "type": "space_types"
     },
     {
       "color": "#117733",
-      "handle": "58851430-e41d-48e3-9204-1d1b564a9735",
+      "handle": null,
       "id": "2734900",
       "name": "stair",
       "type": "space_types"
     },
     {
       "color": "#999933",
-      "handle": "34b49fae-674b-4892-be15-605c05eee15b",
+      "handle": null,
       "id": "2734901",
       "name": "retail",
       "type": "space_types"
     },
     {
       "color": "#ddcc77",
-      "handle": "83622af1-b14e-48d1-b091-d0d9681a5de2",
+      "handle": null,
       "id": "2734902",
       "name": "coffee",
       "type": "space_types"
     },
     {
       "color": "#cc6677",
-      "handle": "bc8a913a-5210-49b0-87bf-18f7c00f646c",
+      "handle": null,
       "id": "2734903",
       "name": "mail",
       "type": "space_types"
     },
     {
       "color": "#882255",
-      "handle": "bad4439e-3588-4950-a30c-7bfd7333af17",
+      "handle": null,
       "id": "2734904",
       "name": "community",
       "type": "space_types"
     },
     {
       "color": "#44aa99",
-      "handle": "13356299-baf8-484c-9eaa-1d333a316c81",
+      "handle": null,
       "id": "2734905",
       "name": "garbage",
       "type": "space_types"
     },
     {
       "color": "#6699cc",
-      "handle": "e856b28a-e298-4640-8c8a-ee19a8560d15",
+      "handle": null,
       "id": "2734906",
       "name": "gym",
       "type": "space_types"
     },
     {
       "color": "#661100",
-      "handle": "fa66fd74-150a-4990-a8b1-10998fa556ca",
+      "handle": null,
       "id": "2734907",
       "name": "office",
       "type": "space_types"
     },
     {
       "color": "#A463BF",
-      "handle": "8d6f7c1e-5f11-45f9-9317-3078eee6e583",
+      "handle": null,
       "id": "2734908",
       "name": "lobby",
       "type": "space_types"
     },
     {
       "color": "#aa4499",
-      "handle": "a8f5b834-9f40-45ee-8569-cd47b984091f",
+      "handle": null,
       "id": "2734909",
       "name": "bathroom",
       "type": "space_types"
@@ -2109,7 +2109,7 @@
           }
         ]
       },
-      "handle": "{49c1979b-fe71-47b0-8a6c-a10a525d3a3b}",
+      "handle": null,
       "id": "1",
       "image_visible": true,
       "images": [],
@@ -4038,7 +4038,7 @@
           }
         ]
       },
-      "handle": "{b9b74c8b-75aa-49c9-b769-2ae7c519cb4e}",
+      "handle": null,
       "id": "2661",
       "image_visible": true,
       "images": [],
@@ -5978,7 +5978,7 @@
           }
         ]
       },
-      "handle": "{e7bd6f41-b6bb-4c72-bd0c-930d781f67a9}",
+      "handle": null,
       "id": "26997",
       "image_visible": true,
       "images": [],
@@ -7918,7 +7918,7 @@
           }
         ]
       },
-      "handle": "{983aa24c-7966-499e-954f-8721ba1656fe}",
+      "handle": null,
       "id": "27170",
       "image_visible": true,
       "images": [],
