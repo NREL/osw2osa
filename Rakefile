@@ -320,7 +320,7 @@ def setup_os_app(workflow_name)
           string_args << arg_val.to_s.gsub(".epw",".ddy")
           string_args << arg_val.to_s.gsub(".epw",".stat")
         end
-        if arg_name == "__SKIP__" && arg_val == true
+        if arg_name.to_s == "__SKIP__" && arg_val.to_s == 'true'
           skip = true
         end
       end
@@ -328,7 +328,9 @@ def setup_os_app(workflow_name)
       # todo - delete measures from workflow that are set to skip in OSW, but I still want to keep measures in place (HPXMLtoOpenStudio is used by many measures)
       # while it seems to run with them in the OSW but skipped it is confusing because they show up in OS app and unlike PAT  no indication of skip state or way to change it.
       if skip
-        step.remove
+        # todo - there is now workfow.removeMeasure or similar function, I cold try to edit as JSON, but will just update view name for now
+        puts "flagging #{measure_dir_name} in GUI display name that are skipped, didn't see easy way to remove measure from workflow."
+        measure_step.setName("***** Measure Skipped on Purpose ***** (#{measure_dir_name} will not run with other measures)")
       end
 
     end
