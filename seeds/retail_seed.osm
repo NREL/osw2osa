@@ -1,7 +1,21 @@
 
 OS:Version,
-  {29c6c9e1-44e1-4fdc-8b99-0591141fa84a}, !- Handle
-  2.8.1;                                  !- Version Identifier
+  {9c9ac75d-3bd0-4693-8ff7-930fa318ebb0}, !- Handle
+  3.0.1;                                  !- Version Identifier
+
+OS:Schedule:Constant,
+  {55fedaae-d10e-4283-8489-8b6237ed81d8}, !- Handle
+  Always On Discrete,                     !- Name
+  {693b2109-fbe9-4984-bc19-41062ab09214}, !- Schedule Type Limits Name
+  1;                                      !- Value
+
+OS:ScheduleTypeLimits,
+  {693b2109-fbe9-4984-bc19-41062ab09214}, !- Handle
+  Always On Discrete Limits,              !- Name
+  0,                                      !- Lower Limit Value
+  1,                                      !- Upper Limit Value
+  Discrete,                               !- Numeric Type
+  Availability;                           !- Unit Type
 
 OS:Site,
   {bc874655-a927-4872-a278-1347186bb1d9}, !- Handle
@@ -20,8 +34,6 @@ OS:YearDescription,
 
 OS:ClimateZones,
   {dd268d6b-2da7-4abc-b8ad-35d0988c56cd}, !- Handle
-  ,                                       !- Active Institution
-  ,                                       !- Active Year
   ASHRAE,                                 !- Climate Zone Institution Name 1
   ANSI/ASHRAE Standard 169,               !- Climate Zone Document Name 1
   2006,                                   !- Climate Zone Document Year 1
@@ -58,8 +70,16 @@ OS:Timestep,
 
 OS:ShadowCalculation,
   {21696cf9-7a12-43bf-ac4c-50d1be8bf2fd}, !- Handle
-  20,                                     !- Calculation Frequency
-  15000;                                  !- Maximum Figures in Shadow Overlap Calculations
+  PolygonClipping,                        !- Shading Calculation Method
+  ,                                       !- Shading Calculation Update Frequency Method
+  20,                                     !- Shading Calculation Update Frequency
+  15000,                                  !- Maximum Figures in Shadow Overlap Calculations
+  ,                                       !- Polygon Clipping Algorithm
+  512,                                    !- Pixel Counting Resolution
+  ,                                       !- Sky Diffuse Modeling Algorithm
+  No,                                     !- Output External Shading Calculation Results
+  No,                                     !- Disable Self-Shading Within Shading Zone Groups
+  No;                                     !- Disable Self-Shading From Shading Zone Groups to Other Zones
 
 OS:HeatBalanceAlgorithm,
   {09f4a614-27ba-43a9-a0ac-4379e03c44e8}, !- Handle
