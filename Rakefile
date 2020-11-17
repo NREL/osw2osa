@@ -293,6 +293,9 @@ def setup_os_app(workflow_name)
   short_path = "run/workflows/#{workflow_name}/measures"
   FileUtils.mkdir_p(short_path)
 
+  # make directory if does not exist
+  FileUtils.mkdir_p("run/workflows/#{workflow_name}/files")
+
   # store string argument names to cross check against weather files
   string_args = []
 
@@ -306,10 +309,10 @@ def setup_os_app(workflow_name)
 
       # populate string arguments
       measure_step.arguments.each do |arg_name,arg_val|
-        string_args = arg_val.to_s
+        string_args << arg_val.to_s
         if arg_val.to_s.include? ".epw"
-          string_args = arg_val.to_s.gsub(".epw",".ddy")
-          string_args = arg_val.to_s.gsub(".epw",".stat")
+          string_args << arg_val.to_s.gsub(".epw",".ddy")
+          string_args << arg_val.to_s.gsub(".epw",".stat")
         end
       end
     end
@@ -317,25 +320,30 @@ def setup_os_app(workflow_name)
 
   # copy weather file (also ddy and stat) and other files that may be used
   # todo - might have to get everyting in files dir, maybe even all seed models for replace model (could cross check for arg names in workflow)
-  puts "Copy weater file and files that might be used by the OSW into the files directory next to the OSW"
   if workflow.weatherFile.is_initialized
+    puts "copying weather file from OSW"
     source_weather = workflow.findFile(weather_file).get
-    target_weather = "run/workflows/weather/#{weather_file}"
+    target_weather = "run/workflows/files/#{weather_file}"
+    FileUtils.copy_entry(source_weather,target_weather)
   end
 
   # look through weather files and copy as needed
   weather_files = Dir.entries('weather')
   weather_files.each do |weather_file|
+    next if [".",".."].include? weather_file
     if string_args.include? weather_file
-      FileUtils.copy_entry("weather/#{weather_file}","run/workflows/#{workflow_name}/files")
+      puts "copying #{weather_file} used by measure in workflow"
+      FileUtils.copy_entry("weather/#{weather_file}","run/workflows/#{workflow_name}/files/#{weather_file}")
     end
   end
 
   # loop through files
   other_files = Dir.entries('files')
   other_files.each do |other_file|
+    next if [".",".."].include? other_file
     if string_args.include? other_file
-      FileUtils.copy_entry("files/#{other_file}","run/workflows/#{workflow_name}/files")
+      puts "copying #{other_file} used by measure in workflow"
+      FileUtils.copy_entry("files/#{other_file}","run/workflows/#{workflow_name}/files/#{other_file}")
     end
   end
 
