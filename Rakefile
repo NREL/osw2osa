@@ -313,13 +313,24 @@ def setup_os_app(workflow_name)
       FileUtils.copy_entry(source_path, "#{short_path}/#{measure_dir_name}")
 
       # populate string arguments
+      skip = false
       measure_step.arguments.each do |arg_name,arg_val|
         string_args << arg_val.to_s
         if arg_val.to_s.include? ".epw"
           string_args << arg_val.to_s.gsub(".epw",".ddy")
           string_args << arg_val.to_s.gsub(".epw",".stat")
         end
+        if arg_name == "__SKIP__" && arg_val == true
+          skip = true
+        end
       end
+
+      # todo - delete measures from workflow that are set to skip in OSW, but I still want to keep measures in place (HPXMLtoOpenStudio is used by many measures)
+      # while it seems to run with them in the OSW but skipped it is confusing because they show up in OS app and unlike PAT  no indication of skip state or way to change it.
+      if skip
+        step.remove
+      end
+
     end
   end
 
