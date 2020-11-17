@@ -29,8 +29,8 @@
         "occupants_weekend_sch": "1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 0.88, 0.41, 0.24, 0.24, 0.24, 0.24, 0.24, 0.24, 0.24, 0.29, 0.55, 0.90, 0.90, 0.90, 1.00, 1.00, 1.00",
         "occupants_monthly_sch": "1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0"
       },
-      "description": "For Number of Bedrooms enter a value for each unit alphabetically by building unit name. Merging of floorspace.json with the OSM will happen in this measure and not in the geometry editor tab of the OpenStudio Application.",
-      "modeler_description": "The example floorspace.json file used for this OSW organized unit names by number of bedrooms to make the number of bedrooms argument cleaner. This workflow is setup to work with OpenStudio 3.0.1 but not OpenStudio 3.1.0.",
+      "description": "For Number of Bedrooms enter a value for each unit in order of building unit number. The unit number is extracted from the right side of the unit name separated from the name prefix by a space. Merging of floorspace.json with the OSM will happen in this measure and not in the geometry editor tab of the OpenStudio Application.",
+      "modeler_description": "The example floorspace.json file used for this OSW organized unit number by number of bedrooms to make the number of bedrooms argument cleaner. Building Unit 112 for example is the 12th 1 Bedroom unit. This workflow is setup to work with OpenStudio 3.0.1 but not OpenStudio 3.1.0.",
       "measure_dir_name": "ResidentialGeometryCreateFromFloorspaceJS"
     },
     {
