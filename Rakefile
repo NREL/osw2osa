@@ -304,6 +304,11 @@ def setup_os_app(workflow_name)
     if step.to_MeasureStep.is_initialized
       measure_step = step.to_MeasureStep.get
       measure_dir_name = measure_step.measureDirName
+
+      # set display name for os app (update to check if name exists first)
+      measure_step.setName(measure_dir_name)
+
+      # copy measure
       source_path = workflow.findMeasure(measure_dir_name.to_s).get.to_s
       FileUtils.copy_entry(source_path, "#{short_path}/#{measure_dir_name}")
 
@@ -317,6 +322,9 @@ def setup_os_app(workflow_name)
       end
     end
   end
+
+  # save workflow with updated measure names
+  workflow.save
 
   # copy weather file (also ddy and stat) and other files that may be used
   # todo - might have to get everyting in files dir, maybe even all seed models for replace model (could cross check for arg names in workflow)
