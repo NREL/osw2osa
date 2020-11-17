@@ -260,7 +260,94 @@ task :setup_non_gem_measures do
     system("svn checkout #{measure_string} #{non_gem_measures}")
   end
 
+end
 
+# setup OSW to be run by OS Application (made to have way to run wihtout using CLI in command line)
+def setup_os_app(workflow_name)
+  puts "Setting up OSM that can be used to run this OSW through the OpenStudio Application."
+
+  if ! find_setup_osws.include?(workflow_name)
+    puts "did not find #{workflow_name} setup in run/workflow directory, running setup_osw."
+    setup_osw(workflow_name)
+  end
+
+  # load OSW file
+  puts "Loading OSW file to inspect seed model, files, and measures."
+  osw = OpenStudio::WorkflowJSON.load("run/workflows/#{workflow_name}/in.osw").get
+  runner = OpenStudio::Measure::OSRunner.new(osw)
+  workflow = runner.workflow
+
+  # saving osw early so I use findMeasure to copy to short path
+  puts "Make a copy of OSW named workflow.osw which is what OS App Expexts"
+  osw_path = "run/workflows/#{workflow_name}/workflow.osw"
+  workflow.saveAs(osw_path)
+
+  # copy seed file
+  puts "Creating OSM named after workflow that is copy of seed model from OSW file."
+  source_seed = "seeds/#{workflow.seedFile.get}"
+  target_seed = "run/workflows/#{workflow_name}.osm"
+  FileUtils.copy_entry(source_seed, target_seed)
+
+  # copy measures
+  puts "Copying measures in #{workflow_name} to run/workflows/#{workflow_name}/measures directory."
+  short_path = "run/workflows/#{workflow_name}/measures"
+  FileUtils.mkdir_p(short_path)
+
+  # store string argument names to cross check against weather files
+  string_args = []
+
+  # find path in measures used in osw and copy them to short path
+  workflow.workflowSteps.each do |step|
+    if step.to_MeasureStep.is_initialized
+      measure_step = step.to_MeasureStep.get
+      measure_dir_name = measure_step.measureDirName
+      source_path = workflow.findMeasure(measure_dir_name.to_s).get.to_s
+      FileUtils.copy_entry(source_path, "#{short_path}/#{measure_dir_name}")
+
+      # populate string arguments
+      measure_step.arguments.each do |arg_name,arg_val|
+        string_args = arg_val.to_s
+        if arg_val.to_s.include? ".epw"
+          string_args = arg_val.to_s.gsub(".epw",".ddy")
+          string_args = arg_val.to_s.gsub(".epw",".stat")
+        end
+      end
+    end
+  end
+
+  # copy weather file (also ddy and stat) and other files that may be used
+  # todo - might have to get everyting in files dir, maybe even all seed models for replace model (could cross check for arg names in workflow)
+  puts "Copy weater file and files that might be used by the OSW into the files directory next to the OSW"
+  if workflow.weatherFile.is_initialized
+    source_weather = workflow.findFile(weather_file).get
+    target_weather = "run/workflows/weather/#{weather_file}"
+  end
+
+  # look through weather files and copy as needed
+  weather_files = Dir.entries('weather')
+  weather_files.each do |weather_file|
+    if string_args.include? weather_file
+      FileUtils.copy_entry("weather/#{weather_file}","run/workflows/#{workflow_name}/files")
+    end
+  end
+
+  # loop through files
+  other_files = Dir.entries('files')
+  other_files.each do |other_file|
+    if string_args.include? other_file
+      FileUtils.copy_entry("files/#{other_file}","run/workflows/#{workflow_name}/files")
+    end
+  end
+
+  puts "You should be able to open and run workflow for #{workflow_name} in the OpenStudio Application by opening #{workflow_name}.osm"
+
+end
+
+desc 'In Run directory Setup OSW with OSM so can be opened and run in OpenStudio Applicaiton'
+task :setup_os_app , [:workflow_name] do |task, args|
+  args.with_defaults(workflow_name: 'bar_typical')
+
+  setup_os_app(args[:workflow_name])
 end
 
 # ARGV[0] json file is generated unless false

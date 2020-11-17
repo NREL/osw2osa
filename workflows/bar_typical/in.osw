@@ -14,6 +14,7 @@
         "set_year": "2019",
         "weather_file_name": "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw"
       },
+      "name": "Change Building Location",
       "measure_dir_name": "ChangeBuildingLocation"
     },
     {
@@ -26,18 +27,21 @@
         "num_stories_below_grade": "0",
         "make_mid_story_surfaces_adiabatic": true
       },
+      "name": "Create Bar From DOE Building Type Ratios",
       "measure_dir_name": "create_bar_from_doe_building_type_ratios"
     },
     {
       "arguments": {
         "__SKIP__": false
       },
+      "name": "Create Typical DOE Building From Model",
       "measure_dir_name": "create_typical_doe_building_from_model"
     },
     {
       "arguments": {
         "__SKIP__": false
       },
+      "name": "View Model",
       "measure_dir_name": "view_model"
     },
     {
@@ -47,12 +51,14 @@
         "cell_efficiency": "0.1976",
         "inverter_efficiency" : "0.96"
       },
+      "name": "Add Rooftop PV",
       "measure_dir_name": "add_rooftop_pv"
     },
     {
       "arguments": {
         "zone_condition_section": false
       },
+      "name": "OpenStudio Results",
       "measure_dir_name": "openstudio_results"
     }
   ]
