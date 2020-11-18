@@ -1,0 +1,144 @@
+{
+  "seed_file": "aedg_retail.osm",
+  "file_paths": [
+    "../seeds",
+    "../weather"
+  ],
+  "measure_paths": [
+    "../measures"
+  ],
+  "steps": [
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "weather_file_name": "USA_GA_Atlanta-Hartsfield-Jackson.Intl.AP.722190_TMY3.epw"
+      },
+      "measure_dir_name": "ChangeBuildingLocation"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "wwr": "0.0",
+        "facade": "North"
+      },
+      "measure_dir_name": "SetWindowToWallRatioByFacade"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "wwr": "0.3",
+        "facade": "South"
+      },
+      "measure_dir_name": "SetWindowToWallRatioByFacade"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "wwr": "0.0",
+        "facade": "East"
+      },
+      "measure_dir_name": "SetWindowToWallRatioByFacade"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "wwr": "0.0",
+        "facade": "West"
+      },
+      "measure_dir_name": "SetWindowToWallRatioByFacade"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "projection_factor": "1.0",
+        "facade": "South"
+      },
+      "measure_dir_name": "AddOverhangsByProjectionFactor"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "projection_factor": "1.0",
+        "facade": "East"
+      },
+      "measure_dir_name": "AddOverhangsByProjectionFactor"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "projection_factor": "1.0",
+        "facade": "West"
+      },
+      "measure_dir_name": "AddOverhangsByProjectionFactor"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "relative_building_rotation": 0.0
+      },
+      "measure_dir_name": "RotateBuilding"
+    },
+    {
+      "arguments": {
+        "__SKIP__": true,
+        "min_power_fraction": "0.3",
+        "min_light_fraction": "0.3"
+      },
+      "measure_dir_name": "AddDaylightSensors"
+    },
+    {
+      "name": "ze_retail_typical",
+      "measure_dir_name": "ze_retail_typical",
+      "arguments": {
+        "__SKIP__": false,
+        "template": "NREL ZNE Ready 2017",
+        "template_space_loads": "ZE AEDG Multifamily",
+        "system_type": "PSZ-HP",
+        "swh_src": "Electricity",
+        "exterior_lighting_zone": "3 - All Other Areas",
+        "add_constructions": true,
+        "add_space_type_loads": true,
+        "add_elevators": true,
+        "add_internal_mass": true,
+        "add_exterior_lights": true,
+        "onsite_parking_fraction": "1.0",
+        "add_swh": true,
+        "add_thermostat": true,
+        "add_hvac": true,
+        "add_refrigeration": false,
+        "remove_objects": false,
+        "use_upstream_args": false
+      }
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "case_length_ft": "100.0"
+      },
+      "measure_dir_name": "add_typical_refrigeration"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "fraction_of_surface": "0.50",
+        "cell_efficiency": "0.1976",
+        "inverter_efficiency" : "0.96"
+      },
+      "measure_dir_name": "add_rooftop_pv"
+    },
+    {
+       "arguments" : 
+       {
+          "__SKIP__" : false
+       },
+       "measure_dir_name" : "view_model"
+    },
+    {
+      "arguments": {
+        "zone_condition_section": true,
+        "reg_monthly_details": true
+      },
+      "measure_dir_name": "openstudio_results"
+    }
+  ]
+}
