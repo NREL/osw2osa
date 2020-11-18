@@ -58,12 +58,12 @@ class ZeRetailCreateTypicalBuildingFromModel < OpenStudio::Measure::ModelMeasure
 
   # human readable name
   def name
-    return 'Create Typical Building from Model'
+    return 'ZE Retail Create Typical Building from Model'
   end
 
   # human readable description
   def description
-    return 'Takes a model with space and stub space types, and assigns constructions, schedules, internal loads, hvac, and other loads such as exterior lights and service water heating.'
+    return 'Custom measure based on create typical building from model for use with ze retail workflow.'
   end
 
   # human readable description of modeling approach

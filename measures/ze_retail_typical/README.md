@@ -2,10 +2,10 @@
 
 ###### (Automatically generated documentation)
 
-# Create Typical Building from Model
+# ZE Retail Create Typical Building from Model
 
 ## Description
-Takes a model with space and stub space types, and assigns constructions, schedules, internal loads, hvac, and other loads such as exterior lights and service water heating.
+Custom measure based on create typical building from model for use with ze retail workflow.
 
 ## Modeler Description
 It is important that the template argument chosen for this measure is in line with the buding types for the stub space types of the model passed in.

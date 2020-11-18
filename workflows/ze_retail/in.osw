@@ -80,7 +80,8 @@
     },
     {
       "arguments": {
-        "__SKIP__": true,
+        "__SKIP__": false,
+        "space_type": "Front_Retail",
         "min_power_fraction": "0.3",
         "min_light_fraction": "0.3"
       },
