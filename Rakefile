@@ -26,17 +26,37 @@ def bundle_base_gem_path
   return '.bundle/install/ruby/2.5.0/bundler/gems'
 end
 
+def bundle_base_gem_path_release
+  return '.bundle/install/ruby/2.5.0/gems'
+end
+
 # print out measure gems that are were installed by bundle
 def find_bundle_measure_paths
   bundle_measure_paths = []
 
   puts "Getting measure directories for bundle installed measure gems"
-  gems = Dir.entries(bundle_base_gem_path)
-  gems.each do |gem|
-    # check if has lib/measures
-    gem = "#{bundle_base_gem_path}/#{gem}/lib/measures"
-    next if ! Dir.exists?(gem)
-    bundle_measure_paths << gem
+  # check for gems from GitHub.com branches
+  if File.directory?(bundle_base_gem_path)
+    gems = Dir.entries(bundle_base_gem_path)
+    gems.each do |gem|
+      # check if has lib/measures
+      gem = "#{bundle_base_gem_path}/#{gem}/lib/measures"
+      next if ! Dir.exists?(gem)
+      next if gem.include?('openstudio-extension') # never want to include measure fromhere
+      bundle_measure_paths << gem
+    end
+  end
+
+  # check for gems from GitHub.com branches
+  if File.directory?(bundle_base_gem_path_release)
+    gems = Dir.entries(bundle_base_gem_path_release)
+    gems.each do |gem|
+      # check if has lib/measures
+      gem = "#{bundle_base_gem_path_release}/#{gem}/lib/measures"
+      next if ! Dir.exists?(gem)
+      next if gem.include?('openstudio-extension') # never want to include measure fromhere
+      bundle_measure_paths << gem
+    end
   end
 
   puts "found #{bundle_measure_paths.size} measure directories"

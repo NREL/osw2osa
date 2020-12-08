@@ -4,14 +4,22 @@ source 'http://rubygems.org'
 
 # library gems
 # only uncomment these if need newer version that included in OpenStudio Installer
+# additional code in CLI call will have to make use of thse, just installing them here will not do anything
 #gem 'openstudio-extension', github: 'NREL/OpenStudio-extension-gem', branch: 'develop'
 #gem 'openstudio-standards', github: 'NREL/openstudio-standards', branch: 'develop'
 
 # measure gems
-# todo - I should prboably change these to specific release instead of develop before I make a branch for it
-gem 'openstudio-model-articulation', github: 'NREL/openstudio-model-articulation-gem', branch: 'new_measures_oct2020_310'
-gem 'openstudio-common-measures', github: 'NREL/openstudio-common-measures-gem', branch: 'develop'
-gem 'openstudio-ee', github: 'NREL/openstudio-ee-gem', branch: 'develop'
+gem 'openstudio-model-articulation', '~> 0.3', '>= 0.3.0'
+gem 'openstudio-common-measures', '~> 0.3', '>= 0.3.1'
+gem 'openstudio-ee', '~> 0.3', '>= 0.3.1'
+gem 'openstudio-calibration', '~> 0.3', '>= 0.3.0'
+
+# for development testing can use specific branch of measure gems instead of release
+#gem 'openstudio-model-articulation', github: 'NREL/openstudio-model-articulation-gem', branch: 'new_measures_oct2020_310'
+#gem 'openstudio-common-measures', github: 'NREL/openstudio-common-measures-gem', branch: 'develop'
+#gem 'openstudio-ee', github: 'NREL/openstudio-ee-gem', branch: 'develop'
+#gem 'openstudio-calibration', github: 'NREL/openstudio-calibration-gem', branch: 'develop'
+
 # todo - the urban geometry measure is failing, maybe need different branch or gem relese to use with OpenStudio 3.0.1
 #gem 'urbanopt-geojson', github: 'URBANopt/urbanopt-geojson-gem', branch: 'develop'
 
