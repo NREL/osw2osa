@@ -5,7 +5,8 @@ require 'rake'
 require 'fileutils'
 require 'openstudio'
 require 'parallel'
-
+require 'open3' 
+require 'json' 
 #task default: 'tbd'
 
 # throw way the run directory and everything in it.
@@ -26,17 +27,37 @@ def bundle_base_gem_path
   return '.bundle/install/ruby/2.5.0/bundler/gems'
 end
 
+def bundle_base_gem_path_release
+  return '.bundle/install/ruby/2.5.0/gems'
+end
+
 # print out measure gems that are were installed by bundle
 def find_bundle_measure_paths
   bundle_measure_paths = []
 
   puts "Getting measure directories for bundle installed measure gems"
-  gems = Dir.entries(bundle_base_gem_path)
-  gems.each do |gem|
-    # check if has lib/measures
-    gem = "#{bundle_base_gem_path}/#{gem}/lib/measures"
-    next if ! Dir.exists?(gem)
-    bundle_measure_paths << gem
+  # check for gems from GitHub.com branches
+  if File.directory?(bundle_base_gem_path)
+    gems = Dir.entries(bundle_base_gem_path)
+    gems.each do |gem|
+      # check if has lib/measures
+      gem = "#{bundle_base_gem_path}/#{gem}/lib/measures"
+      next if ! Dir.exists?(gem)
+      next if gem.include?('openstudio-extension') # never want to include measure fromhere
+      bundle_measure_paths << gem
+    end
+  end
+
+  # check for gems from GitHub.com branches
+  if File.directory?(bundle_base_gem_path_release)
+    gems = Dir.entries(bundle_base_gem_path_release)
+    gems.each do |gem|
+      # check if has lib/measures
+      gem = "#{bundle_base_gem_path_release}/#{gem}/lib/measures"
+      next if ! Dir.exists?(gem)
+      next if gem.include?('openstudio-extension') # never want to include measure fromhere
+      bundle_measure_paths << gem
+    end
   end
 
   puts "found #{bundle_measure_paths.size} measure directories"
@@ -165,7 +186,7 @@ end
 
 # quick way to see which osw files are in the run/workflows directory. Used for run_osws
 def find_setup_osws
-  puts "Get names of workflows in run/workflows directory"
+  #puts "Get names of workflows in run/workflows directory"
   workflow_names = []
   # make directory if does not exist
   FileUtils.mkdir_p('run/workflows')
@@ -176,7 +197,7 @@ def find_setup_osws
     next if ! File.exists?(workflow_path)
     workflow_names << workflow
   end
-  puts workflow_names
+  #puts workflow_names
 
   return workflow_names
 end
@@ -202,7 +223,6 @@ def run_osws(workflow_names, measures_only = false)
       setup_osw(workflow_name)
     end
 
-    puts "Running #{workflow_name}"
     if measures_only
       jobs << "openstudio run -m -w run/workflows/#{workflow_name}/in.osw"
     else
@@ -211,12 +231,42 @@ def run_osws(workflow_names, measures_only = false)
   end
 
   # run simulations
-  num_parallel = 12 # can it default or input something like n-1
+  # determine available processors on running host
+  workflows_passed = true
+  num_parallel = (Parallel.processor_count - 1).floor
+  puts "Running workflows in parallel on #{num_parallel} processors"
   Parallel.each(jobs, in_threads: num_parallel) do |job|
-    puts job
-    system(job)
+    puts "Running #{job}"
+    stdin, stdout, stderr, wait_thr = Open3.popen3(job)
+    unless wait_thr.value.success?
+      puts "#{job}: returned Error: #{wait_thr.value.exitstatus}"
+      puts "stdout: #{stdout}"
+      puts "stderr: #{stderr}"
+      workflows_passed = false
+    end
   end
+  unless workflows_passed
+    raise "A workflow failed. Please check logs for further info" 
+  end  
 
+  # Check the result codes in the workflow output out.osw json file 
+  # and raise error if any equal Fail
+  workflows_passed = true
+  workflow_names.each do |workflow_name|
+    # Check for file existence
+    unless File.exist?("run/workflows/#{workflow_name}/out.osw")
+      raise "File run/workflows/#{workflow_name}/out.osw not found"
+    end
+    # check status code in json output
+    unless check_status_code?("run/workflows/#{workflow_name}/out.osw")
+      puts "Workflow #{workflow_name} Failed"
+      workflows_passed = false
+    end 
+  end
+  # Check if any workflow failed
+  unless workflows_passed
+    raise "A workflow failed. Please check logs for further info" 
+  end    
 end
 
 desc 'Run single osw'
@@ -260,6 +310,16 @@ task :setup_non_gem_measures do
     system("svn checkout #{measure_string} #{non_gem_measures}")
   end
 
+end
+
+# Parse json and check status code
+def check_status_code?(workflow_outfile)
+  osw = JSON.parse(File.read(workflow_outfile))
+  if osw["completed_status"] == "Success"
+    return true
+  else
+    return false
+  end
 end
 
 # setup OSW to be run by OS Application (made to have way to run wihtout using CLI in command line)
