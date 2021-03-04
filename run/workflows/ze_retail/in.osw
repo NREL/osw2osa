@@ -1,0 +1,166 @@
+{
+   "file_paths" : 
+   [
+      "../../../weather",
+      "../../../seeds",
+      "../../../files"
+   ],
+   "hash" : "FA790BF0",
+   "measure_paths" : 
+   [
+      "../../measures",
+      "../../../measures"
+   ],
+   "seed_file" : "aedg_retail.osm",
+   "steps" : 
+   [
+      {
+         "arguments" : 
+         {
+            "__SKIP__" : false,
+            "weather_file_name" : "USA_GA_Atlanta-Hartsfield-Jackson.Intl.AP.722190_TMY3.epw"
+         },
+         "measure_dir_name" : "ChangeBuildingLocation"
+      },
+      {
+         "arguments" : 
+         {
+            "__SKIP__" : false,
+            "facade" : "North",
+            "wwr" : "0.0"
+         },
+         "measure_dir_name" : "SetWindowToWallRatioByFacade"
+      },
+      {
+         "arguments" : 
+         {
+            "__SKIP__" : false,
+            "facade" : "South",
+            "wwr" : "0.3"
+         },
+         "measure_dir_name" : "SetWindowToWallRatioByFacade"
+      },
+      {
+         "arguments" : 
+         {
+            "__SKIP__" : false,
+            "facade" : "East",
+            "wwr" : "0.0"
+         },
+         "measure_dir_name" : "SetWindowToWallRatioByFacade"
+      },
+      {
+         "arguments" : 
+         {
+            "__SKIP__" : false,
+            "facade" : "West",
+            "wwr" : "0.0"
+         },
+         "measure_dir_name" : "SetWindowToWallRatioByFacade"
+      },
+      {
+         "arguments" : 
+         {
+            "__SKIP__" : false,
+            "facade" : "South",
+            "projection_factor" : "1.0"
+         },
+         "measure_dir_name" : "AddOverhangsByProjectionFactor"
+      },
+      {
+         "arguments" : 
+         {
+            "__SKIP__" : false,
+            "facade" : "East",
+            "projection_factor" : "1.0"
+         },
+         "measure_dir_name" : "AddOverhangsByProjectionFactor"
+      },
+      {
+         "arguments" : 
+         {
+            "__SKIP__" : false,
+            "facade" : "West",
+            "projection_factor" : "1.0"
+         },
+         "measure_dir_name" : "AddOverhangsByProjectionFactor"
+      },
+      {
+         "arguments" : 
+         {
+            "__SKIP__" : false,
+            "relative_building_rotation" : 0
+         },
+         "measure_dir_name" : "RotateBuilding"
+      },
+      {
+         "arguments" : 
+         {
+            "__SKIP__" : false,
+            "min_light_fraction" : "0.3",
+            "min_power_fraction" : "0.3",
+            "space_type" : "Front_Retail"
+         },
+         "measure_dir_name" : "AddDaylightSensors"
+      },
+      {
+         "arguments" : 
+         {
+            "__SKIP__" : false,
+            "add_constructions" : true,
+            "add_elevators" : true,
+            "add_exterior_lights" : true,
+            "add_hvac" : true,
+            "add_internal_mass" : true,
+            "add_refrigeration" : false,
+            "add_space_type_loads" : true,
+            "add_swh" : true,
+            "add_thermostat" : true,
+            "exterior_lighting_zone" : "3 - All Other Areas",
+            "onsite_parking_fraction" : "1.0",
+            "remove_objects" : false,
+            "swh_src" : "Electricity",
+            "system_type" : "PSZ-HP",
+            "template" : "NREL ZNE Ready 2017",
+            "template_space_loads" : "ZE AEDG Multifamily",
+            "use_upstream_args" : false
+         },
+         "measure_dir_name" : "ze_retail_typical",
+         "name" : "ze_retail_typical"
+      },
+      {
+         "arguments" : 
+         {
+            "__SKIP__" : false,
+            "case_length_ft" : "100.0"
+         },
+         "measure_dir_name" : "add_typical_refrigeration"
+      },
+      {
+         "arguments" : 
+         {
+            "__SKIP__" : false,
+            "cell_efficiency" : "0.1976",
+            "fraction_of_surface" : "0.50",
+            "inverter_efficiency" : "0.96"
+         },
+         "measure_dir_name" : "add_rooftop_pv"
+      },
+      {
+         "arguments" : 
+         {
+            "__SKIP__" : false
+         },
+         "measure_dir_name" : "view_model"
+      },
+      {
+         "arguments" : 
+         {
+            "reg_monthly_details" : true,
+            "zone_condition_section" : true
+         },
+         "measure_dir_name" : "openstudio_results"
+      }
+   ],
+   "updated_at" : "20210304T165125Z"
+}

@@ -1,0 +1,91 @@
+{
+   "file_paths" : 
+   [
+      "../../../weather",
+      "../../../seeds",
+      "../../../files"
+   ],
+   "hash" : "312F4CB3",
+   "measure_paths" : 
+   [
+      "../../measures",
+      "../../../measures"
+   ],
+   "seed_file" : "seed_empty.osm",
+   "steps" : 
+   [
+      {
+         "arguments" : 
+         {
+            "set_year" : "2019",
+            "weather_file_name" : "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw"
+         },
+         "measure_dir_name" : "ChangeBuildingLocation"
+      },
+      {
+         "arguments" : 
+         {
+            "bldg_type_a" : "SecondarySchool",
+            "make_mid_story_surfaces_adiabatic" : true,
+            "ns_to_ew_ratio" : "0.0",
+            "num_stories_above_grade" : "2.0",
+            "num_stories_below_grade" : "0",
+            "template" : "90.1-2013",
+            "total_bldg_floor_area" : "210887"
+         },
+         "measure_dir_name" : "create_bar_from_doe_building_type_ratios"
+      },
+      {
+         "arguments" : 
+         {
+            "__SKIP__" : false,
+            "add_hvac" : false
+         },
+         "measure_dir_name" : "create_typical_doe_building_from_model"
+      },
+      {
+         "arguments" : 
+         {
+            "__SKIP__" : false,
+            "add_constructions" : false,
+            "add_elevators" : false,
+            "add_exhaust" : false,
+            "add_exterior_lights" : false,
+            "add_hvac" : true,
+            "add_internal_mass" : false,
+            "add_refrigeration" : false,
+            "add_space_type_loads" : false,
+            "add_swh" : false,
+            "add_thermostat" : false,
+            "template" : "90.1-2013",
+            "use_upstream_args" : false
+         },
+         "measure_dir_name" : "create_typical_doe_building_from_model"
+      },
+      {
+         "arguments" : 
+         {
+            "__SKIP__" : false
+         },
+         "measure_dir_name" : "view_model"
+      },
+      {
+         "arguments" : 
+         {
+            "__SKIP__" : false,
+            "cell_efficiency" : "0.1976",
+            "fraction_of_surface" : "0.75",
+            "inverter_efficiency" : "0.96"
+         },
+         "measure_dir_name" : "add_rooftop_pv"
+      },
+      {
+         "arguments" : 
+         {
+            "zone_condition_section" : false
+         },
+         "measure_dir_name" : "openstudio_results"
+      }
+   ],
+   "updated_at" : "20210304T165125Z"
+}
