@@ -9,10 +9,10 @@ source 'http://rubygems.org'
 #gem 'openstudio-standards', github: 'NREL/openstudio-standards', branch: 'develop'
 
 # measure gems
-gem 'openstudio-model-articulation', '~> 0.3', '>= 0.3.0'
-gem 'openstudio-common-measures', '~> 0.3', '>= 0.3.1'
-gem 'openstudio-ee', '~> 0.3', '>= 0.3.1'
-gem 'openstudio-calibration', '~> 0.3', '>= 0.3.0'
+gem 'openstudio-model-articulation', '~> 0.4', '>= 0.4.0'
+gem 'openstudio-common-measures', '~> 0.4', '>= 0.4.0'
+gem 'openstudio-ee', '~> 0.4', '>= 0.4.0'
+gem 'openstudio-calibration', '~> 0.4', '>= 0.4.0'
 
 # for development testing can use specific branch of measure gems instead of release
 #gem 'openstudio-model-articulation', github: 'NREL/openstudio-model-articulation-gem', branch: 'new_measures_oct2020_310'
