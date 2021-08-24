@@ -237,8 +237,8 @@ def run_osws(workflow_names, measures_only = false)
   puts "Running workflows in parallel on #{num_parallel} processors"
   Parallel.each(jobs, in_threads: num_parallel) do |job|
     puts "Running #{job}"
-    stdin, stdout, stderr, wait_thr = Open3.popen3(job)
-    unless wait_thr.value.success?
+    stdout, stderr, status = Open3.capture3(job)
+    unless status.success?
       puts "#{job}: returned Error: #{wait_thr.value.exitstatus}"
       puts "stdout: #{stdout}"
       puts "stderr: #{stderr}"
