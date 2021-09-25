@@ -17,7 +17,7 @@
     },
     {
       "arguments": {
-        "wwr": "All",
+        "wwr": 0.4,
         "facade": "All",
         "split_at_doors": "Split Walls at Doors",
         "inset_tri_sub": true,
