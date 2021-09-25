@@ -17,6 +17,12 @@
     },
     {
       "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "remove_orphan_objects_and_unused_resources"
+    },
+    {
+      "arguments": {
         "wwr": 0.4,
         "facade": "All",
         "split_at_doors": "Split Walls at Doors",
@@ -24,7 +30,7 @@
         "triangulate": true
       },
       "measure_dir_name": "SetWindowToWallRatioByFacade"
-    },
+    },    
     {
       "arguments": {
         "zone_condition_section": false
