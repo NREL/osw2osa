@@ -239,7 +239,7 @@ def run_osws(workflow_names, measures_only = false)
     puts "Running #{job}"
     stdout, stderr, status = Open3.capture3(job)
     unless status.success?
-      puts "#{job}: returned Error: #{wait_thr.value.exitstatus}"
+      puts "#{job}: returned Error: #{status.exitstatus}"
       puts "stdout: #{stdout}"
       puts "stderr: #{stderr}"
       workflows_passed = false
