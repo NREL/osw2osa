@@ -44,6 +44,7 @@
         "add_internal_mass": false,
         "add_exterior_lights": false,
         "add_exhaust": false,
+        "kitchen_makeup": "Largest Zone",
         "add_swh": false,
         "add_thermostat": false,
         "add_refrigeration": false,

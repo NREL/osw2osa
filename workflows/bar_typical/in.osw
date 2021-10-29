@@ -30,7 +30,8 @@
     },
     {
       "arguments": {
-        "__SKIP__": false
+        "__SKIP__": false,
+        "kitchen_makeup": "Largest Zone"
       },
       "measure_dir_name": "create_typical_doe_building_from_model"
     },
