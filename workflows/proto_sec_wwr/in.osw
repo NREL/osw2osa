@@ -1,0 +1,41 @@
+{
+  "seed_file": "seed_empty.osm",
+  "file_paths": [
+    "../../seeds",
+    "../../weather"
+  ],
+  "measure_paths": [
+    "../../../openstudio-common-measures-gem/lib/measures",
+    "../../../openstudio-model-articulation-gem/lib/measures"
+  ],
+  "steps": [
+    {
+      "arguments": {
+        "building_type": "SecondarySchool"
+      },
+      "measure_dir_name": "create_DOE_prototype_building"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "remove_orphan_objects_and_unused_resources"
+    },
+    {
+      "arguments": {
+        "wwr": 0.4,
+        "facade": "All",
+        "split_at_doors": "Split Walls at Doors",
+        "inset_tri_sub": true,
+        "triangulate": true
+      },
+      "measure_dir_name": "SetWindowToWallRatioByFacade"
+    },    
+    {
+      "arguments": {
+        "zone_condition_section": false
+      },
+      "measure_dir_name": "openstudio_results"
+    }
+  ]
+}
