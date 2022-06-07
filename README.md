@@ -2,8 +2,8 @@
 This repo is a sample deployment of ruby scripts used to generate OSA files from template OSW and OSA files. It uses bundle to access measure from measure gem repositories so you don't have to check out any other GitHub repositories to use this one. OSW files can be run for testing prior to generating and running OSA projects. Rake tasks should be the primary interfaces for users of this repository. Additionally new OSW and OSA templates can be add without having to alter ruby code. If you want to setup new variable sets you will need to edut `custom_var_set_mapping.rb`. `osw_2_osa.rb` contains more generalized code that shouldn't be project specific. . This creates the analysis JSON file as well as the ZIP file containing measures, weather, seed models, analysis scripts, and other resources. The script supports defining variable values for measure arguments found in the template OSW file. You can run the script with a clean checkout (of required repositories) by calling `ruby osw_2_osa_rb` from the top level of this repository. This will populate the run directory with a JSON and ZIp file for the default analysis described in 'custom_var_set_mappping.rb'
 
 - Instructions
-    - Requires Ruby 2.5.5.
-    - Requires OpenStudio 3.1.0
+    - Requires Ruby 2.7.2
+    - Requires OpenStudio 3.4.0
     - install bundle using `gem install bundle` at the command prompt
     - from top level of repository type `bundle install` at the command prompt
        - This should result in a `.bundle` directory which contains all of the measure gems necessary for the workflows described in this repository. Any measures that are not in a measure gems and are unique to this project can be in the `measures` directory at the top level of the repository.
