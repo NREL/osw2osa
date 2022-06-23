@@ -1,0 +1,65 @@
+{
+  "seed_file": "seed_empty.osm",
+  "file_paths": [
+    "../../seeds",
+    "../../weather"
+  ],
+  "measure_paths": [
+    "../../../openstudio-common-measures-gem/lib/measures",
+    "../../../openstudio-model-articulation-gem/lib/measures"
+  ],
+  "steps": [
+    {
+      "arguments": {
+        "set_year": "2019",
+        "weather_file_name": "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw"
+      },
+      "measure_dir_name": "ChangeBuildingLocation"
+    },
+    {
+      "arguments": {
+        "template": "90.1-2013",
+        "bldg_type_a": "MediumOffice",
+        "total_bldg_floor_area": "210887",
+        "ns_to_ew_ratio": "0.0",
+        "num_stories_above_grade": "2.0",
+        "num_stories_below_grade": "0",
+        "make_mid_story_surfaces_adiabatic": true
+      },
+      "measure_dir_name": "create_bar_from_doe_building_type_ratios"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "create_typical_doe_building_from_model"
+    },
+    {
+      "arguments": {
+        "standard": "90.1-2013",
+        "building_type": "MediumOffice",
+        "climate_zone": "ASHRAE 169-2013-5A",        
+        "__SKIP__": false
+      },
+      "measure_dir_name": "create_baseline_building"
+    },    
+    {
+      "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "view_model"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "envelope_and_internal_load_breakdown"
+    },
+    {
+      "arguments": {
+        "zone_condition_section": false
+      },
+      "measure_dir_name": "openstudio_results"
+    }
+  ]
+}
