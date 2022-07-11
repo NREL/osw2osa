@@ -30,7 +30,19 @@
         "triangulate": true
       },
       "measure_dir_name": "SetWindowToWallRatioByFacade"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "view_model"
     },    
+    {
+      "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "envelope_and_internal_load_breakdown"
+    },        
     {
       "arguments": {
         "zone_condition_section": false

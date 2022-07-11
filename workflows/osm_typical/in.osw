@@ -45,6 +45,12 @@
     },
     {
       "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "envelope_and_internal_load_breakdown"
+    },    
+    {
+      "arguments": {
         "zone_condition_section": false
       },
       "measure_dir_name": "openstudio_results"
