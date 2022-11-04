@@ -10,13 +10,13 @@ source 'http://rubygems.org'
 
 # measure gems
 # 0.4.0 release of common-measures has invalid measure.xml on view_model that prevents osws from running. Switched to develop to access fixed measure. Once 0.4.1 is released use that instead of develop.
-gem 'openstudio-model-articulation', '~> 0.6', '>= 0.6.1'
+# gem 'openstudio-model-articulation', '~> 0.6', '>= 0.6.1'
 gem 'openstudio-common-measures', '~> 0.6', '>= 0.6.0'
 gem 'openstudio-ee', '~> 0.6', '>= 0.6.0'
 gem 'openstudio-calibration', '~> 0.6', '>= 0.6.0'
 
 # for development testing can use specific branch of measure gems instead of release
-#gem 'openstudio-model-articulation', github: 'NREL/openstudio-model-articulation-gem', branch: 'develop'
+gem 'openstudio-model-articulation', github: 'anchapin/openstudio-model-articulation-gem', branch: 'prm-2019'
 #gem 'openstudio-common-measures', github: 'NREL/openstudio-common-measures-gem', branch: 'develop'
 #gem 'openstudio-ee', github: 'NREL/openstudio-ee-gem', branch: 'develop'
 #gem 'openstudio-calibration', github: 'NREL/openstudio-calibration-gem', branch: 'develop'

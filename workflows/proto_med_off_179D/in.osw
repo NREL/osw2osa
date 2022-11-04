@@ -1,0 +1,45 @@
+{
+  "seed_file": "seed_empty.osm",
+  "file_paths": [
+    "../../seeds",
+    "../../weather"
+  ],
+  "measure_paths": [
+    "../../../openstudio-common-measures-gem/lib/measures",
+    "../../../openstudio-model-articulation-gem/lib/measures"
+  ],
+  "steps": [
+    {
+      "arguments": {
+        "building_type": "MediumOffice",
+        "template": "90.1-2019",
+        "climate_zone": "ASHRAE 169-2013-4A"
+      },
+      "measure_dir_name": "create_DOE_prototype_building"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "remove_orphan_objects_and_unused_resources"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "view_model"
+    },    
+    {
+      "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "envelope_and_internal_load_breakdown"
+    },        
+    {
+      "arguments": {
+        "zone_condition_section": false
+      },
+      "measure_dir_name": "openstudio_results"
+    }
+  ]
+}
