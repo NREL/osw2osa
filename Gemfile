@@ -14,6 +14,8 @@ gem 'openstudio-model-articulation', '~> 0.6', '>= 0.6.1'
 gem 'openstudio-common-measures', '~> 0.6', '>= 0.6.0'
 gem 'openstudio-ee', '~> 0.6', '>= 0.6.0'
 gem 'openstudio-calibration', '~> 0.6', '>= 0.6.0'
+#gem 'openstudio-analysis', '= 1.3.2', path: 'C:/Ruby27-x64/lib/ruby/gems/2.7.0/gems/openstudio-analysis-1.3.2'
+gem 'openstudio-analysis', github: 'NREL/OpenStudio-analysis-gem', branch: 'measure_paths'
 
 # for development testing can use specific branch of measure gems instead of release
 #gem 'openstudio-model-articulation', github: 'NREL/openstudio-model-articulation-gem', branch: 'develop'
