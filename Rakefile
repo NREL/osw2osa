@@ -24,11 +24,11 @@ end
 
 # saving base path to measure gems to make it easier to maintain if it changes
 def bundle_base_gem_path
-  return '.bundle/install/ruby/2.7.0/bundler/gems'
+  return '.bundle/install/ruby/3.2.0/bundler/gems'
 end
 
 def bundle_base_gem_path_release
-  return '.bundle/install/ruby/2.7.0/gems'
+  return '.bundle/install/ruby/3.2.0/gems'
 end
 
 # print out measure gems that are were installed by bundle
