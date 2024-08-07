@@ -19,14 +19,14 @@
     {
       "arguments": {
         "template": "ComStock 90.1-2019",
-        "bldg_type_a": "MediumOffice",
+        "space_type_hash_string": "MediumOffice | Conference => 0.2, PrimarySchool | Corridor => 0.125, PrimarySchool | Classroom => 0.175, Warehouse | Office => 0.5",
         "total_bldg_floor_area": "300000",
         "ns_to_ew_ratio": "0.0",
         "num_stories_above_grade": "4.0",
         "num_stories_below_grade": "0",
         "make_mid_story_surfaces_adiabatic": true
       },
-      "measure_dir_name": "create_bar_from_doe_building_type_ratios"
+      "measure_dir_name": "create_bar_from_space_type_ratios"
     },
     {
       "arguments": {
