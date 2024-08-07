@@ -18,7 +18,7 @@
     },
     {
       "arguments": {
-        "template": "ComStock 90.1-2013",
+        "template": "ComStock 90.1-2016",
         "bldg_type_a": "Laboratory",
         "total_bldg_floor_area": "100000",
         "ns_to_ew_ratio": "0.0",
