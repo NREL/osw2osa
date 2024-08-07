@@ -224,9 +224,17 @@ def run_osws(workflow_names, measures_only = false)
     end
 
     if measures_only
-      jobs << "openstudio run -m -w run/workflows/#{workflow_name}/in.osw"
+      #jobs << "openstudio run -m -w run/workflows/#{workflow_name}/in.osw"
+
+      # alternate version of cli call to use custom standards gem. Adjust for specific install path
+      jobs << "openstudio -l Trace -I /Users/dgoldwas/.rbenv/versions/3.2.2/lib/ruby/gems/3.2.0/gems/openstudio-standards-0.6.2/lib run -m -w run/workflows/#{workflow_name}/in.osw"
+
     else
-      jobs << "openstudio run -w run/workflows/#{workflow_name}/in.osw"
+      #jobs << "openstudio run -w run/workflows/#{workflow_name}/in.osw"
+
+      # alternate version of cli call to use custom standards gem. Adjust for specific install path
+      jobs << "openstudio -l Trace -I /Users/dgoldwas/.rbenv/versions/3.2.2/lib/ruby/gems/3.2.0/gems/openstudio-standards-0.6.2/lib run -w run/workflows/#{workflow_name}/in.osw"
+
     end
   end
 

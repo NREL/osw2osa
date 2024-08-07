@@ -22,6 +22,9 @@ gem 'openstudio-calibration', '~> 0.10', '>= 0.10.0'
 #gem 'openstudio-ee', github: 'NREL/openstudio-ee-gem', branch: 'develop'
 #gem 'openstudio-calibration', github: 'NREL/openstudio-calibration-gem', branch: 'develop'
 
+# install custom developmet of standards gem. Need to customize cli call to use this version of standards gem
+#gem 'openstudio-standards', github: 'NREL/openstudio-standards', branch: 'fix/issue1786'
+
 # todo - the urban geometry measure is failing, maybe need different branch or gem relese to use with OpenStudio 3.0.1
 #gem 'urbanopt-geojson', github: 'URBANopt/urbanopt-geojson-gem', branch: 'develop'
 
