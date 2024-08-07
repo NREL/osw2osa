@@ -12,13 +12,13 @@
     {
       "arguments": {
         "set_year": "2019",
-        "weather_file_name": "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw"
+        "weather_file_name": "USA_CO_Denver.Intl.AP.725650_TMY3.epw"
       },
       "measure_dir_name": "ChangeBuildingLocation"
     },
     {
       "arguments": {
-        "template": "ComStock 90.1-2016",
+        "template": "ComStock 90.1-2013",
         "bldg_type_a": "Laboratory",
         "total_bldg_floor_area": "100000",
         "ns_to_ew_ratio": "0.0",
