@@ -106,4 +106,3 @@
     </file>
   </files>
 </measure>
-<error>Unable to extract OpenStudio::Measure::OSMeasure object from C:/Users/mdahlhau/Desktop/SD2021/measures/add_typical_refrigeration/measure.rb. The script should contain a class that derives from OpenStudio::Measure::OSMeasure and should close with a line stating the class name followed by .new.registerWithApplication.</error>

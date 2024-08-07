@@ -24,11 +24,11 @@ end
 
 # saving base path to measure gems to make it easier to maintain if it changes
 def bundle_base_gem_path
-  return '.bundle/install/ruby/2.7.0/bundler/gems'
+  return '.bundle/install/ruby/3.2.0/bundler/gems'
 end
 
 def bundle_base_gem_path_release
-  return '.bundle/install/ruby/2.7.0/gems'
+  return '.bundle/install/ruby/3.2.0/gems'
 end
 
 # print out measure gems that are were installed by bundle
@@ -42,7 +42,7 @@ def find_bundle_measure_paths
     gems.each do |gem|
       # check if has lib/measures
       gem = "#{bundle_base_gem_path}/#{gem}/lib/measures"
-      next if ! Dir.exists?(gem)
+      next if ! Dir.exist?(gem)
       next if gem.include?('openstudio-extension') # never want to include measure fromhere
       bundle_measure_paths << gem
     end
@@ -54,7 +54,7 @@ def find_bundle_measure_paths
     gems.each do |gem|
       # check if has lib/measures
       gem = "#{bundle_base_gem_path_release}/#{gem}/lib/measures"
-      next if ! Dir.exists?(gem)
+      next if ! Dir.exist?(gem)
       next if gem.include?('openstudio-extension') # never want to include measure fromhere
       bundle_measure_paths << gem
     end
@@ -176,7 +176,7 @@ def find_osws
   workflows.each do |workflow|
     # check if has lib/measures
     workflow_path = "workflows/#{workflow}/in.osw"
-    next if ! File.exists?(workflow_path)
+    next if ! File.exist?(workflow_path)
     workflow_names << workflow
   end
   puts workflow_names
@@ -194,7 +194,7 @@ def find_setup_osws
   workflows.each do |workflow|
     # check if has lib/measures
     workflow_path = "run/workflows/#{workflow}/in.osw"
-    next if ! File.exists?(workflow_path)
+    next if ! File.exist?(workflow_path)
     workflow_names << workflow
   end
   #puts workflow_names
@@ -239,7 +239,8 @@ def run_osws(workflow_names, measures_only = false)
     puts "Running #{job}"
     stdout, stderr, status = Open3.capture3(job)
     unless status.success?
-      puts "#{job}: returned Error: #{wait_thr.value.exitstatus}"
+      # wait_thr causing issues again
+      # puts "#{job}: returned Error: #{wait_thr.value.exitstatus}"
       puts "stdout: #{stdout}"
       puts "stderr: #{stderr}"
       workflows_passed = false

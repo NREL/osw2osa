@@ -10,7 +10,7 @@
   "steps": [
     {
       "arguments": {
-        "__SKIP__": false,
+        "set_year" : "2019",
         "weather_file_name": "USA_GA_Atlanta-Hartsfield-Jackson.Intl.AP.722190_TMY3.epw"
       },
       "measure_dir_name": "ChangeBuildingLocation"
