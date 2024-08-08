@@ -42,6 +42,7 @@
     },       
     {
       "arguments": {
+        "template": "ComStock 90.1-2019",
         "__SKIP__": false
       },
       "measure_dir_name": "create_typical_doe_building_from_model"
