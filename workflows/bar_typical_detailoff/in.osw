@@ -20,14 +20,26 @@
       "arguments": {
         "template": "ComStock 90.1-2019",
         "space_type_hash_string" : "MediumOffice | ClosedOffice => 0.351, MediumOffice | Corridor => 0.304, MediumOffice | Conference => 0.096, MediumOffice | Elec/MechRoom => 0.072, MediumOffice | Storage => 0.055, MediumOffice | Stair => 0.036, MediumOffice | OpenOffice => 0.027, MediumOffice | Restroom => 0.018, MediumOffice | BreakRoom => 0.012, MediumOffice | IT_Room => 0.01, LargeOffice | OfficeLarge Data Center => 0.009, MediumOffice | Dining => 0.006, MediumOffice | Lobby => 0.003, MediumOffice | Vending => 0.001",
-        "total_bldg_floor_area": "300000",
-        "ns_to_ew_ratio": "3.0",
+        "total_bldg_floor_area": "100000",
+        "ns_to_ew_ratio": "4.0",
+        "perim_mult": "1.0",
+        "bar_width": "60",
+        "bar_sep_dist_mult": "1",
         "num_stories_above_grade": "4.0",
         "num_stories_below_grade": "0",
+        "building_rotation": "0",
         "make_mid_story_surfaces_adiabatic": true
       },
       "measure_dir_name": "create_bar_from_space_type_ratios"
     },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "projection_factor": "1.0",
+        "facade": "South"
+      },
+      "measure_dir_name": "AddOverhangsByProjectionFactor"
+    },       
     {
       "arguments": {
         "__SKIP__": false
@@ -42,7 +54,7 @@
     },
     {
       "arguments": {
-        "__SKIP__": true,
+        "__SKIP__": false,
         "fraction_of_surface": "0.75",
         "cell_efficiency": "0.1976",
         "inverter_efficiency" : "0.96"
