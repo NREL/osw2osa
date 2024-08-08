@@ -21,9 +21,10 @@
         "template": "ComStock 90.1-2016",
         "bldg_type_a": "Laboratory",
         "total_bldg_floor_area": "100000",
-        "ns_to_ew_ratio": "0.0",
+        "ns_to_ew_ratio": "2.25",
         "num_stories_above_grade": "2.0",
         "num_stories_below_grade": "0",
+        "floor_height": "20",
         "make_mid_story_surfaces_adiabatic": true
       },
       "measure_dir_name": "create_bar_from_doe_building_type_ratios"
@@ -48,6 +49,12 @@
         "inverter_efficiency" : "0.96"
       },
       "measure_dir_name": "add_rooftop_pv"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "add_hourly_meters"
     },
     {
       "arguments": {
