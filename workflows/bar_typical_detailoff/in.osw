@@ -19,7 +19,7 @@
     {
       "arguments": {
         "template": "ComStock 90.1-2019",
-        "space_type_hash_string": "Office | ClosedOffice => 0.353, Office | Corridor => 0.304, Office | Conference => 0.096, Office | Elec/MechRoom => 0.072, Office | Storage => 0.055, Office | Stair => 0.036, Office | OpenOffice => 0.027, Office | Restroom => 0.018, Office | BreakRoom => 0.012, Office | IT_Room => 0.01, Office | OfficeLarge Data Center => 0.009, Office | Dining => 0.006, Office | Lobby => 0.003, Office | Vending => 0.001",
+        "space_type_hash_string" : "MediumOffice | ClosedOffice => 0.351, MediumOffice | Corridor => 0.304, MediumOffice | Conference => 0.096, MediumOffice | Elec/MechRoom => 0.072, MediumOffice | Storage => 0.055, MediumOffice | Stair => 0.036, MediumOffice | OpenOffice => 0.027, MediumOffice | Restroom => 0.018, MediumOffice | BreakRoom => 0.012, MediumOffice | IT_Room => 0.01, LargeOffice | Data Center => 0.009, MediumOffice | Dining => 0.006, MediumOffice | Lobby => 0.003, MediumOffice | Vending => 0.001",
         "total_bldg_floor_area": "300000",
         "ns_to_ew_ratio": "0.0",
         "num_stories_above_grade": "4.0",
