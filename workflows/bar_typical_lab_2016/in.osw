@@ -19,15 +19,16 @@
     {
       "arguments": {
         "template": "ComStock 90.1-2016",
-        "bldg_type_a": "Laboratory",
+        "space_type_hash_string" : "Laboratory | Office => 0.50, Laboratory | Open lab => 0.35, Laboratory | Lab with fume hood => 0.10, Laboratory |  Equipment corridor => 0.05",
         "total_bldg_floor_area": "100000",
         "ns_to_ew_ratio": "2.25",
         "num_stories_above_grade": "2.0",
         "num_stories_below_grade": "0",
         "floor_height": "20",
+        "building_rotation": "0",
         "make_mid_story_surfaces_adiabatic": true
       },
-      "measure_dir_name": "create_bar_from_doe_building_type_ratios"
+      "measure_dir_name": "create_bar_from_space_type_ratios"
     },
     {
       "arguments": {
@@ -43,7 +44,7 @@
     },
     {
       "arguments": {
-        "__SKIP__": true,
+        "__SKIP__": false,
         "fraction_of_surface": "0.75",
         "cell_efficiency": "0.1976",
         "inverter_efficiency" : "0.96"
