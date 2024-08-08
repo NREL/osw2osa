@@ -48,18 +48,18 @@
     },
     {
       "arguments": {
-        "__SKIP__": false
-      },
-      "measure_dir_name": "view_model"
-    },
-    {
-      "arguments": {
         "__SKIP__": false,
         "fraction_of_surface": "0.75",
         "cell_efficiency": "0.1976",
         "inverter_efficiency" : "0.96"
       },
       "measure_dir_name": "add_rooftop_pv"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "view_model"
     },
     {
       "arguments": {
