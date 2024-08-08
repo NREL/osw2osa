@@ -1,0 +1,78 @@
+{
+  "seed_file": "seed_empty.osm",
+  "file_paths": [
+    "../../seeds",
+    "../../weather"
+  ],
+  "measure_paths": [
+    "../../../openstudio-common-measures-gem/lib/measures",
+    "../../../openstudio-model-articulation-gem/lib/measures"
+  ],
+  "steps": [
+    {
+      "arguments": {
+        "set_year": "2019",
+        "weather_file_name": "USA_CO_Denver.Intl.AP.725650_TMY3.epw"
+      },
+      "measure_dir_name": "ChangeBuildingLocation"
+    },
+    {
+      "arguments": {
+        "template": "ComStock 90.1-2016",
+        "bldg_type_a" : "Laboratory",
+        "total_bldg_floor_area": "100000",
+        "ns_to_ew_ratio": "2.25",
+        "num_stories_above_grade": "2.0",
+        "num_stories_below_grade": "0",
+        "floor_height": "20",
+        "building_rotation": "0",
+        "make_mid_story_surfaces_adiabatic": true
+      },
+      "measure_dir_name": "create_bar_from_doe_building_type_ratios"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "create_typical_doe_building_from_model"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "view_model"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "fraction_of_surface": "0.75",
+        "cell_efficiency": "0.1976",
+        "inverter_efficiency" : "0.96"
+      },
+      "measure_dir_name": "add_rooftop_pv"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "add_hourly_meters"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "envelope_and_internal_load_breakdown"
+    },
+    {
+      "arguments": {
+        "zone_condition_section": false
+      },
+      "measure_dir_name": "openstudio_results"
+    },
+    {
+      "arguments": {
+      },
+      "measure_dir_name": "create_csv_output"
+    }
+  ]
+}
