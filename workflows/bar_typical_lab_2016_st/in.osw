@@ -54,7 +54,8 @@
     },
     {
       "arguments": {
-        "__SKIP__": false
+        "__SKIP__": false,
+        "reporting_frequency": "Zone Timestep"
       },
       "measure_dir_name": "add_meters"
     },
@@ -72,6 +73,8 @@
     },
     {
       "arguments": {
+        "__SKIP__": false,
+        "reporting_frequency": "Zone Timestep"
       },
       "measure_dir_name": "create_csv_output"
     }

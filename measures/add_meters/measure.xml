@@ -1,17 +1,37 @@
+<?xml version="1.0"?>
 <measure>
-  <schema_version>3.0</schema_version>
-  <name>add_hourly_meters</name>
+  <schema_version>3.1</schema_version>
+  <name>add_meters</name>
   <uid>2ee535a3-90cd-4f87-9bc8-bdf31b4d12b9</uid>
-  <version_id>6844e55c-e456-4079-9518-bf544830424f</version_id>
-  <version_modified>20190315T225744Z</version_modified>
+  <version_id>73fe9cdb-4ea0-4e82-a74a-c08113b5fdcd</version_id>
+  <version_modified>2024-08-09T21:23:39Z</version_modified>
   <xml_checksum>9E530B22</xml_checksum>
-  <class_name>AddHourlyMeters</class_name>
-  <display_name>Add Hourly Meters</display_name>
+  <class_name>AddMeters</class_name>
+  <display_name>Add Meters</display_name>
   <description>This measure adds hourly meters for the most common energy use types.</description>
   <modeler_description>This measure adds these Output:Meter electricity and gas objects: Electricity:Facility,ExteriorLights:Electricity,InteriorLights:Electricity,InteriorEquipment:Electricity,ExteriorEquipment:Electricity,Fans:Electricity,Pumps:Electricity,Heating:Electricity,Cooling:Electricity,HeatRejection:Electricity,Humidifer:Electricity,HeatRecovery:Electricity,WaterSystems:Electricity,Cogeneration:Electricity,Gas:Facility,InteriorEquipment:Gas,ExteriorEquipment:Gas,Heating:Gas,Cooling:Gas,WaterSystems:Gas,Cogeneration:Gas</modeler_description>
-  <arguments/>
-  <outputs/>
-  <provenances/>
+  <arguments>
+    <argument>
+      <name>reporting_frequency</name>
+      <display_name>Reporting Frequency.</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>Hourly</default_value>
+      <choices>
+        <choice>
+          <value>Hourly</value>
+          <display_name>Hourly</display_name>
+        </choice>
+        <choice>
+          <value>Zone Timestep</value>
+          <display_name>Zone Timestep</display_name>
+        </choice>
+      </choices>
+    </argument>
+  </arguments>
+  <outputs />
+  <provenances />
   <tags>
     <tag>Reporting.QAQC</tag>
   </tags>
@@ -39,10 +59,10 @@
   </attributes>
   <files>
     <file>
-      <filename>AddHourlyMeters_Test.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>test</usage_type>
-      <checksum>1344C08B</checksum>
+      <filename>LICENSE.md</filename>
+      <filetype>md</filetype>
+      <usage_type>license</usage_type>
+      <checksum>E7161B14</checksum>
     </file>
     <file>
       <version>
@@ -53,7 +73,13 @@
       <filename>measure.rb</filename>
       <filetype>rb</filetype>
       <usage_type>script</usage_type>
-      <checksum>EEDB58B0</checksum>
+      <checksum>9301ACC3</checksum>
+    </file>
+    <file>
+      <filename>AddHourlyMeters_Test.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>test</usage_type>
+      <checksum>43B46DD2</checksum>
     </file>
   </files>
 </measure>
