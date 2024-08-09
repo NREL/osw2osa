@@ -3,8 +3,8 @@
   <schema_version>3.1</schema_version>
   <name>add_meters</name>
   <uid>2ee535a3-90cd-4f87-9bc8-bdf31b4d12b9</uid>
-  <version_id>73fe9cdb-4ea0-4e82-a74a-c08113b5fdcd</version_id>
-  <version_modified>2024-08-09T21:23:39Z</version_modified>
+  <version_id>215df3f6-830e-4c28-a368-9459c6838f2f</version_id>
+  <version_modified>2024-08-09T22:11:04Z</version_modified>
   <xml_checksum>9E530B22</xml_checksum>
   <class_name>AddMeters</class_name>
   <display_name>Add Meters</display_name>
@@ -24,8 +24,8 @@
           <display_name>Hourly</display_name>
         </choice>
         <choice>
-          <value>Zone Timestep</value>
-          <display_name>Zone Timestep</display_name>
+          <value>Timestep</value>
+          <display_name>Timestep</display_name>
         </choice>
       </choices>
     </argument>
@@ -73,7 +73,7 @@
       <filename>measure.rb</filename>
       <filetype>rb</filetype>
       <usage_type>script</usage_type>
-      <checksum>9301ACC3</checksum>
+      <checksum>E69A97F5</checksum>
     </file>
     <file>
       <filename>AddHourlyMeters_Test.rb</filename>

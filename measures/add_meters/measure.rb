@@ -13,7 +13,7 @@ class AddMeters < OpenStudio::Ruleset::ModelUserScript
     #make an argument for the reporting frequency
     reporting_frequency_chs = OpenStudio::StringVector.new
     reporting_frequency_chs << 'Hourly'
-    reporting_frequency_chs << 'Zone Timestep'
+    reporting_frequency_chs << 'Timestep'
     reporting_frequency = OpenStudio::Measure::OSArgument::makeChoiceArgument('reporting_frequency', reporting_frequency_chs, true)
     reporting_frequency.setDisplayName('Reporting Frequency.')
     reporting_frequency.setDefaultValue('Hourly')

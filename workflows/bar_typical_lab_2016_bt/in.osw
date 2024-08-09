@@ -55,7 +55,7 @@
     {
       "arguments": {
         "__SKIP__": false,
-        "reporting_frequency": "Zone Timestep"
+        "reporting_frequency": "Timestep"
       },
       "measure_dir_name": "add_meters"
     },
