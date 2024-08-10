@@ -43,6 +43,13 @@
     {
       "arguments": {
         "template": "ComStock 90.1-2019",
+        "system_type": "Inferred",
+        "hvac_delivery_type": "Forced Air",
+        "htg_src": "Electricity",
+        "clg_src": "Electricity",
+        "swh_src": "HeatPump",
+        "exterior_lighting_zone": "2 - Neighborhood",
+        "onsite_parking_fraction": "0.25",
         "__SKIP__": false
       },
       "measure_dir_name": "create_typical_doe_building_from_model"
