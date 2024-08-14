@@ -11,8 +11,8 @@
   "steps": [
     {
       "arguments": {
-        "set_year": "2019",
-        "weather_file_name": "USA_CO_Denver.Intl.AP.725650_TMY3.epw"
+        "set_year": "2020",
+        "weather_file_name": "NREL_TMY2020.epw"
       },
       "measure_dir_name": "ChangeBuildingLocation"
     },
