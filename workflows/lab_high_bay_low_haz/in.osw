@@ -1,0 +1,115 @@
+{
+  "seed_file": "seed_empty.osm",
+  "file_paths": [
+    "../../seeds",
+    "../../weather"
+  ],
+  "measure_paths": [
+    "../../../openstudio-common-measures-gem/lib/measures",
+    "../../../openstudio-model-articulation-gem/lib/measures"
+  ],
+  "steps": [
+    {
+      "arguments": {
+        "set_year": "2020",
+        "weather_file_name": "NREL_TMY2020.epw"
+      },
+      "measure_dir_name": "ChangeBuildingLocation"
+    },
+    {
+      "arguments": {
+        "template": "ComStock 90.1-2016",
+        "space_type_hash_string" : "Laboratory | Office => 0.22, Laboratory | Open lab => 0.55, Laboratory | Lab with fume hood => 0.09, Laboratory |  Equipment corridor => 0.14",
+        "total_bldg_floor_area": "100000",
+        "ns_to_ew_ratio": "2.25",
+        "num_stories_above_grade": "1.0",
+        "num_stories_below_grade": "0",
+        "floor_height": "30",
+        "building_rotation": "0",
+        "make_mid_story_surfaces_adiabatic": true
+      },
+      "measure_dir_name": "create_bar_from_space_type_ratios"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "template": "ComStock 90.1-2016",
+        "exterior_lighting_zone": "2 - Neighborhood",
+        "onsite_parking_fraction": "0.25",
+        "add_hvac": false
+      },
+      "measure_dir_name": "create_typical_doe_building_from_model"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "lab_type": "High Bay Low Haz"
+      },
+      "measure_dir_name": "lab_input_customization"
+    },    
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "template": "ComStock 90.1-2016",
+        "add_constructions": false,
+        "add_space_type_loads": false,
+        "add_elevators": false,
+        "add_internal_mass": false,
+        "add_exterior_lights": false,
+        "add_exhaust": false,
+        "add_swh": false,
+        "add_thermostat": false,
+        "add_refrigeration": false,
+        "add_hvac": true,
+        "use_upstream_args": false,
+        "system_type": "Inferred",
+        "hvac_delivery_type": "Forced Air",
+        "htg_src": "Electricity",
+        "clg_src": "Electricity",
+        "swh_src": "HeatPump"
+        },
+      "measure_dir_name": "create_typical_doe_building_from_model"
+    },    
+    {
+      "arguments": {
+        "__SKIP__": true,
+        "fraction_of_surface": "0.75",
+        "cell_efficiency": "0.1976",
+        "inverter_efficiency" : "0.96"
+      },
+      "measure_dir_name": "add_rooftop_pv"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "view_model"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "reporting_frequency": "Timestep"
+      },
+      "measure_dir_name": "add_meters"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "envelope_and_internal_load_breakdown"
+    },
+    {
+      "arguments": {
+        "zone_condition_section": true
+      },
+      "measure_dir_name": "openstudio_results"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "reporting_frequency": "Zone Timestep"
+      },
+      "measure_dir_name": "create_csv_output"
+    }
+  ]
+}

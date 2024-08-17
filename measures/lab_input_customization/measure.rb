@@ -28,7 +28,7 @@ class LabInputCustomization < OpenStudio::Measure::ModelMeasure
     # make choice argument for lab type
     choices = OpenStudio::StringVector.new
     choices << 'Dry Lab'
-    choices << 'Wet Chem'
+    choices << 'Wet Chem Low Haz'
     choices << 'Wet Chem High Haz'
     choices << 'High Bay Low Haz'
     choices << 'High Bay High Haz'
@@ -52,11 +52,9 @@ class LabInputCustomization < OpenStudio::Measure::ModelMeasure
     # assign the user inputs to variables
     lab_type = runner.getStringArgumentValue('lab_type', user_arguments)
 
-
     # report initial condition of model
     runner.registerInitialCondition("The building started with #{model.getSpaceTypes.size} space types.")
     altered_space_types = []
-
 
     # report final condition of model
     runner.registerFinalCondition("#{altered_space_types.size} space types were altered.")
