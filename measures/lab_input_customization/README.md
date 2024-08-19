@@ -27,7 +27,7 @@ ModelMeasure
 **Required:** true,
 **Model Dependent:** false
 
-**Choice Display Names** ["Dry Lab", "Wet Chem", "Wet Chem High Haz", "High Bay Low Haz", "High Bay High Haz"]
+**Choice Display Names** ["Dry Lab", "Wet Chem Low Haz", "Wet Chem High Haz", "High Bay Low Haz", "High Bay High Haz"]
 
 
 

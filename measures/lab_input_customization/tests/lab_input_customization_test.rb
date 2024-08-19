@@ -52,7 +52,7 @@ class LabInputCustomizationTest < Minitest::Test
     # create hash of argument values.
     # If the argument has a default that you want to use, you don't need it in the hash
     args_hash = {}
-    args_hash['lab_type'] = 'Wet Chem'
+    args_hash['lab_type'] = 'Wet Chem Low Haz'
     # using defaults values from measure.rb for other arguments
 
     # populate argument with specified hash value if specified

@@ -3,8 +3,8 @@
   <schema_version>3.1</schema_version>
   <name>lab_input_customization</name>
   <uid>395de31a-370a-482c-9808-e0895830897f</uid>
-  <version_id>f49e6dfd-4e9a-4537-ba27-82a6d465fa61</version_id>
-  <version_modified>2024-08-17T06:04:18Z</version_modified>
+  <version_id>e808e5e6-c69d-4075-b2d7-b6da85ead323</version_id>
+  <version_modified>2024-08-19T07:30:31Z</version_modified>
   <xml_checksum>BED8DECF</xml_checksum>
   <class_name>LabInputCustomization</class_name>
   <display_name>Lab Input Customization</display_name>
@@ -24,8 +24,8 @@
           <display_name>Dry Lab</display_name>
         </choice>
         <choice>
-          <value>Wet Chem</value>
-          <display_name>Wet Chem</display_name>
+          <value>Wet Chem Low Haz</value>
+          <display_name>Wet Chem Low Haz</display_name>
         </choice>
         <choice>
           <value>Wet Chem High Haz</value>
@@ -85,19 +85,13 @@
       <filename>README.md</filename>
       <filetype>md</filetype>
       <usage_type>readme</usage_type>
-      <checksum>D85D4927</checksum>
+      <checksum>BDC18B8C</checksum>
     </file>
     <file>
       <filename>README.md.erb</filename>
       <filetype>erb</filetype>
       <usage_type>readmeerb</usage_type>
       <checksum>F1C26127</checksum>
-    </file>
-    <file>
-      <filename>.gitkeep</filename>
-      <filetype>gitkeep</filetype>
-      <usage_type>doc</usage_type>
-      <checksum>00000000</checksum>
     </file>
     <file>
       <version>
@@ -108,7 +102,7 @@
       <filename>measure.rb</filename>
       <filetype>rb</filetype>
       <usage_type>script</usage_type>
-      <checksum>F79D0C33</checksum>
+      <checksum>0530DAE7</checksum>
     </file>
     <file>
       <filename>lab_example_model.osm</filename>
@@ -120,7 +114,7 @@
       <filename>lab_input_customization_test.rb</filename>
       <filetype>rb</filetype>
       <usage_type>test</usage_type>
-      <checksum>6FB2EB46</checksum>
+      <checksum>B5F5518E</checksum>
     </file>
   </files>
 </measure>
