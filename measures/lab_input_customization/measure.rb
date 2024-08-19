@@ -100,7 +100,7 @@ class LabInputCustomization < OpenStudio::Measure::ModelMeasure
 
         # alter ab with fume hood vent
         if !space_type.designSpecificationOutdoorAir.empty?
-          vent_si = OpenStudio.convert(lab_customization_vals[lab_type][:vent],'ft/min','m/hr').get
+          vent_si = OpenStudio.convert(lab_customization_vals[lab_type][:vent],'ft/min','m/s').get
           vent = space_type.designSpecificationOutdoorAir.get
           vent.setOutdoorAirFlowperFloorArea(vent_si)
           vent.setOutdoorAirFlowperPerson(0.0)
@@ -123,7 +123,7 @@ class LabInputCustomization < OpenStudio::Measure::ModelMeasure
 
         # alter lab_cor vent
         if !space_type.designSpecificationOutdoorAir.empty?
-          vent_si = OpenStudio.convert(lab_customization_vals['Laboratory Equipment corridor'][:vent],'ft/min','m/hr').get
+          vent_si = OpenStudio.convert(lab_customization_vals['Laboratory Equipment corridor'][:vent],'ft/min','m/s').get
           vent = space_type.designSpecificationOutdoorAir.get
           vent.setOutdoorAirFlowperFloorArea(vent_si)
           vent.setOutdoorAirFlowperPerson(0.0)

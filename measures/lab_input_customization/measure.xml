@@ -3,8 +3,8 @@
   <schema_version>3.1</schema_version>
   <name>lab_input_customization</name>
   <uid>395de31a-370a-482c-9808-e0895830897f</uid>
-  <version_id>e808e5e6-c69d-4075-b2d7-b6da85ead323</version_id>
-  <version_modified>2024-08-19T07:30:31Z</version_modified>
+  <version_id>ccf7f146-d1fe-437f-8bb7-183c6a2fc15b</version_id>
+  <version_modified>2024-08-19T08:20:18Z</version_modified>
   <xml_checksum>BED8DECF</xml_checksum>
   <class_name>LabInputCustomization</class_name>
   <display_name>Lab Input Customization</display_name>
@@ -102,7 +102,7 @@
       <filename>measure.rb</filename>
       <filetype>rb</filetype>
       <usage_type>script</usage_type>
-      <checksum>0530DAE7</checksum>
+      <checksum>21612B6F</checksum>
     </file>
     <file>
       <filename>lab_example_model.osm</filename>
