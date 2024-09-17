@@ -224,9 +224,17 @@ def run_osws(workflow_names, measures_only = false)
     end
 
     if measures_only
-      jobs << "openstudio run -m -w run/workflows/#{workflow_name}/in.osw"
+      #jobs << "openstudio run -m -w run/workflows/#{workflow_name}/in.osw"
+
+      # alternate version of cli call to  load urbanop-geojson gem. Adjust for specific install path
+      jobs << "openstudio -l Trace -I /Users/dgoldwas/Documents/github/nrel/osw2osa/.bundle/install/ruby/3.2.0/bundler/gems/urbanopt-geojson-gem-a3a434b21353/lib -I /Users/dgoldwas/Documents/github/nrel/osw2osa/.bundle/install/ruby/3.2.0/bundler/gems/urbanopt-core-gem-2bd8985fab24/lib run -m -w run/workflows/#{workflow_name}/in.osw"
+
     else
-      jobs << "openstudio run -w run/workflows/#{workflow_name}/in.osw"
+      #jobs << "openstudio run -w run/workflows/#{workflow_name}/in.osw"
+
+      # alternate version of cli call to  load urbanop-geojson gem. Adjust for specific install path
+      jobs << "openstudio -l Trace -I /Users/dgoldwas/Documents/github/nrel/osw2osa/.bundle/install/ruby/3.2.0/bundler/gems/urbanopt-geojson-gem-a3a434b21353/lib -I /Users/dgoldwas/Documents/github/nrel/osw2osa/.bundle/install/ruby/3.2.0/bundler/gems/urbanopt-core-gem-2bd8985fab24/lib run -w run/workflows/#{workflow_name}/in.osw"
+
     end
   end
 

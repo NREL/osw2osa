@@ -15,6 +15,8 @@ gem 'openstudio-model-articulation', '~> 0.10', '>= 0.10.0'
 gem 'openstudio-common-measures', '~> 0.10', '>= 0.10.0'
 gem 'openstudio-ee', '~> 0.10', '>= 0.10.0'
 gem 'openstudio-calibration', '~> 0.10', '>= 0.10.0'
+gem 'urbanopt-geojson', github: 'urbanopt/urbanopt-geojson-gem', branch: 'os38'
+gem 'urbanopt-core', github: 'urbanopt/urbanopt-core-gem', branch: 'os38'
 
 # for development testing can use specific branch of measure gems instead of release
 #gem 'openstudio-model-articulation', github: 'NREL/openstudio-model-articulation-gem', branch: 'develop'
