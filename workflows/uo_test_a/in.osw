@@ -69,7 +69,7 @@
       "measure_dir_name": "urban_geometry_creation_zoning",
       "arguments": {
         "__SKIP__": false,
-        "geojson_file": "exportGeo.json",
+        "geojson_file": "/Users/dgoldwas/Documents/github/nrel/osw2osa/files/example_project_ft5only.json",
         "feature_id": "5",
         "surrounding_buildings": "None"
       }
