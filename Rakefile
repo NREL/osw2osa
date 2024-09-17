@@ -233,7 +233,7 @@ def run_osws(workflow_names, measures_only = false)
       #jobs << "openstudio run -w run/workflows/#{workflow_name}/in.osw"
 
       # alternate version of cli call to  load urbanop-geojson gem. Adjust for specific install path
-      jobs << "openstudio -l Trace -I /Users/dgoldwas/Documents/github/nrel/osw2osa/.bundle/install/ruby/3.2.0/bundler/gems/urbanopt-geojson-gem-a3a434b21353/lib -I /Users/dgoldwas/Documents/github/nrel/osw2osa/.bundle/install/ruby/3.2.0/bundler/gems/urbanopt-core-gem-2bd8985fab24/lib run -w run/workflows/#{workflow_name}/in.osw"
+      jobs << "openstudio -l Trace -I /Users/dgoldwas/.rbenv/versions/3.2.2/lib/ruby/gems/3.2.0/gems/openstudio-standards-0.6.3/lib -I /Users/dgoldwas/Documents/github/nrel/osw2osa/.bundle/install/ruby/3.2.0/bundler/gems/urbanopt-geojson-gem-a3a434b21353/lib -I /Users/dgoldwas/Documents/github/nrel/osw2osa/.bundle/install/ruby/3.2.0/bundler/gems/urbanopt-core-gem-2bd8985fab24/lib run -w run/workflows/#{workflow_name}/in.osw"
       
       # approach using bundler instead of include isn't working yet, but I'll try to get it working
       #jobs << "openstudio -l Trace --bundle /Users/dgoldwas/Documents/github/nrel/osw2osa/Gemfile --bundle_path /Users/dgoldwas/Documents/github/nrel/osw2osa/.bundle/install run -w run/workflows/#{workflow_name}/in.osw"
