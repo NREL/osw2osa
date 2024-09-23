@@ -54,6 +54,7 @@
       "measure_dir_name": "create_typical_building_from_model",
       "arguments": {
         "__SKIP__": true,
+        "template": "90.1-2004",
         "add_hvac": false,
         "add_refrigeration": false
       }
