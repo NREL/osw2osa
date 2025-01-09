@@ -24,7 +24,7 @@
         "ns_to_ew_ratio": "0.0",
         "num_stories_above_grade": "10.0",
         "num_stories_below_grade": "0",
-        "story_multiplier": "Basements Ground Mid Top",
+        "story_multiplier_method": "Basements Ground Mid Top",
         "make_mid_story_surfaces_adiabatic": true
       },
       "measure_dir_name": "create_bar_from_doe_building_type_ratios"
