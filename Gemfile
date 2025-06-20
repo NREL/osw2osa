@@ -4,7 +4,7 @@ source 'http://rubygems.org'
 
 # library gems
 # only uncomment these if need newer version that included in OpenStudio Installer
-# additional code in CLI call will have to make use of thse, just installing them here will not do anything
+# additional code in CLI call will have to make use of these, just installing them here will not do anything
 #gem 'openstudio-extension', github: 'NREL/OpenStudio-extension-gem', branch: 'develop'
 #gem 'openstudio-standards', github: 'NREL/openstudio-standards', branch: 'develop'
 
@@ -19,12 +19,12 @@ gem 'git'
 #gem 'urbanopt-core', github: 'urbanopt/urbanopt-core-gem', branch: 'os38'
 
 # for development testing can use specific branch of measure gems instead of release
-gem 'openstudio-model-articulation', github: 'NREL/openstudio-model-articulation-gem', branch: '0.11.0-prep'
-gem 'openstudio-common-measures', github: 'NREL/openstudio-common-measures-gem', branch: '0.11.0-prep'
-gem 'openstudio-ee', github: 'NREL/openstudio-ee-gem', branch: '0.11.0-prep'
-gem 'openstudio-calibration', github: 'NREL/openstudio-calibration-gem', branch: '0.11.0-prep'
+gem 'openstudio-model-articulation', github: 'NREL/openstudio-model-articulation-gem', branch: 'develop'
+gem 'openstudio-common-measures', github: 'NREL/openstudio-common-measures-gem', branch: '193-openstudio-results-rendering'
+gem 'openstudio-ee', github: 'NREL/openstudio-ee-gem', branch: 'develop'
+gem 'openstudio-calibration', github: 'NREL/openstudio-calibration-gem', branch: 'develop'
 
-# todo - the urban geometry measure is failing, maybe need different branch or gem relese to use with OpenStudio 3.0.1
+# todo - the urban geometry measure is failing, maybe need different branch or gem release to use with OpenStudio 3.0.1
 #gem 'urbanopt-geojson', github: 'URBANopt/urbanopt-geojson-gem', branch: 'develop'
 
 # other gems
