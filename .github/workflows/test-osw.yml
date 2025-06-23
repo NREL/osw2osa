@@ -1,0 +1,24 @@
+name: Test OSW
+on: push
+
+jobs:
+  test-osw:
+    runs-on: ubuntu-latest
+    container:  nrel/openstudio:3.10.0
+    steps:
+    - name: check out repository
+      uses: actions/checkout@v2
+    - name: environment info
+      shell: bash 
+      run: |
+          openstudio --version
+          ruby -v
+          bundle -v
+    - name: install dependencies
+      shell: bash 
+      run: |
+          bundle install
+    - name: run workflows
+      shell: bash 
+      run: |
+          bundle exec rake run_all_osws
