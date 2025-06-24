@@ -22,3 +22,4 @@ jobs:
       shell: bash 
       run: |
           bundle exec rake run_all_osws
+          # create and and rake tasks that adds more validation of the runs
