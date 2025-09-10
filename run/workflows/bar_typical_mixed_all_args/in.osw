@@ -35,7 +35,7 @@
             "bldg_type_c_fract_bldg_area" : "0.0",
             "bldg_type_d" : "SmallOffice",
             "bldg_type_d_fract_bldg_area" : "0.0",
-            "bottom_story_ground_exposed_floor" : false,
+            "bottom_story_ground_exposed_floor" : true,
             "building_rotation" : "10.0",
             "custom_height_bar" : false,
             "double_loaded_corridor" : "Primary Space Type",
@@ -54,7 +54,7 @@
             "space_type_sort_logic" : "Building Type > Size",
             "story_multiplier_method" : "None",
             "template" : "90.1-2013",
-            "top_story_exterior_exposed_roof" : false,
+            "top_story_exterior_exposed_roof" : true,
             "total_bldg_floor_area" : "40000",
             "use_upstream_args" : true,
             "wwr" : "0.3"
