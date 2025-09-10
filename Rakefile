@@ -24,11 +24,11 @@ end
 
 # saving base path to measure gems to make it easier to maintain if it changes
 def bundle_base_gem_path
-  return '.bundle/install/ruby/2.5.0/bundler/gems'
+  return '.bundle/install/ruby/3.2.0/bundler/gems'
 end
 
 def bundle_base_gem_path_release
-  return '.bundle/install/ruby/2.5.0/gems'
+  return '.bundle/install/ruby/3.2.0/gems'
 end
 
 # print out measure gems that are were installed by bundle
@@ -42,7 +42,7 @@ def find_bundle_measure_paths
     gems.each do |gem|
       # check if has lib/measures
       gem = "#{bundle_base_gem_path}/#{gem}/lib/measures"
-      next if ! Dir.exists?(gem)
+      next if ! Dir.exist?(gem)
       next if gem.include?('openstudio-extension') # never want to include measure fromhere
       bundle_measure_paths << gem
     end
@@ -54,7 +54,7 @@ def find_bundle_measure_paths
     gems.each do |gem|
       # check if has lib/measures
       gem = "#{bundle_base_gem_path_release}/#{gem}/lib/measures"
-      next if ! Dir.exists?(gem)
+      next if ! Dir.exist?(gem)
       next if gem.include?('openstudio-extension') # never want to include measure fromhere
       bundle_measure_paths << gem
     end
@@ -176,7 +176,7 @@ def find_osws
   workflows.each do |workflow|
     # check if has lib/measures
     workflow_path = "workflows/#{workflow}/in.osw"
-    next if ! File.exists?(workflow_path)
+    next if ! File.exist?(workflow_path)
     workflow_names << workflow
   end
   puts workflow_names
@@ -194,7 +194,7 @@ def find_setup_osws
   workflows.each do |workflow|
     # check if has lib/measures
     workflow_path = "run/workflows/#{workflow}/in.osw"
-    next if ! File.exists?(workflow_path)
+    next if ! File.exist?(workflow_path)
     workflow_names << workflow
   end
   #puts workflow_names
@@ -225,8 +225,22 @@ def run_osws(workflow_names, measures_only = false)
 
     if measures_only
       jobs << "openstudio run -m -w run/workflows/#{workflow_name}/in.osw"
+
+      # alternate version of cli call to  load urbanop-geojson gem. Adjust for specific install path
+      #jobs << "openstudio -l Trace -I /Users/dgoldwas/Documents/github/nrel/osw2osa/.bundle/install/ruby/3.2.0/bundler/gems/urbanopt-geojson-gem-a3a434b21353/lib -I /Users/dgoldwas/Documents/github/nrel/osw2osa/.bundle/install/ruby/3.2.0/bundler/gems/urbanopt-core-gem-2bd8985fab24/lib run -m -w run/workflows/#{workflow_name}/in.osw"
+
     else
       jobs << "openstudio run -w run/workflows/#{workflow_name}/in.osw"
+
+      # alternate version of cli call to  load urbanop-geojson gem. Adjust for specific install path
+      # with custom standards
+      #jobs << "openstudio -l Trace -I /Users/dgoldwas/.rbenv/versions/3.2.2/lib/ruby/gems/3.2.0/gems/openstudio-standards-0.6.3/lib -I /Users/dgoldwas/Documents/github/nrel/osw2osa/.bundle/install/ruby/3.2.0/bundler/gems/urbanopt-geojson-gem-a3a434b21353/lib -I /Users/dgoldwas/Documents/github/nrel/osw2osa/.bundle/install/ruby/3.2.0/bundler/gems/urbanopt-core-gem-2bd8985fab24/lib run -w run/workflows/#{workflow_name}/in.osw"
+      # without custom standards
+      #jobs << "openstudio -l Trace -I /Users/dgoldwas/Documents/github/nrel/osw2osa/.bundle/install/ruby/3.2.0/bundler/gems/urbanopt-geojson-gem-a3a434b21353/lib -I /Users/dgoldwas/Documents/github/nrel/osw2osa/.bundle/install/ruby/3.2.0/bundler/gems/urbanopt-core-gem-2bd8985fab24/lib run -w run/workflows/#{workflow_name}/in.osw"
+      
+      # approach using bundler instead of include isn't working yet, but I'll try to get it working
+      #jobs << "openstudio -l Trace --bundle /Users/dgoldwas/Documents/github/nrel/osw2osa/Gemfile --bundle_path /Users/dgoldwas/Documents/github/nrel/osw2osa/.bundle/install run -w run/workflows/#{workflow_name}/in.osw"
+
     end
   end
 
@@ -237,9 +251,10 @@ def run_osws(workflow_names, measures_only = false)
   puts "Running workflows in parallel on #{num_parallel} processors"
   Parallel.each(jobs, in_threads: num_parallel) do |job|
     puts "Running #{job}"
-    stdin, stdout, stderr, wait_thr = Open3.popen3(job)
-    unless wait_thr.value.success?
-      puts "#{job}: returned Error: #{wait_thr.value.exitstatus}"
+    stdout, stderr, status = Open3.capture3(job)
+    unless status.success?
+      # wait_thr causing issues again
+      # puts "#{job}: returned Error: #{wait_thr.value.exitstatus}"
       puts "stdout: #{stdout}"
       puts "stderr: #{stderr}"
       workflows_passed = false

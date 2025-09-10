@@ -11,44 +11,38 @@
   "steps": [
     {
       "arguments": {
-        "external_model_name": "geo_stub_space_types.osm"
+        "building_type": "SecondarySchool"
       },
-      "measure_dir_name": "ReplaceModel"
-    },
-    {
-      "arguments": {
-        "set_year": "2019",
-        "weather_file_name": "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw"
-      },
-      "measure_dir_name": "ChangeBuildingLocation"
+      "measure_dir_name": "create_DOE_prototype_building"
     },
     {
       "arguments": {
         "__SKIP__": false
       },
-      "measure_dir_name": "create_typical_doe_building_from_model"
+      "measure_dir_name": "remove_orphan_objects_and_unused_resources"
+    },
+    {
+      "arguments": {
+        "wwr": 0.4,
+        "facade": "All",
+        "split_at_doors": "Split Walls at Doors",
+        "inset_tri_sub": true,
+        "triangulate": true
+      },
+      "measure_dir_name": "SetWindowToWallRatioByFacade"
     },
     {
       "arguments": {
         "__SKIP__": false
       },
       "measure_dir_name": "view_model"
-    },
-    {
-      "arguments": {
-        "__SKIP__": false,
-        "fraction_of_surface": "0.75",
-        "cell_efficiency": "0.1976",
-        "inverter_efficiency" : "0.96"
-      },
-      "measure_dir_name": "add_rooftop_pv"
-    },
+    },    
     {
       "arguments": {
         "__SKIP__": false
       },
       "measure_dir_name": "envelope_and_internal_load_breakdown"
-    },    
+    },        
     {
       "arguments": {
         "zone_condition_section": false

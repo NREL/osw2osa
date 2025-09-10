@@ -1,0 +1,120 @@
+{
+  "seed_file": "seed_empty.osm",
+  "file_paths": [
+    "../../seeds",
+    "../../weather"
+  ],
+  "measure_paths": [
+    "../../../openstudio-common-measures-gem/lib/measures",
+    "../../../openstudio-model-articulation-gem/lib/measures"
+  ],
+  "steps": [
+    {
+      "arguments": {
+        "set_year": "2019",
+        "weather_file_name": "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw"
+      },
+      "measure_dir_name": "ChangeBuildingLocation"
+    },
+    {
+      "arguments": {
+        "template": "90.1-2013",
+        "bldg_type_a": "SmallOffice",
+        "bldg_type_b": "FullServiceRestaurant",
+        "bldg_type_b_fract_bldg_area": "0.25",
+        "bldg_type_c": "RetailStandalone",
+        "bldg_type_c_fract_bldg_area": "0.0",
+        "bldg_type_d": "SmallOffice",
+        "bldg_type_d_fract_bldg_area": "0.0",
+        "total_bldg_floor_area": "40000",
+        "single_floor_area": "0",
+        "floor_height": "0",
+        "custom_height_bar": false,
+        "building_rotation": "10.0",
+        "num_stories_above_grade": "4.0",
+        "num_stories_below_grade": "0",
+        "wwr": "0.3",
+        "ns_to_ew_ratio": "0.0",
+        "perim_mult": "1.0",
+        "bar_width": "0.0",
+        "bar_sep_dist_mult": "1.0",
+        "party_wall_fraction": "0.0",
+        "party_wall_stories_north": "0.0",
+        "party_wall_stories_south": "0.0",
+        "party_wall_stories_east": "0.0",
+        "party_wall_stories_west": "0.0",
+        "bottom_story_ground_exposed_floor": false,
+        "top_story_exterior_exposed_roof": false,
+        "story_multiplier_method": "None",
+        "party_wall_stories_west": "0.0",
+        "make_mid_story_surfaces_adiabatic": true,
+        "bar_division_method": "Multiple Space Types - Individual Stories Sliced",
+        "double_loaded_corridor": "Primary Space Type",
+        "space_type_sort_logic": "Building Type > Size",
+        "use_upstream_args": true
+      },
+      "measure_dir_name": "create_bar_from_doe_building_type_ratios"
+    },
+    {
+      "arguments": {
+        "template": "90.1-2013",
+        "system_type": "Inferred",
+        "hvac_delivery_type": "Forced Air",
+        "htg_src": "NaturalGas",
+        "clg_src": "Electricity",
+        "swh_src": "NaturalGas",
+        "kitchen_makeup": "Largest Zone",
+        "exterior_lighting_zone": "3 - All Other Areas",
+        "add_constructions": true,
+        "wall_construction_type": "SteelFramed",
+        "add_space_type_loads": true,
+        "add_elevators": true,
+        "add_internal_mass": true,
+        "add_exterior_lights": true,
+        "onsite_parking_fraction": "1.0",
+        "add_exhaust": true,
+        "add_swh": true,
+        "add_thermostat": true,
+        "add_hvac": true,
+        "add_refrigeration": true,
+        "modify_wkdy_op_hrs": true,
+        "wkdy_op_hrs_start_time": "8.0",
+        "wkdy_op_hrs_duration": "8.0",
+        "modify_wknd_op_hrs": true,
+        "wknd_op_hrs_start_time": "8.0",
+        "wknd_op_hrs_duration": "8.0",
+        "unmet_hours_tolerance": "1.0",
+        "remove_objects": true,
+        "enable_dst": true
+      },
+      "measure_dir_name": "create_typical_doe_building_from_model"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "view_model"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false,
+        "fraction_of_surface": "0.75",
+        "cell_efficiency": "0.1976",
+        "inverter_efficiency" : "0.96"
+      },
+      "measure_dir_name": "add_rooftop_pv"
+    },
+    {
+      "arguments": {
+        "__SKIP__": false
+      },
+      "measure_dir_name": "envelope_and_internal_load_breakdown"
+    },
+    {
+      "arguments": {
+        "zone_condition_section": false
+      },
+      "measure_dir_name": "openstudio_results"
+    }
+  ]
+}

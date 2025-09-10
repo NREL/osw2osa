@@ -19,7 +19,7 @@
     {
       "arguments": {
         "template": "90.1-2013",
-        "bldg_type_a": "SecondarySchool",
+        "bldg_type_a": "MediumOffice",
         "total_bldg_floor_area": "210887",
         "ns_to_ew_ratio": "0.0",
         "num_stories_above_grade": "2.0",
@@ -36,18 +36,18 @@
     },
     {
       "arguments": {
+        "standard": "90.1-2013",
+        "building_type": "MediumOffice",
+        "climate_zone": "ASHRAE 169-2013-5A",        
+        "__SKIP__": false
+      },
+      "measure_dir_name": "create_baseline_building"
+    },    
+    {
+      "arguments": {
         "__SKIP__": false
       },
       "measure_dir_name": "view_model"
-    },
-    {
-      "arguments": {
-        "__SKIP__": false,
-        "fraction_of_surface": "0.75",
-        "cell_efficiency": "0.1976",
-        "inverter_efficiency" : "0.96"
-      },
-      "measure_dir_name": "add_rooftop_pv"
     },
     {
       "arguments": {
