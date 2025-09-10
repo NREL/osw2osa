@@ -1,48 +1,15 @@
 # *******************************************************************************
-# OpenStudio(R), Copyright (c) 2008-2020, Alliance for Sustainable Energy, LLC.
-# All rights reserved.
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met:
-#
-# (1) Redistributions of source code must retain the above copyright notice,
-# this list of conditions and the following disclaimer.
-#
-# (2) Redistributions in binary form must reproduce the above copyright notice,
-# this list of conditions and the following disclaimer in the documentation
-# and/or other materials provided with the distribution.
-#
-# (3) Neither the name of the copyright holder nor the names of any contributors
-# may be used to endorse or promote products derived from this software without
-# specific prior written permission from the respective party.
-#
-# (4) Other than as required in clauses (1) and (2), distributions in any form
-# of modifications or other derivative works may not use the "OpenStudio"
-# trademark, "OS", "os", or any other confusingly similar designation without
-# specific prior written permission from Alliance for Sustainable Energy, LLC.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER(S) AND ANY CONTRIBUTORS
-# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
-# THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER(S), ANY CONTRIBUTORS, THE
-# UNITED STATES GOVERNMENT, OR THE UNITED STATES DEPARTMENT OF ENERGY, NOR ANY OF
-# THEIR EMPLOYEES, BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
-# OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
-# STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+# OpenStudio(R), Copyright (c) Alliance for Sustainable Energy, LLC.
+# See also https://openstudio.net/license
 # *******************************************************************************
 
 # see the URL below for information on how to write OpenStudio measures
 # http://nrel.github.io/OpenStudio-user-documentation/measures/measure_writing_guide/
 
-# load OpenStudio measure libraries from openstudio-extension gem
-require 'openstudio-extension'
-require 'openstudio/extension/core/os_lib_helper_methods'
-require 'openstudio/extension/core/os_lib_schedules'
-
 # start the measure
 class AddRooftopPV < OpenStudio::Measure::ModelMeasure
+  require 'openstudio-standards'
+
   # human readable name
   def name
     return 'Add Rooftop PV'
@@ -98,7 +65,8 @@ class AddRooftopPV < OpenStudio::Measure::ModelMeasure
     end
 
     # assign the user inputs to variables
-    args = OsLib_HelperMethods.createRunVariables(runner, model, user_arguments, arguments(model))
+    args = runner.getArgumentValues(arguments(model), user_arguments)
+    args = Hash[args.collect{ |k, v| [k.to_s, v] }]
     if !args then return false end
 
     # check expected values of double arguments
@@ -116,12 +84,19 @@ class AddRooftopPV < OpenStudio::Measure::ModelMeasure
 
     # create the inverter
     inverter = OpenStudio::Model::ElectricLoadCenterInverterSimple.new(model)
-    inverter.setInverterEfficiency(args['inverter_efficiency'])
+    inverter.setName("Rooftop PV Inverter")
+    inverter.setInverterEfficiency(args["inverter_efficiency"])
+    inverter.setAvailabilitySchedule(model.alwaysOnDiscreteSchedule)
     runner.registerInfo("Created inverter with efficiency of #{inverter.inverterEfficiency}")
 
     # create the distribution system
     elcd = OpenStudio::Model::ElectricLoadCenterDistribution.new(model)
+    elcd.setName("Rooftop PV ELCD")
     elcd.setInverter(inverter)
+    # This is the default, but much better to do it explicitly since it's
+    # critical
+    elcd.setGeneratorOperationSchemeType("Baseload")
+    elcd.setElectricalBussType("DirectCurrentWithInverter")
 
     # create shared shading transmittance schedule
     target_transmittance = 1.0 - args['fraction_of_surface'].to_f
@@ -131,8 +106,12 @@ class AddRooftopPV < OpenStudio::Measure::ModelMeasure
       'summerTimeValuePairs' => { 24.0 => target_transmittance },
       'defaultTimeValuePairs' => { 24.0 => target_transmittance }
     }
-    pv_shading_transmittance_schedule = OsLib_Schedules.createSimpleSchedule(model, inputs)
+    pv_shading_transmittance_schedule = OpenstudioStandards::Schedules.create_simple_schedule(model, inputs)
     runner.registerInfo("Created transmittance schedule for PV shading surfaces with constant value of #{target_transmittance}")
+
+    # Efficiency is rated at a solar irradiance intensity of 1000 W/m^2
+    # So if cell_efficiency is 0.18, that means 180 W/m^2
+    rated_solar_irradiance_w_per_m2 = 1000.0
 
     model.getSurfaces.each do |surface|
       next if !surface.space.is_initialized
@@ -157,9 +136,18 @@ class AddRooftopPV < OpenStudio::Measure::ModelMeasure
         # create the panel
         panel = OpenStudio::Model::GeneratorPhotovoltaic.simple(model)
         panel.setSurface(shading_surface)
+        panel.setName("Rooftop PV - #{surface.nameString}")
         performance = panel.photovoltaicPerformance.to_PhotovoltaicPerformanceSimple.get
         performance.setFractionOfSurfaceAreaWithActiveSolarCells(args['fraction_of_surface'])
         performance.setFixedEfficiency(args['cell_efficiency'])
+        performance.setName("Rooftop PV - #{surface.nameString} - Performance Simple")
+
+        rated_electric_power_output_w = args["cell_efficiency"] * rated_solar_irradiance_w_per_m2 * args["fraction_of_surface"] * shading_surface.grossArea
+
+        # Set it on the panel, so it's written to the ElectricLoadCenter:Generators
+        # object that the OS ForwardTranslator creates, and reported in the
+        # eplustbl.html (otherwise it shows rated power = 0.0W in L-1. Renewable Energy Source Summary)
+        panel.setRatedElectricPowerOutput(rated_electric_power_output_w)
 
         # connect panel to electric load center distribution
         elcd.addGenerator(panel)

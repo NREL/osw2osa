@@ -19,8 +19,8 @@ ReportingMeasure
 ## Arguments
 
 
-### Which Unit System do you want to use?
-
+### Unit System
+IP = Inch Pound, SI = International System, OS = OpenStudio
 **Name:** units,
 **Type:** Choice,
 **Units:** ,
@@ -207,6 +207,22 @@ ReportingMeasure
 This argument does not effect HTML file, instead it makes data from individal cells of monthly tables avaiable for machine readable values in the resulting OpenStudio Workflow file.
 **Name:** reg_monthly_details,
 **Type:** Boolean,
+**Units:** ,
+**Required:** true,
+**Model Dependent:** false
+
+### Add EnergyPlus Summary Reports?
+
+**Name:** energyplus_reports,
+**Type:** Boolean,
+**Units:** ,
+**Required:** true,
+**Model Dependent:** false
+
+### HTML Dependencies
+Location of HTML dependencies. Local is useful for working offline.
+**Name:** html_dependencies,
+**Type:** Choice,
 **Units:** ,
 **Required:** true,
 **Model Dependent:** false

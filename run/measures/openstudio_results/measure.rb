@@ -1,36 +1,6 @@
 # *******************************************************************************
-# OpenStudio(R), Copyright (c) 2008-2020, Alliance for Sustainable Energy, LLC.
-# All rights reserved.
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met:
-#
-# (1) Redistributions of source code must retain the above copyright notice,
-# this list of conditions and the following disclaimer.
-#
-# (2) Redistributions in binary form must reproduce the above copyright notice,
-# this list of conditions and the following disclaimer in the documentation
-# and/or other materials provided with the distribution.
-#
-# (3) Neither the name of the copyright holder nor the names of any contributors
-# may be used to endorse or promote products derived from this software without
-# specific prior written permission from the respective party.
-#
-# (4) Other than as required in clauses (1) and (2), distributions in any form
-# of modifications or other derivative works may not use the "OpenStudio"
-# trademark, "OS", "os", or any other confusingly similar designation without
-# specific prior written permission from Alliance for Sustainable Energy, LLC.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER(S) AND ANY CONTRIBUTORS
-# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
-# THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER(S), ANY CONTRIBUTORS, THE
-# UNITED STATES GOVERNMENT, OR THE UNITED STATES DEPARTMENT OF ENERGY, NOR ANY OF
-# THEIR EMPLOYEES, BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
-# OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
-# STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+# OpenStudio(R), Copyright (c) Alliance for Sustainable Energy, LLC.
+# See also https://openstudio.net/license
 # *******************************************************************************
 
 require 'erb'
@@ -38,9 +8,6 @@ require 'json'
 
 # load local resources
 require "#{File.dirname(__FILE__)}/resources/os_lib_reporting"
-require "#{File.dirname(__FILE__)}/resources/os_lib_schedules"
-require "#{File.dirname(__FILE__)}/resources/os_lib_helper_methods"
-
 require_relative 'resources/Siz.Model'
 
 # start the measure
@@ -131,8 +98,10 @@ class OpenStudioResults < OpenStudio::Measure::ReportingMeasure
     chs = OpenStudio::StringVector.new
     chs << 'IP'
     chs << 'SI'
+    chs << 'OS'
     units = OpenStudio::Measure::OSArgument.makeChoiceArgument('units', chs, true)
-    units.setDisplayName('Which Unit System do you want to use?')
+    units.setDisplayName('Unit System')
+    units.setDescription('IP = Inch Pound, SI = International System, OS = OpenStudio')
     units.setDefaultValue('IP')
     args << units
 
@@ -153,6 +122,22 @@ class OpenStudioResults < OpenStudio::Measure::ReportingMeasure
     reg_monthly_details.setDescription('This argument does not effect HTML file, instead it makes data from individal cells of monthly tables avaiable for machine readable values in the resulting OpenStudio Workflow file.')
     reg_monthly_details.setDefaultValue(false) # set to false so no impact on existing projects using the measure
     args << reg_monthly_details
+
+    # add energyplus output tables, used by revit systems analysis
+    energyplus_reports = OpenStudio::Measure::OSArgument::makeBoolArgument('energyplus_reports', true)
+    energyplus_reports.setDisplayName('Add EnergyPlus Summary Reports?')
+    energyplus_reports.setDefaultValue(false)
+    args << energyplus_reports
+
+    # location of html dependencies, revit systems analysis uses local files
+    html_dependencies_choices = OpenStudio::StringVector.new
+    html_dependencies_choices << 'Local'
+    html_dependencies_choices << 'Remote'
+    html_dependencies = OpenStudio::Measure::OSArgument::makeChoiceArgument('html_dependencies', html_dependencies_choices, true)
+    html_dependencies.setDisplayName('HTML Dependencies')
+    html_dependencies.setDescription('Location of HTML dependencies. Local is useful for working offline.')
+    html_dependencies.setDefaultValue('Remote')
+    args << html_dependencies
 
     args
   end
@@ -241,16 +226,18 @@ class OpenStudioResults < OpenStudio::Measure::ReportingMeasure
     web_asset_path = setup[:web_asset_path]
 
     # assign the user inputs to variables
-    args = OsLib_HelperMethods.createRunVariables(runner, model, user_arguments, arguments)
+    args = runner.getArgumentValues(arguments, user_arguments)
+    args = Hash[args.collect{ |k, v| [k.to_s, v] }]
+    energyplus_reports = runner.getBoolArgumentValue('energyplus_reports', user_arguments)
+    @html_dependencies = runner.getStringArgumentValue('html_dependencies', user_arguments)
     unless args
       return false
     end
+
+    # get units, runner's is used by revit systems analysis
     units = args['units']
-    if units == 'IP'
-      is_ip_units = true
-    else
-      is_ip_units = false
-    end
+    units = runner.unitsPreference if units == 'OS'
+    is_ip_units = units == 'IP' ? true : false
 
     # reporting final condition
     runner.registerInitialCondition("Gathering data from EnergyPlus SQL file and OSM model. Will report in #{units} Units")
@@ -346,9 +333,13 @@ class OpenStudioResults < OpenStudio::Measure::ReportingMeasure
       html_in = file.read
     end
 
-    # configure template with variable values
+    # configure template with variable values, resources_path needed to find javascript web libraries for html
+    resources_path = "#{File.dirname(__FILE__)}/resources/"
     renderer = ERB.new(html_in)
     html_out = renderer.result(binding)
+
+    # add energyplus reports, used by revit systems analysis
+    html_out = OsLib_Reporting.add_energyplus_reports(runner, html_out) if energyplus_reports
 
     # write html file
     html_out_path = './report.html'

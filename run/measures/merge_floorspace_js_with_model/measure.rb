@@ -1,36 +1,6 @@
 # *******************************************************************************
-# OpenStudio(R), Copyright (c) 2008-2020, Alliance for Sustainable Energy, LLC.
-# All rights reserved.
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met:
-#
-# (1) Redistributions of source code must retain the above copyright notice,
-# this list of conditions and the following disclaimer.
-#
-# (2) Redistributions in binary form must reproduce the above copyright notice,
-# this list of conditions and the following disclaimer in the documentation
-# and/or other materials provided with the distribution.
-#
-# (3) Neither the name of the copyright holder nor the names of any contributors
-# may be used to endorse or promote products derived from this software without
-# specific prior written permission from the respective party.
-#
-# (4) Other than as required in clauses (1) and (2), distributions in any form
-# of modifications or other derivative works may not use the "OpenStudio"
-# trademark, "OS", "os", or any other confusingly similar designation without
-# specific prior written permission from Alliance for Sustainable Energy, LLC.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER(S) AND ANY CONTRIBUTORS
-# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
-# THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER(S), ANY CONTRIBUTORS, THE
-# UNITED STATES GOVERNMENT, OR THE UNITED STATES DEPARTMENT OF ENERGY, NOR ANY OF
-# THEIR EMPLOYEES, BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
-# OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
-# STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+# OpenStudio(R), Copyright (c) Alliance for Sustainable Energy, LLC.
+# See also https://openstudio.net/license
 # *******************************************************************************
 
 # insert your copyright here
@@ -106,15 +76,21 @@ class MergeFloorspaceJsWithModel < OpenStudio::Measure::ModelMeasure
       return false
     end
 
-    scene = floorplan.get.toThreeScene(true)
-    rt = OpenStudio::Model::ThreeJSReverseTranslator.new
-    new_model = rt.modelFromThreeJS(scene)
+    # scene = floorplan.get.toThreeScene(true)
+    # rt = OpenStudio::Model::ThreeJSReverseTranslator.new
+    # new_model = rt.modelFromThreeJS(scene
+
+    rt = OpenStudio::Model::FloorspaceReverseTranslator.new
+    new_model = rt.modelFromFloorspace(json)
 
     unless new_model.is_initialized
       runner.registerError('Cannot convert floorplan to model.')
       return false
     end
     new_model = new_model.get
+    runner.registerInfo("Model from FloorSpaceJS has #{new_model.getPlanarSurfaceGroups.size} planar surface groups.")
+    puts "hello"
+    puts new_model
 
     runner.registerInitialCondition("Initial model has #{model.getPlanarSurfaceGroups.size} planar surface groups.")
 
@@ -143,12 +119,14 @@ class MergeFloorspaceJsWithModel < OpenStudio::Measure::ModelMeasure
       fixed = false
       vertices.each do |vertex|
         next if fixed
+
         if array.include?(vertex)
           # create a new set of vertices
           new_vertices = OpenStudio::Point3dVector.new
           array_b = []
           surface.vertices.each do |vertex_b|
             next if array_b.include?(vertex_b)
+
             new_vertices << vertex_b
             array_b << vertex_b
           end
@@ -184,6 +162,7 @@ class MergeFloorspaceJsWithModel < OpenStudio::Measure::ModelMeasure
 
         surfaces_b.each do |surface_b|
           next if surface_a == surface_b # dont' test against same surface
+
           if surface_a.equalVertices(surface_b)
             runner.registerWarning("#{surface_a.name} and #{surface_b.name} in #{space.name} have duplicate geometry, removing #{surface_b.name}.")
             surface_b.remove
@@ -221,7 +200,7 @@ class MergeFloorspaceJsWithModel < OpenStudio::Measure::ModelMeasure
     json = JSON.parse(File.read(path.get.to_s))
 
     # error checking
-    unless !json['space_types'].empty?
+    if json['space_types'].empty?
       runner.registerInfo('No space types were created.')
     end
 

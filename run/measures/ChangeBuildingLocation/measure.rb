@@ -1,52 +1,14 @@
 # *******************************************************************************
-# OpenStudio(R), Copyright (c) 2008-2020, Alliance for Sustainable Energy, LLC.
-# All rights reserved.
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met:
-#
-# (1) Redistributions of source code must retain the above copyright notice,
-# this list of conditions and the following disclaimer.
-#
-# (2) Redistributions in binary form must reproduce the above copyright notice,
-# this list of conditions and the following disclaimer in the documentation
-# and/or other materials provided with the distribution.
-#
-# (3) Neither the name of the copyright holder nor the names of any contributors
-# may be used to endorse or promote products derived from this software without
-# specific prior written permission from the respective party.
-#
-# (4) Other than as required in clauses (1) and (2), distributions in any form
-# of modifications or other derivative works may not use the "OpenStudio"
-# trademark, "OS", "os", or any other confusingly similar designation without
-# specific prior written permission from Alliance for Sustainable Energy, LLC.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER(S) AND ANY CONTRIBUTORS
-# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
-# THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER(S), ANY CONTRIBUTORS, THE
-# UNITED STATES GOVERNMENT, OR THE UNITED STATES DEPARTMENT OF ENERGY, NOR ANY OF
-# THEIR EMPLOYEES, BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
-# OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
-# STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+# OpenStudio(R), Copyright (c) Alliance for Sustainable Energy, LLC.
+# See also https://openstudio.net/license
 # *******************************************************************************
 
 # Authors : Nicholas Long, David Goldwasser
 # Simple measure to load the EPW file and DDY file
 
-# load OpenStudio measure libraries from openstudio-extension gem
-require 'openstudio-extension'
-require 'openstudio/extension/core/os_lib_helper_methods'
-require 'openstudio/extension/core/os_lib_model_generation.rb'
-
 class ChangeBuildingLocation < OpenStudio::Measure::ModelMeasure
   Dir[File.dirname(__FILE__) + '/resources/*.rb'].each { |file| require file }
-
-  # resource file modules
-  include OsLib_HelperMethods
-  include OsLib_ModelGeneration
+  require 'openstudio-standards'
 
   # define the name that a user will see, this method may be deprecated as
   # the display name in PAT comes from the name field in measure.xml
@@ -64,10 +26,11 @@ class ChangeBuildingLocation < OpenStudio::Measure::ModelMeasure
     args << weather_file_name
 
     # make choice argument for climate zone
-    choices = OpenStudio::StringVector.new
+    #choices = OpenStudio::StringVector.new
+    choices = OpenstudioStandards::CreateTypical.get_climate_zones
     choices << 'Lookup From Stat File'
 
-    climate_zone = OpenStudio::Measure::OSArgument.makeChoiceArgument('climate_zone', get_climate_zones(false, 'Lookup From Stat File'), true)
+    climate_zone = OpenStudio::Measure::OSArgument.makeChoiceArgument('climate_zone', choices, true)
     climate_zone.setDisplayName('Climate Zone.')
     climate_zone.setDefaultValue('Lookup From Stat File')
     args << climate_zone
@@ -104,14 +67,16 @@ class ChangeBuildingLocation < OpenStudio::Measure::ModelMeasure
     super(model, runner, user_arguments)
 
     # assign the user inputs to variables
-    args = OsLib_HelperMethods.createRunVariables(runner, model, user_arguments, arguments(model))
+    args = runner.getArgumentValues(arguments(model), user_arguments)
+    args = Hash[args.collect{ |k, v| [k.to_s, v] }]
     if !args then return false end
 
     # lookup and replace argument values from upstream measures
     if args['use_upstream_args'] == true
       args.each do |arg, value|
         next if arg == 'use_upstream_args' # this argument should not be changed
-        value_from_osw = OsLib_HelperMethods.check_upstream_measure_for_arg(runner, arg)
+        value_from_osw = runner.getPastStepValuesForName(arg)
+        value_from_osw = value_from_osw.collect{ |k, v| Hash[:measure_name => k, :value => v] }.first if !value_from_osw.empty?
         if !value_from_osw.empty?
           runner.registerInfo("Replacing argument named #{arg} from current measure with a value of #{value_from_osw[:value]} from #{value_from_osw[:measure_name]}.")
           new_val = value_from_osw[:value]
@@ -196,8 +161,8 @@ class ChangeBuildingLocation < OpenStudio::Measure::ModelMeasure
     runner.registerInfo("city is #{epw_file.city}. State is #{epw_file.state}")
 
     # actual year of start date
-    if args['set_year'] > 0
-      model.getYearDescription.setCalendarYear(args['set_year'])
+    if args['set_year'].to_i > 0
+      model.getYearDescription.setCalendarYear(args['set_year'].to_i)
       runner.registerInfo("Changing Calendar Year to #{args['set_year']},")
     end
 
