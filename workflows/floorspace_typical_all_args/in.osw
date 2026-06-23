@@ -12,7 +12,7 @@
   "steps": [
     {
       "arguments": {
-        "floorplan_path": "../files/office_floorplan.json"
+        "floorplan_path": "office_floorplan.json"
       },
       "measure_dir_name": "merge_floorspace_js_with_model"
     },
